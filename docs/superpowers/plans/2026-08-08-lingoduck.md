@@ -926,6 +926,7 @@ describe('Match', () => {
     fireEvent.click(screen.getByRole('button', { name: '빨강' }))
     fireEvent.click(screen.getByRole('button', { name: 'blue' }))
     fireEvent.click(screen.getByRole('button', { name: '파랑' }))
+    fireEvent.click(screen.getByRole('button', { name: '확인' }))
     expect(onAnswer).toHaveBeenCalledWith(true)
   })
 })
