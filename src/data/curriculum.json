@@ -46,6 +46,62 @@
               ]
             }
           ]
+        },
+        {
+          "id": "kinder-u3",
+          "title": "숫자",
+          "lessons": [
+            {
+              "id": "kinder-u3-l1",
+              "title": "Numbers 1-5",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘다섯’은 영어로?", "choices": ["Five", "Four", "Three", "Two"], "answer": "Five", "audioText": "Five" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["one", "하나"], ["two", "둘"], ["three", "셋"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 다섯 살이야’", "tokens": ["I", "am", "five"], "distractors": ["four", "you"], "answer": ["I", "am", "five"], "audioText": "I am five" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "see", "two"], "distractors": ["three", "am"], "answer": ["I", "see", "two"], "audioText": "I see two" },
+                { "type": "mcq", "prompt": "‘넷’은 영어로?", "choices": ["Four", "Five", "One", "Two"], "answer": "Four", "audioText": "Four" }
+              ]
+            },
+            {
+              "id": "kinder-u3-l2",
+              "title": "Counting",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["three", "셋"], ["four", "넷"], ["five", "다섯"]] },
+                { "type": "mcq", "prompt": "‘하나’는 영어로?", "choices": ["One", "Two", "Five", "Four"], "answer": "One", "audioText": "One" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 개 두 마리가 있어’", "tokens": ["I", "have", "two", "dogs"], "distractors": ["three", "cats"], "answer": ["I", "have", "two", "dogs"], "audioText": "I have two dogs" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "count", "to", "five"], "distractors": ["three", "four"], "answer": ["I", "count", "to", "five"], "audioText": "I count to five" },
+                { "type": "mcq", "prompt": "‘둘’은 영어로?", "choices": ["Two", "Three", "One", "Five"], "answer": "Two", "audioText": "Two" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kinder-u4",
+          "title": "음식",
+          "lessons": [
+            {
+              "id": "kinder-u4-l1",
+              "title": "Food",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘사과’는 영어로?", "choices": ["Apple", "Milk", "Bread", "Water"], "answer": "Apple", "audioText": "Apple" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["apple", "사과"], ["milk", "우유"], ["bread", "빵"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 빵을 좋아해’", "tokens": ["I", "like", "bread"], "distractors": ["milk", "you"], "answer": ["I", "like", "bread"], "audioText": "I like bread" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "want", "water"], "distractors": ["milk", "rice"], "answer": ["I", "want", "water"], "audioText": "I want water" },
+                { "type": "mcq", "prompt": "‘우유’는 영어로?", "choices": ["Milk", "Water", "Rice", "Apple"], "answer": "Milk", "audioText": "Milk" }
+              ]
+            },
+            {
+              "id": "kinder-u4-l2",
+              "title": "Eat and Drink",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["water", "물"], ["rice", "밥"], ["apple", "사과"]] },
+                { "type": "mcq", "prompt": "‘밥’은 영어로?", "choices": ["Rice", "Bread", "Milk", "Water"], "answer": "Rice", "audioText": "Rice" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 밥을 먹어’", "tokens": ["I", "eat", "rice"], "distractors": ["bread", "milk"], "answer": ["I", "eat", "rice"], "audioText": "I eat rice" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "drink", "milk"], "distractors": ["water", "eat"], "answer": ["I", "drink", "milk"], "audioText": "I drink milk" },
+                { "type": "mcq", "prompt": "‘물’은 영어로?", "choices": ["Water", "Rice", "Bread", "Apple"], "answer": "Water", "audioText": "Water" }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -81,6 +137,152 @@
                 { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["mom", "엄마"], ["dad", "아빠"], ["baby", "아기"]] },
                 { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 달릴 수 있어’", "tokens": ["I", "can", "run"], "distractors": ["jump", "you"], "answer": ["I", "can", "run"], "audioText": "I can run" },
                 { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["My", "dad", "is", "tall"], "distractors": ["mom", "short"], "answer": ["My", "dad", "is", "tall"], "audioText": "My dad is tall" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grade1-u3",
+          "title": "학교",
+          "lessons": [
+            {
+              "id": "grade1-u3-l1",
+              "title": "School Things",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘책’은 영어로?", "choices": ["Book", "Pen", "Desk", "Friend"], "answer": "Book", "audioText": "Book" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["book", "책"], ["pen", "펜"], ["desk", "책상"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 책이 있어’", "tokens": ["I", "have", "a", "book"], "distractors": ["pen", "desk"], "answer": ["I", "have", "a", "book"], "audioText": "I have a book" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["The", "pen", "is", "blue"], "distractors": ["red", "book"], "answer": ["The", "pen", "is", "blue"], "audioText": "The pen is blue" },
+                { "type": "mcq", "prompt": "‘책상’은 영어로?", "choices": ["Desk", "Pen", "Book", "Teacher"], "answer": "Desk", "audioText": "Desk" }
+              ]
+            },
+            {
+              "id": "grade1-u3-l2",
+              "title": "People at School",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["teacher", "선생님"], ["friend", "친구"], ["book", "책"]] },
+                { "type": "mcq", "prompt": "‘선생님’은 영어로?", "choices": ["Teacher", "Friend", "Desk", "Pen"], "answer": "Teacher", "audioText": "Teacher" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘그녀는 나의 선생님이야’", "tokens": ["She", "is", "my", "teacher"], "distractors": ["friend", "he"], "answer": ["She", "is", "my", "teacher"], "audioText": "She is my teacher" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["He", "is", "my", "friend"], "distractors": ["she", "teacher"], "answer": ["He", "is", "my", "friend"], "audioText": "He is my friend" },
+                { "type": "mcq", "prompt": "‘친구’는 영어로?", "choices": ["Friend", "Teacher", "Book", "Desk"], "answer": "Friend", "audioText": "Friend" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grade1-u4",
+          "title": "동사",
+          "lessons": [
+            {
+              "id": "grade1-u4-l1",
+              "title": "Action Verbs",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘달리다’는 영어로?", "choices": ["Run", "Jump", "Read", "Eat"], "answer": "Run", "audioText": "Run" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["run", "달리다"], ["jump", "점프하다"], ["read", "읽다"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 매일 달려’", "tokens": ["I", "run", "every", "day"], "distractors": ["jump", "read"], "answer": ["I", "run", "every", "day"], "audioText": "I run every day" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "can", "jump", "high"], "distractors": ["run", "low"], "answer": ["I", "can", "jump", "high"], "audioText": "I can jump high" },
+                { "type": "mcq", "prompt": "‘읽다’는 영어로?", "choices": ["Read", "Write", "Eat", "Jump"], "answer": "Read", "audioText": "Read" }
+              ]
+            },
+            {
+              "id": "grade1-u4-l2",
+              "title": "More Verbs",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["write", "쓰다"], ["eat", "먹다"], ["run", "달리다"]] },
+                { "type": "mcq", "prompt": "‘쓰다’는 영어로?", "choices": ["Write", "Read", "Eat", "Run"], "answer": "Write", "audioText": "Write" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 이름을 써’", "tokens": ["I", "write", "my", "name"], "distractors": ["read", "eat"], "answer": ["I", "write", "my", "name"], "audioText": "I write my name" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "eat", "an", "apple"], "distractors": ["read", "jump"], "answer": ["I", "eat", "an", "apple"], "audioText": "I eat an apple" },
+                { "type": "mcq", "prompt": "‘먹다’는 영어로?", "choices": ["Eat", "Write", "Read", "Run"], "answer": "Eat", "audioText": "Eat" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade2",
+      "name": "초등 2학년",
+      "units": [
+        {
+          "id": "grade2-u1",
+          "title": "날씨",
+          "lessons": [
+            {
+              "id": "grade2-u1-l1",
+              "title": "Weather Today",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘맑은’은 영어로?", "choices": ["Sunny", "Rainy", "Windy", "Cloudy"], "answer": "Sunny", "audioText": "Sunny" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["sunny", "맑은"], ["rainy", "비 오는"], ["windy", "바람 부는"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘오늘은 날씨가 맑아’", "tokens": ["It", "is", "sunny", "today"], "distractors": ["rainy", "cold"], "answer": ["It", "is", "sunny", "today"], "audioText": "It is sunny today" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["The", "sky", "is", "cloudy"], "distractors": ["sunny", "clear"], "answer": ["The", "sky", "is", "cloudy"], "audioText": "The sky is cloudy" },
+                { "type": "mcq", "prompt": "‘비 오는’은 영어로?", "choices": ["Rainy", "Sunny", "Snowy", "Windy"], "answer": "Rainy", "audioText": "Rainy" }
+              ]
+            },
+            {
+              "id": "grade2-u1-l2",
+              "title": "Kinds of Weather",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["cloudy", "흐린"], ["snowy", "눈 오는"], ["windy", "바람 부는"]] },
+                { "type": "mcq", "prompt": "‘눈 오는’은 영어로?", "choices": ["Snowy", "Rainy", "Sunny", "Cloudy"], "answer": "Snowy", "audioText": "Snowy" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘밖에 바람이 많이 불어’", "tokens": ["It", "is", "very", "windy"], "distractors": ["sunny", "warm"], "answer": ["It", "is", "very", "windy"], "audioText": "It is very windy" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["It", "will", "be", "rainy"], "distractors": ["snowy", "sunny"], "answer": ["It", "will", "be", "rainy"], "audioText": "It will be rainy" },
+                { "type": "mcq", "prompt": "‘흐린’은 영어로?", "choices": ["Cloudy", "Snowy", "Windy", "Sunny"], "answer": "Cloudy", "audioText": "Cloudy" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grade2-u2",
+          "title": "시간과 요일",
+          "lessons": [
+            {
+              "id": "grade2-u2-l1",
+              "title": "Days of the Week",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘월요일’은 영어로?", "choices": ["Monday", "Sunday", "Friday", "Tuesday"], "answer": "Monday", "audioText": "Monday" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["Monday", "월요일"], ["Friday", "금요일"], ["Sunday", "일요일"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 월요일 아침이 좋아’", "tokens": ["I", "like", "Monday", "mornings"], "distractors": ["Sunday", "nights"], "answer": ["I", "like", "Monday", "mornings"], "audioText": "I like Monday mornings" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["See", "you", "on", "Sunday"], "distractors": ["Monday", "Friday"], "answer": ["See", "you", "on", "Sunday"], "audioText": "See you on Sunday" },
+                { "type": "mcq", "prompt": "‘금요일’은 영어로?", "choices": ["Friday", "Monday", "Sunday", "Morning"], "answer": "Friday", "audioText": "Friday" }
+              ]
+            },
+            {
+              "id": "grade2-u2-l2",
+              "title": "Time Words",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["today", "오늘"], ["tomorrow", "내일"], ["morning", "아침"]] },
+                { "type": "mcq", "prompt": "‘내일’은 영어로?", "choices": ["Tomorrow", "Today", "Night", "Morning"], "answer": "Tomorrow", "audioText": "Tomorrow" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘내일 아침에 만나자’", "tokens": ["See", "you", "tomorrow", "morning"], "distractors": ["today", "night"], "answer": ["See", "you", "tomorrow", "morning"], "audioText": "See you tomorrow morning" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "sleep", "at", "night"], "distractors": ["morning", "today"], "answer": ["I", "sleep", "at", "night"], "audioText": "I sleep at night" },
+                { "type": "mcq", "prompt": "‘아침’은 영어로?", "choices": ["Morning", "Night", "Today", "Tomorrow"], "answer": "Morning", "audioText": "Morning" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grade2-u3",
+          "title": "감정과 형용사",
+          "lessons": [
+            {
+              "id": "grade2-u3-l1",
+              "title": "Feelings",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘행복한’은 영어로?", "choices": ["Happy", "Sad", "Angry", "Tired"], "answer": "Happy", "audioText": "Happy" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["happy", "행복한"], ["sad", "슬픈"], ["angry", "화난"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 오늘 정말 행복해’", "tokens": ["I", "am", "very", "happy"], "distractors": ["sad", "angry"], "answer": ["I", "am", "very", "happy"], "audioText": "I am very happy" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "am", "so", "tired"], "distractors": ["happy", "hungry"], "answer": ["I", "am", "so", "tired"], "audioText": "I am so tired" },
+                { "type": "mcq", "prompt": "‘배고픈’은 영어로?", "choices": ["Hungry", "Tired", "Sad", "Happy"], "answer": "Hungry", "audioText": "Hungry" }
+              ]
+            },
+            {
+              "id": "grade2-u3-l2",
+              "title": "Adjectives",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["big", "큰"], ["small", "작은"], ["fast", "빠른"]] },
+                { "type": "mcq", "prompt": "‘느린’은 영어로?", "choices": ["Slow", "Fast", "Big", "Small"], "answer": "Slow", "audioText": "Slow" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘그 개는 매우 빨라’", "tokens": ["The", "dog", "is", "fast"], "distractors": ["slow", "small"], "answer": ["The", "dog", "is", "fast"], "audioText": "The dog is fast" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["The", "box", "is", "big"], "distractors": ["small", "slow"], "answer": ["The", "box", "is", "big"], "audioText": "The box is big" },
+                { "type": "mcq", "prompt": "‘빠른’은 영어로?", "choices": ["Fast", "Slow", "Big", "Small"], "answer": "Fast", "audioText": "Fast" }
               ]
             }
           ]
