@@ -7,6 +7,7 @@ export function defaultProgress() {
     version: 1,
     xp: 0,
     hearts: START_HEARTS,
+    heartsUpdatedAt: 0,
     streak: { count: 0, lastDay: null, freezes: 1 },
     completedLessons: [],
     dailyXp: { day: null, amount: 0 },
