@@ -32,3 +32,27 @@ export function addDailyXp(daily, gained, today) {
   if (daily.day === today) return { day: today, amount: daily.amount + gained }
   return { day: today, amount: gained }
 }
+
+export const HEART_REGEN_MS = 30 * 60 * 1000
+
+// Returns { hearts, heartsUpdatedAt } after applying elapsed regeneration.
+// - When hearts >= START_HEARTS: nothing regenerates; clock stays at `updatedAt`.
+// - Otherwise add floor((now - updatedAt)/HEART_REGEN_MS) hearts (capped at START_HEARTS),
+//   and advance updatedAt by the number of whole intervals consumed. If capped to max,
+//   set heartsUpdatedAt = now.
+export function regenHearts(hearts, heartsUpdatedAt, now) {
+  if (hearts >= START_HEARTS) return { hearts, heartsUpdatedAt }
+  const elapsed = now - heartsUpdatedAt
+  const gained = Math.floor(elapsed / HEART_REGEN_MS)
+  if (gained <= 0) return { hearts, heartsUpdatedAt }
+  const newHearts = Math.min(START_HEARTS, hearts + gained)
+  if (newHearts >= START_HEARTS) return { hearts: START_HEARTS, heartsUpdatedAt: now }
+  return { hearts: newHearts, heartsUpdatedAt: heartsUpdatedAt + gained * HEART_REGEN_MS }
+}
+
+// ms until the next heart, or 0 if already full.
+export function msUntilNextHeart(hearts, heartsUpdatedAt, now) {
+  if (hearts >= START_HEARTS) return 0
+  const rem = HEART_REGEN_MS - ((now - heartsUpdatedAt) % HEART_REGEN_MS)
+  return rem
+}
