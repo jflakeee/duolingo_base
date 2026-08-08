@@ -1,0 +1,91 @@
+{
+  "levels": [
+    {
+      "id": "kinder",
+      "name": "유치원",
+      "units": [
+        {
+          "id": "kinder-u1",
+          "title": "인사와 색깔",
+          "lessons": [
+            {
+              "id": "kinder-u1-l1",
+              "title": "Hello",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘안녕’은 영어로?", "choices": ["Hello", "Bye", "Cat", "Red"], "answer": "Hello", "audioText": "Hello" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["red", "빨강"], ["blue", "파랑"], ["green", "초록"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 파랑을 좋아해’", "tokens": ["I", "like", "blue"], "distractors": ["red", "you"], "answer": ["I", "like", "blue"], "audioText": "I like blue" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "am", "happy"], "distractors": ["sad", "you"], "answer": ["I", "am", "happy"], "audioText": "I am happy" },
+                { "type": "mcq", "prompt": "‘초록’은 영어로?", "choices": ["Green", "Blue", "Dog", "Bye"], "answer": "Green", "audioText": "Green" }
+              ]
+            },
+            {
+              "id": "kinder-u1-l2",
+              "title": "Colors",
+              "exercises": [
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["yellow", "노랑"], ["black", "검정"], ["white", "하양"]] },
+                { "type": "mcq", "prompt": "‘노랑’은 영어로?", "choices": ["Yellow", "Green", "Cat", "Hello"], "answer": "Yellow", "audioText": "Yellow" },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘그것은 빨강이야’", "tokens": ["It", "is", "red"], "distractors": ["blue", "am"], "answer": ["It", "is", "red"], "audioText": "It is red" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "see", "yellow"], "distractors": ["red", "am"], "answer": ["I", "see", "yellow"], "audioText": "I see yellow" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kinder-u2",
+          "title": "동물",
+          "lessons": [
+            {
+              "id": "kinder-u2-l1",
+              "title": "Animals",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘고양이’는 영어로?", "choices": ["Cat", "Dog", "Red", "Bye"], "answer": "Cat", "audioText": "Cat" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["dog", "개"], ["cat", "고양이"], ["bird", "새"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 개를 좋아해’", "tokens": ["I", "like", "dogs"], "distractors": ["cats", "you"], "answer": ["I", "like", "dogs"], "audioText": "I like dogs" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["The", "cat", "is", "small"], "distractors": ["big", "dog"], "answer": ["The", "cat", "is", "small"], "audioText": "The cat is small" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade1",
+      "name": "초등 1학년",
+      "units": [
+        {
+          "id": "grade1-u1",
+          "title": "숫자와 음식",
+          "lessons": [
+            {
+              "id": "grade1-u1-l1",
+              "title": "Numbers",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘셋’은 영어로?", "choices": ["Three", "Two", "Apple", "Milk"], "answer": "Three", "audioText": "Three" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["one", "하나"], ["two", "둘"], ["three", "셋"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 사과 두 개가 있어’", "tokens": ["I", "have", "two", "apples"], "distractors": ["milk", "three"], "answer": ["I", "have", "two", "apples"], "audioText": "I have two apples" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["I", "like", "milk"], "distractors": ["apple", "have"], "answer": ["I", "like", "milk"], "audioText": "I like milk" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "grade1-u2",
+          "title": "가족과 동작",
+          "lessons": [
+            {
+              "id": "grade1-u2-l1",
+              "title": "Family",
+              "exercises": [
+                { "type": "mcq", "prompt": "‘엄마’는 영어로?", "choices": ["Mom", "Dad", "Run", "Milk"], "answer": "Mom", "audioText": "Mom" },
+                { "type": "match", "prompt": "짝을 맞추세요", "pairs": [["mom", "엄마"], ["dad", "아빠"], ["baby", "아기"]] },
+                { "type": "wordbank", "prompt": "문장을 만드세요: ‘나는 달릴 수 있어’", "tokens": ["I", "can", "run"], "distractors": ["jump", "you"], "answer": ["I", "can", "run"], "audioText": "I can run" },
+                { "type": "listen", "prompt": "들리는 문장을 완성하세요", "tokens": ["My", "dad", "is", "tall"], "distractors": ["mom", "short"], "answer": ["My", "dad", "is", "tall"], "audioText": "My dad is tall" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
