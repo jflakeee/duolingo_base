@@ -1,0 +1,32 @@
+import { START_HEARTS } from '../engine/gamification.js'
+
+export const STORAGE_KEY = 'lingoduck.progress.v1'
+
+export function defaultProgress() {
+  return {
+    version: 1,
+    xp: 0,
+    hearts: START_HEARTS,
+    streak: { count: 0, lastDay: null, freezes: 1 },
+    completedLessons: [],
+    dailyXp: { day: null, amount: 0 },
+  }
+}
+
+export function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return defaultProgress()
+    return { ...defaultProgress(), ...JSON.parse(raw) }
+  } catch {
+    return defaultProgress()
+  }
+}
+
+export function saveProgress(p) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p))
+}
+
+export function resetProgress() {
+  localStorage.removeItem(STORAGE_KEY)
+}
