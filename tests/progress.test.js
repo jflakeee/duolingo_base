@@ -34,6 +34,12 @@ describe('progress store', () => {
     expect(p.settings).toEqual({ theme: 'auto' })
     expect(p.version).toBe(2)
   })
+  it('defaults include gamification fields', () => {
+    const p = defaultProgress()
+    expect(p.quests).toEqual({ day: null, items: [] })
+    expect(p.achievements).toEqual({})
+    expect(p.perfectCount).toBe(0)
+  })
   it('migrates a v1 save by filling new fields', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, xp: 30 }))
     const p = loadProgress()

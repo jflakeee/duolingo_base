@@ -15,6 +15,9 @@ export function defaultProgress() {
     dailyGoal: 50,
     onboarded: false,
     settings: { theme: 'auto' },
+    quests: { day: null, items: [] },
+    achievements: {},
+    perfectCount: 0,
   }
 }
 
