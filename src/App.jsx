@@ -13,6 +13,9 @@ import { getLessonById, getLevels } from './data/loadCurriculum.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
+import { gemsForLesson, buyHeartRefill, buyStreakFreeze } from './engine/economy.js'
+import { ensureQuests, applyLessonToQuests, claimQuest as claimQuestReward } from './engine/quests.js'
+import { newlyUnlocked } from './engine/achievements.js'
 
 function todayStr() {
   const d = new Date()
@@ -23,7 +26,7 @@ export default function App() {
   const [progress, setProgress] = useState(() => {
     const p = loadProgress()
     const r = regenHearts(p.hearts, p.heartsUpdatedAt ?? Date.now(), Date.now())
-    return { ...p, hearts: r.hearts, heartsUpdatedAt: r.heartsUpdatedAt }
+    return { ...p, hearts: r.hearts, heartsUpdatedAt: r.heartsUpdatedAt, quests: ensureQuests(p.quests, todayStr()) }
   })
   const [tab, setTab] = useState('learn')
   const [screen, setScreen] = useState('path') // learn sub-screen: path|lesson|result|fail
@@ -63,17 +66,26 @@ export default function App() {
   }
   function handleFinish(s) {
     const today = todayStr()
-    const next = {
+    const perfect = s.mistakes === 0
+    const gemsGained = gemsForLesson({ mistakes: s.mistakes })
+    const afterLesson = {
       ...progress,
       xp: progress.xp + s.xpGained,
+      gems: progress.gems + gemsGained,
+      perfectCount: (progress.perfectCount || 0) + (perfect ? 1 : 0),
       dailyXp: addDailyXp(progress.dailyXp, s.xpGained, today),
       streak: updateStreak(progress.streak, today),
       completedLessons: progress.completedLessons.includes(activeLessonId)
         ? progress.completedLessons
         : [...progress.completedLessons, activeLessonId],
+      quests: applyLessonToQuests(ensureQuests(progress.quests, today), { xpGained: s.xpGained, perfect }),
     }
+    const newIds = newlyUnlocked(afterLesson)
+    const achievements = { ...afterLesson.achievements }
+    for (const id of newIds) achievements[id] = today
+    const next = { ...afterLesson, achievements }
     persist(next)
-    setSummary(s)
+    setSummary({ ...s, gemsGained, newAchievements: newIds })
     setScreen('result')
   }
 
@@ -82,13 +94,27 @@ export default function App() {
     const idx = levels.findIndex((l) => l.id === startLevel)
     const pre = []
     for (let i = 0; i < idx; i++) for (const u of levels[i].units) for (const l of u.lessons) pre.push(l.id)
-    persist({ ...progress, onboarded: true, dailyGoal, completedLessons: pre })
+    persist({ ...progress, onboarded: true, dailyGoal, completedLessons: pre, quests: ensureQuests(progress.quests, todayStr()) })
   }
   function setTheme(theme) { persist({ ...progress, settings: { ...progress.settings, theme } }) }
   function setGoal(dailyGoal) { persist({ ...progress, dailyGoal }) }
   function resetKeepOnboarding() {
     const next = { ...defaultProgress(), onboarded: true, settings: progress.settings, dailyGoal: progress.dailyGoal }
     resetProgress(); persist(next); goTab('learn')
+  }
+  function claimQuest(id) {
+    const today = todayStr()
+    const q = ensureQuests(progress.quests, today)
+    const { quests, reward } = claimQuestReward(q, id)
+    persist({ ...progress, quests, gems: progress.gems + reward })
+  }
+  function buyHearts() {
+    const r = buyHeartRefill(progress.gems, progress.hearts)
+    if (r.ok) persist({ ...progress, gems: r.gems, hearts: r.hearts })
+  }
+  function buyFreeze() {
+    const r = buyStreakFreeze(progress.gems, progress.streak.freezes)
+    if (r.ok) persist({ ...progress, gems: r.gems, streak: { ...progress.streak, freezes: r.freezes } })
   }
 
   if (!progress.onboarded) return <Onboarding onDone={handleOnboarded} />
@@ -122,8 +148,8 @@ export default function App() {
         </>
       )}
 
-      {tab === 'quests' && <Quests progress={progress} />}
-      {tab === 'shop' && <Shop progress={progress} />}
+      {tab === 'quests' && <Quests progress={progress} onClaim={claimQuest} />}
+      {tab === 'shop' && <Shop progress={progress} onBuyHearts={buyHearts} onBuyFreeze={buyFreeze} />}
       {tab === 'profile' && (
         <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetKeepOnboarding} />
       )}
