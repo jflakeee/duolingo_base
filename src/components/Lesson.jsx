@@ -35,16 +35,17 @@ export default function Lesson({ lesson, onWrong, onFinish, onQuit }) {
 
   return (
     <div>
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <button className="token" onClick={onQuit}>✕</button>
+      <div className="lesson-top">
+        <button className="iconbtn" onClick={onQuit} aria-label="레슨 나가기">✕</button>
         <div className="progress" style={{ flex: 1 }}><i style={{ width: `${pct}%` }} /></div>
       </div>
-      <div key={session.queue[0].id} style={{ marginTop: 16 }}>
+      <div className="ex" key={session.queue[0].id}>
         <ExComp exercise={ex} onAnswer={handleAnswer} />
       </div>
       {feedback && (
-        <div style={{ marginTop: 12, fontWeight: 700, color: feedback === 'correct' ? 'var(--green)' : 'var(--red)' }}>
-          {feedback === 'correct' ? '정답이에요! ✅' : '아쉬워요, 다시 나올 거예요. ❌'}
+        <div className={`feedback feedback--${feedback}`}>
+          <span className="badge">{feedback === 'correct' ? '🎉' : '💡'}</span>
+          {feedback === 'correct' ? '정답이에요!' : '아쉬워요, 이 문제는 다시 나올 거예요.'}
         </div>
       )}
     </div>

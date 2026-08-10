@@ -76,7 +76,7 @@ export default function App() {
       {screen === 'path' && (
         <>
           <Path progress={progress} onStart={startLesson} />
-          <button className="btn-ghost choice" onClick={hardReset}>진도 초기화</button>
+          <button className="btn btn--ghost" style={{ marginTop: 20 }} onClick={hardReset}>진도 초기화</button>
         </>
       )}
       {screen === 'lesson' && (
@@ -91,12 +91,14 @@ export default function App() {
         <Result summary={summary} onContinue={goPath} />
       )}
       {screen === 'fail' && (
-        <div style={{ textAlign: 'center' }}>
-          <Duck mood="sad" size={120} />
-          <h2>하트가 없어요</h2>
+        <div className="fail">
+          <Duck mood="sad" size={128} />
+          <h2>하트가 없어요 💔</h2>
           <p>잠시 후 다시 도전하거나 진도를 초기화할 수 있어요.</p>
           <p>다음 하트까지 약 {Math.ceil(msUntilNextHeart(progress.hearts, progress.heartsUpdatedAt, Date.now()) / 60000)}분</p>
-          <button className="btn" onClick={goPath}>경로로 돌아가기</button>
+          <div style={{ marginTop: 20 }}>
+            <button className="btn" onClick={goPath}>경로로 돌아가기</button>
+          </div>
         </div>
       )}
     </div>

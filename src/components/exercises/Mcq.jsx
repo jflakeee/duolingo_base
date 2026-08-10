@@ -8,7 +8,7 @@ export default function Mcq({ exercise, onAnswer }) {
     <div>
       <h2>{exercise.prompt}</h2>
       {exercise.audioText && (
-        <button className="btn-ghost choice" onClick={() => speak(exercise.audioText)}>🔊 듣기</button>
+        <button className="audio-btn" onClick={() => speak(exercise.audioText)}>🔊 소리 듣기</button>
       )}
       {exercise.choices.map((c) => (
         <button

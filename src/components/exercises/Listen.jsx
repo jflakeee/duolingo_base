@@ -19,21 +19,23 @@ export default function Listen({ exercise, onAnswer }) {
   return (
     <div>
       <h2>{exercise.prompt}</h2>
-      <button className="btn-ghost choice" onClick={() => speak(exercise.audioText)}>🔊 다시 듣기</button>
+      <button className="audio-btn" onClick={() => speak(exercise.audioText)}>🔊 다시 듣기</button>
       {!canSpeak() && <p style={{ color: 'var(--muted)' }}>({exercise.audioText})</p>}
-      <div style={{ minHeight: 48, background: '#fff', border: '2px solid #e5e5e5', padding: 6, borderRadius: 10 }}>
+      <div className="tray">
         {chosen.map((c) => (
           <button key={c.i} className="token" onClick={() => setChosen(chosen.filter((x) => x.i !== c.i))}>{c.t}</button>
         ))}
       </div>
-      <div style={{ marginTop: 10 }}>
+      <div>
         {bank.map((b) => (
           <button key={b.i} className="token" disabled={chosenIds.has(b.i)}
             onClick={() => setChosen([...chosen, b])}>{b.t}</button>
         ))}
       </div>
-      <button className="btn" disabled={chosen.length === 0}
-        onClick={() => onAnswer(checkAnswer(exercise, chosen.map((c) => c.t)))}>확인</button>
+      <div className="action-bar">
+        <button className="btn" disabled={chosen.length === 0}
+          onClick={() => onAnswer(checkAnswer(exercise, chosen.map((c) => c.t)))}>확인</button>
+      </div>
     </div>
   )
 }
