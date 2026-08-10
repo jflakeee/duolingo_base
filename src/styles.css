@@ -409,6 +409,14 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 
 @keyframes nodeBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
 
+/* mascot animation */
+.duck-eyes { animation: blink 4.2s ease-in-out infinite; }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+.duck-cheer { animation: duckJump .6s ease; }
+@keyframes duckJump { 0% { transform: translateY(0) } 30% { transform: translateY(-14px) rotate(-4deg) } 55% { transform: translateY(0) } 72% { transform: translateY(-6px) } 100% { transform: translateY(0) } }
+.duck-sad { animation: duckShake .5s ease; }
+@keyframes duckShake { 0%,100% { transform: translateX(0) } 20% { transform: translateX(-6px) } 40% { transform: translateX(6px) } 60% { transform: translateX(-4px) } 80% { transform: translateX(4px) } }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }

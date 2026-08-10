@@ -1,5 +1,5 @@
 // Original mascot — a friendly yellow duck "덕이" (NOT an owl). mood: happy|sad|cheer
-export default function Duck({ mood = 'happy', size = 96, bob = false }) {
+export default function Duck({ mood = 'happy', size = 96, bob = false, animate = null }) {
   const eyeY = mood === 'sad' ? 41 : 39
   const browY = mood === 'cheer' ? 27 : 29
   return (
@@ -9,7 +9,7 @@ export default function Duck({ mood = 'happy', size = 96, bob = false }) {
       viewBox="0 0 100 100"
       aria-label={`duck-${mood}`}
       role="img"
-      className={bob ? 'bob' : undefined}
+      className={[bob ? 'bob' : '', animate ? `duck-${animate}` : ''].filter(Boolean).join(' ') || undefined}
     >
       <defs>
         <linearGradient id="dBody" x1="0" y1="0" x2="0" y2="1">
@@ -33,11 +33,13 @@ export default function Duck({ mood = 'happy', size = 96, bob = false }) {
       {/* cheeks */}
       <circle cx="36" cy="46" r="5" fill="#ffb3b3" opacity=".6" />
       <circle cx="64" cy="46" r="5" fill="#ffb3b3" opacity=".6" />
-      {/* eyes (white + pupil) */}
-      <circle cx="42" cy={eyeY} r="6.5" fill="#fff" />
-      <circle cx="58" cy={eyeY} r="6.5" fill="#fff" />
-      <circle cx={mood === 'cheer' ? 43 : 42} cy={eyeY + 1} r="3.2" fill="#3c3c3c" />
-      <circle cx={mood === 'cheer' ? 59 : 58} cy={eyeY + 1} r="3.2" fill="#3c3c3c" />
+      {/* eyes (white + pupil) — blinking group */}
+      <g className="duck-eyes" style={{ transformOrigin: `50px ${eyeY}px` }}>
+        <circle cx="42" cy={eyeY} r="6.5" fill="#fff" />
+        <circle cx="58" cy={eyeY} r="6.5" fill="#fff" />
+        <circle cx={mood === 'cheer' ? 43 : 42} cy={eyeY + 1} r="3.2" fill="#3c3c3c" />
+        <circle cx={mood === 'cheer' ? 59 : 58} cy={eyeY + 1} r="3.2" fill="#3c3c3c" />
+      </g>
       {/* brows */}
       <path d={`M36 ${browY} q6 -3 11 0`} stroke="#e0a800" strokeWidth="2" fill="none" strokeLinecap="round" />
       <path d={`M53 ${browY} q6 -3 11 0`} stroke="#e0a800" strokeWidth="2" fill="none" strokeLinecap="round" />

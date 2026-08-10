@@ -31,7 +31,7 @@ export default function Result({ summary, onContinue }) {
   return (
     <div className="result">
       {perfect && <Confetti />}
-      <Duck mood={perfect ? 'cheer' : 'happy'} size={128} bob />
+      <Duck mood={perfect ? 'cheer' : 'happy'} size={128} bob animate="cheer" />
       <h2>{perfect ? '완벽해요! 🎉' : '잘했어요! 👏'}</h2>
       <p className="lede">
         {perfect ? '실수 없이 통과했어요' : `정답 ${summary.correct} / ${summary.total} · 실수 ${summary.mistakes}`}
