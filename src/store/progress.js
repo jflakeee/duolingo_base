@@ -4,13 +4,17 @@ export const STORAGE_KEY = 'lingoduck.progress.v1'
 
 export function defaultProgress() {
   return {
-    version: 1,
+    version: 2,
     xp: 0,
     hearts: START_HEARTS,
     heartsUpdatedAt: 0,
     streak: { count: 0, lastDay: null, freezes: 1 },
     completedLessons: [],
     dailyXp: { day: null, amount: 0 },
+    gems: 0,
+    dailyGoal: 50,
+    onboarded: false,
+    settings: { theme: 'auto' },
   }
 }
 
