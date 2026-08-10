@@ -215,10 +215,16 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .unit__title::before { left: 6%; }
 .unit__title::after { right: 6%; }
 
-.nodes { position: relative; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.nodes { position: relative; margin: 0 auto; max-width: 300px; }
+.nodes__road { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.road { fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.road--bg { stroke: var(--line); stroke-width: 6; stroke-dasharray: 2 12; }
+.road--done { stroke: var(--green); stroke-width: 6; }
 
 .node {
-  position: relative;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 1;
   background: transparent;
   border: none;
   display: flex;
@@ -240,15 +246,14 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
   font-weight: 600;
   font-size: 13px;
   color: var(--muted);
-  max-width: 140px;
+  max-width: 130px;
   text-align: center;
 }
-
-/* node states */
 .node--current .node__disc {
   background: linear-gradient(180deg, #7ee63a, var(--green));
   color: #fff;
-  box-shadow: 0 6px 0 var(--green-d), 0 0 0 6px #eafce0;
+  box-shadow: 0 6px 0 var(--green-d);
+  animation: nodeBounce 2.2s ease-in-out infinite;
 }
 .node--current .node__label { color: var(--green-d); }
 .node--done .node__disc {
@@ -257,22 +262,7 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
   box-shadow: 0 6px 0 var(--gold-d);
 }
 .node--locked { cursor: default; }
-.node--locked .node__disc {
-  background: #ededed;
-  color: #bdbdbd;
-  box-shadow: 0 6px 0 #dcdcdc;
-}
-
-/* pulsing ring on the next lesson to do */
-.node--current::before {
-  content: '';
-  position: absolute;
-  top: -6px; width: 80px; height: 80px;
-  border-radius: 50%;
-  border: 3px solid var(--green);
-  opacity: .5;
-  animation: pulseRing 1.8s ease-out infinite;
-}
+.node--locked .node__disc { background: #ededed; color: #bdbdbd; box-shadow: 0 6px 0 #dcdcdc; }
 
 /* little start bubble */
 .node__bubble {
@@ -392,6 +382,59 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 @keyframes confettiFall { to { transform: translateY(120vh) rotate(720deg); opacity: .9; } }
 @keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
 
+/* answer sheet (lesson) */
+.sheet {
+  position: sticky;
+  bottom: 0;
+  margin: 18px -14px -40px;
+  padding: 18px 16px 26px;
+  animation: slideUp .22s ease both;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.sheet--correct { background: #d7ffb8; }
+.sheet--wrong { background: #ffe0e0; }
+.sheet__msg { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); }
+.sheet__badge { font-size: 26px; }
+.sheet__msg strong { font-size: 18px; color: var(--ink-strong); }
+.sheet--correct .sheet__msg strong { color: #3a8500; }
+.sheet--wrong .sheet__msg strong { color: var(--red-d); }
+.sheet__answer { font-weight: 700; color: var(--red-d); margin-top: 2px; }
+.combo { margin-left: 10px; font-weight: 800; color: #ff7a00; }
+.sheet--correct .btn { --c: var(--green); --cd: var(--green-d); }
+.sheet--wrong .btn { --c: var(--red); --cd: var(--red-d); }
+
+/* match two-column */
+.match-grid { display: flex; gap: 10px; }
+.match-col { flex: 1; }
+
+@keyframes nodeBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+/* dark mode (auto) — brand colors kept, surfaces/ink inverted */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e7e7e7;
+    --ink-strong: #f3f3f3;
+    --muted: #8a8a8a;
+    --line: #333638;
+    --line-2: #2a2c2e;
+    --card: #1b1d1f;
+    --card-2: #232628;
+  }
+  body {
+    background:
+      radial-gradient(1200px 500px at 50% -10%, #10361c 0%, rgba(16, 54, 28, 0) 60%),
+      radial-gradient(900px 500px at 110% 10%, #2a2410 0%, rgba(42, 36, 16, 0) 55%),
+      #131516;
+  }
+  .stat, .path-hero, .choice, .token, .audio-btn { background: var(--card); }
+  .header { background: linear-gradient(180deg, rgba(19,21,22,.96), rgba(19,21,22,.7)); }
+  .choice:hover:not(:disabled) { background: #202a30; }
+  .sheet--correct { background: #1d3311; }
+  .sheet--wrong { background: #3a1a1a; }
+  .node--locked .node__disc { background: #2a2c2e; color: #6a6a6a; box-shadow: 0 6px 0 #202223; }
+  .action-bar { background: linear-gradient(0deg, #131516 60%, rgba(19,21,22,0)); }
 }
