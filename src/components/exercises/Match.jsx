@@ -22,8 +22,8 @@ export default function Match({ exercise, onAnswer }) {
   return (
     <div>
       <h2>{exercise.prompt}</h2>
-      <div style={{ display: 'flex', gap: 10 }}>
-        <div style={{ flex: 1 }}>
+      <div className="match-grid">
+        <div className="match-col">
           {lefts.map((en) => (
             <button key={en}
               className={`choice ${selEn === en ? 'selected' : ''} ${map[en] ? 'correct' : ''}`}
@@ -32,7 +32,7 @@ export default function Match({ exercise, onAnswer }) {
             </button>
           ))}
         </div>
-        <div style={{ flex: 1 }}>
+        <div className="match-col">
           {rights.map((ko) => {
             const used = Object.values(map).includes(ko)
             return (
@@ -41,8 +41,10 @@ export default function Match({ exercise, onAnswer }) {
           })}
         </div>
       </div>
-      <button className="btn" disabled={!complete}
-        onClick={() => onAnswer(checkAnswer(exercise, map))}>확인</button>
+      <div className="action-bar">
+        <button className="btn" disabled={!complete}
+          onClick={() => onAnswer(checkAnswer(exercise, map))}>확인</button>
+      </div>
     </div>
   )
 }

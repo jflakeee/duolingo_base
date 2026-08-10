@@ -19,8 +19,10 @@ export default function Mcq({ exercise, onAnswer }) {
           {c}
         </button>
       ))}
-      <button className="btn" disabled={picked === null}
-        onClick={() => onAnswer(checkAnswer(exercise, picked))}>확인</button>
+      <div className="action-bar">
+        <button className="btn" disabled={picked === null}
+          onClick={() => onAnswer(checkAnswer(exercise, picked))}>확인</button>
+      </div>
     </div>
   )
 }
