@@ -446,6 +446,26 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 }
 .empty-card p { margin: 6px 0; }
 
+/* onboarding */
+.onboarding { justify-content: center; }
+.ob-step { text-align: center; animation: fadeUp .35s ease both; padding-top: 20px; }
+.ob-step h1 { font-size: 26px; margin: 14px 0 6px; }
+.ob-step .choice { text-align: center; }
+.ob-step .btn { margin-top: 8px; }
+
+/* profile */
+.profile__hero { display: flex; align-items: center; gap: 14px; margin: 6px 0 18px; }
+.profile__hero h1 { margin: 0; font-size: 24px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pstat { background: var(--card); border: 2px solid var(--line-2); border-radius: 16px; padding: 16px; box-shadow: 0 3px 0 var(--line); }
+.pstat__v { font-family: var(--font-display); font-weight: 700; font-size: 26px; color: var(--green-d); }
+.pstat__k { color: var(--muted); font-weight: 700; font-size: 13px; }
+.section-title { font-size: 18px; margin: 22px 0 10px; }
+.setting-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; }
+.seg { display: inline-flex; background: var(--card-2); border-radius: 12px; padding: 3px; }
+.seg__btn { border: none; background: transparent; padding: 8px 12px; border-radius: 9px; font-weight: 700; color: var(--muted); font-size: 13px; }
+.seg__btn--on { background: var(--green); color: #fff; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
