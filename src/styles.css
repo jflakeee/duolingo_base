@@ -423,28 +423,31 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
   * { animation: none !important; transition: none !important; }
 }
 
-/* dark mode (auto) — brand colors kept, surfaces/ink inverted */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #e7e7e7;
-    --ink-strong: #f3f3f3;
-    --muted: #8a8a8a;
-    --line: #333638;
-    --line-2: #2a2c2e;
-    --card: #1b1d1f;
-    --card-2: #232628;
-  }
-  body {
-    background:
-      radial-gradient(1200px 500px at 50% -10%, #10361c 0%, rgba(16, 54, 28, 0) 60%),
-      radial-gradient(900px 500px at 110% 10%, #2a2410 0%, rgba(42, 36, 16, 0) 55%),
-      #131516;
-  }
-  .stat, .path-hero, .choice, .token, .audio-btn { background: var(--card); }
-  .header { background: linear-gradient(180deg, rgba(19,21,22,.96), rgba(19,21,22,.7)); }
-  .choice:hover:not(:disabled) { background: #202a30; }
-  .sheet--correct { background: #1d3311; }
-  .sheet--wrong { background: #3a1a1a; }
-  .node--locked .node__disc { background: #2a2c2e; color: #6a6a6a; box-shadow: 0 6px 0 #202223; }
-  .action-bar { background: linear-gradient(0deg, #131516 60%, rgba(19,21,22,0)); }
+/* dark mode — driven by data-theme (JS resolves 'auto' via matchMedia) */
+:root[data-theme="dark"] {
+  --ink: #e7e7e7;
+  --ink-strong: #f3f3f3;
+  --muted: #8a8a8a;
+  --line: #333638;
+  --line-2: #2a2c2e;
+  --card: #1b1d1f;
+  --card-2: #232628;
 }
+[data-theme="dark"] body {
+  background:
+    radial-gradient(1200px 500px at 50% -10%, #10361c 0%, rgba(16, 54, 28, 0) 60%),
+    radial-gradient(900px 500px at 110% 10%, #2a2410 0%, rgba(42, 36, 16, 0) 55%),
+    #131516;
+}
+[data-theme="dark"] .stat,
+[data-theme="dark"] .path-hero,
+[data-theme="dark"] .choice,
+[data-theme="dark"] .token,
+[data-theme="dark"] .audio-btn { background: var(--card); }
+[data-theme="dark"] .header { background: linear-gradient(180deg, rgba(19,21,22,.96), rgba(19,21,22,.7)); }
+[data-theme="dark"] .choice:hover:not(:disabled) { background: #202a30; }
+[data-theme="dark"] .sheet--correct { background: #1d3311; }
+[data-theme="dark"] .sheet--wrong { background: #3a1a1a; }
+[data-theme="dark"] .node--locked .node__disc { background: #2a2c2e; color: #6a6a6a; box-shadow: 0 6px 0 #202223; }
+[data-theme="dark"] .action-bar { background: linear-gradient(0deg, #131516 60%, rgba(19,21,22,0)); }
+[data-theme="dark"] .bottomnav { background: #16181a; border-top-color: #2a2c2e; }
