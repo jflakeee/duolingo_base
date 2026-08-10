@@ -3,6 +3,7 @@ import { createSession, currentExercise, answer } from '../engine/session.js'
 import { xpForLesson } from '../engine/gamification.js'
 import { correctAnswerText } from '../engine/answerText.js'
 import { playCorrect, playWrong } from '../audio/sfx.js'
+import { buzzCorrect, buzzWrong } from '../audio/haptics.js'
 import Mcq from './exercises/Mcq.jsx'
 import WordBank from './exercises/WordBank.jsx'
 import Listen from './exercises/Listen.jsx'
@@ -21,7 +22,7 @@ export default function Lesson({ lesson, onWrong, onFinish, onQuit }) {
 
   function handleAnswer(isCorrect) {
     const nextCombo = isCorrect ? combo + 1 : 0
-    if (isCorrect) { playCorrect() } else { playWrong(); onWrong?.() }
+    if (isCorrect) { playCorrect(); buzzCorrect() } else { playWrong(); buzzWrong(); onWrong?.() }
     setCombo(nextCombo)
     setSheet({ correct: isCorrect, answerText: correctAnswerText(ex), combo: nextCombo })
   }
