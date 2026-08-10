@@ -466,6 +466,34 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .seg__btn { border: none; background: transparent; padding: 8px 12px; border-radius: 9px; font-weight: 700; color: var(--muted); font-size: 13px; }
 .seg__btn--on { background: var(--green); color: #fff; }
 
+.stat--gem { color: #1899d6; }
+
+/* quests */
+.quest { background: var(--card); border: 2px solid var(--line-2); border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 3px 0 var(--line); }
+.quest__top { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; }
+.quest__reward { color: #1899d6; font-family: var(--font-display); font-weight: 600; }
+.quest__foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.quest__count { color: var(--muted); font-weight: 700; font-size: 13px; }
+
+/* shop */
+.shop-item { display: flex; align-items: center; gap: 12px; background: var(--card); border: 2px solid var(--line-2); border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 3px 0 var(--line); }
+.shop-item__ico { font-size: 30px; }
+.shop-item__body { flex: 1; }
+.shop-item__body strong { display: block; }
+.shop-item .btn { width: auto; }
+
+/* badges */
+.badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.badge-card { text-align: center; background: var(--card); border: 2px solid var(--line-2); border-radius: 14px; padding: 12px 6px; box-shadow: 0 3px 0 var(--line); }
+.badge-card__ico { font-size: 28px; }
+.badge-card__label { font-family: var(--font-display); font-weight: 600; font-size: 11px; color: var(--ink); margin-top: 4px; }
+.badge-card--locked { opacity: .5; }
+.badge-card--locked .badge-card__label { color: var(--muted); }
+
+/* result reward lines */
+.gem-line { font-family: var(--font-display); font-weight: 600; color: #1899d6; margin: 4px 0; }
+.ach-line { font-family: var(--font-display); font-weight: 600; color: var(--gold-d); margin: 4px 0 12px; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }

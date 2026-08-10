@@ -1,4 +1,5 @@
 import Duck from './Duck.jsx'
+import { ACHIEVEMENTS } from '../engine/achievements.js'
 
 function Stat({ k, v }) {
   return (
@@ -25,6 +26,19 @@ export default function Profile({ progress, onSetTheme, onSetGoal, onReset }) {
         <Stat k="스트릭" v={`${progress.streak.count}일`} />
         <Stat k="완료 레슨" v={progress.completedLessons.length} />
         <Stat k="젬" v={progress.gems} />
+      </div>
+
+      <h2 className="section-title">업적</h2>
+      <div className="badges">
+        {ACHIEVEMENTS.map((a) => {
+          const on = !!progress.achievements?.[a.id]
+          return (
+            <div key={a.id} className={`badge-card ${on ? '' : 'badge-card--locked'}`}>
+              <div className="badge-card__ico">{on ? a.icon : '🔒'}</div>
+              <div className="badge-card__label">{a.label}</div>
+            </div>
+          )
+        })}
       </div>
 
       <h2 className="section-title">설정</h2>

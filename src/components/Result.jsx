@@ -58,6 +58,8 @@ export default function Result({ summary, streak, onContinue }) {
         </div>
       </div>
 
+      {summary.gemsGained > 0 && <p className="gem-line">💎 +{summary.gemsGained} 젬 획득</p>}
+      {summary.newAchievements?.length > 0 && <p className="ach-line">🏆 새 업적 {summary.newAchievements.length}개 달성!</p>}
       {streak > 0 && <p className="streak-line">🔥 {streak}일 연속 학습 중!</p>}
       <button className="btn" onClick={onContinue}>계속하기</button>
     </div>
