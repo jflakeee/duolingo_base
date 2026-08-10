@@ -88,7 +88,7 @@ export default function App() {
         />
       )}
       {screen === 'result' && summary && (
-        <Result summary={summary} onContinue={goPath} />
+        <Result summary={summary} streak={progress.streak.count} onContinue={goPath} />
       )}
       {screen === 'fail' && (
         <div className="fail">

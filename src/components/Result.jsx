@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import Duck from './Duck.jsx'
+import { playComplete } from '../audio/sfx.js'
 
 const CONFETTI_COLORS = ['#58cc02', '#ffc800', '#1cb0f6', '#ce82ff', '#ff4b4b', '#ff9600']
 
@@ -15,6 +17,9 @@ function Confetti({ count = 26 }) {
         style={{
           left: `${left}%`,
           background: color,
+          width: `${7 + Math.round(Math.random() * 6)}px`,
+          height: `${10 + Math.round(Math.random() * 8)}px`,
+          borderRadius: i % 3 === 0 ? '50%' : '2px',
           animationDuration: `${dur}s`,
           animationDelay: `${delay}s`,
           transform: `rotate(${rot}deg)`,
@@ -25,9 +30,10 @@ function Confetti({ count = 26 }) {
   return <div className="confetti">{pieces}</div>
 }
 
-export default function Result({ summary, onContinue }) {
+export default function Result({ summary, streak, onContinue }) {
   const perfect = summary.mistakes === 0
   const accuracy = Math.round((summary.correct / summary.total) * 100)
+  useEffect(() => { playComplete() }, [])
   return (
     <div className="result">
       {perfect && <Confetti />}
@@ -52,6 +58,7 @@ export default function Result({ summary, onContinue }) {
         </div>
       </div>
 
+      {streak > 0 && <p className="streak-line">🔥 {streak}일 연속 학습 중!</p>}
       <button className="btn" onClick={onContinue}>계속하기</button>
     </div>
   )

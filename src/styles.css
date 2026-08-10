@@ -417,6 +417,8 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .duck-sad { animation: duckShake .5s ease; }
 @keyframes duckShake { 0%,100% { transform: translateX(0) } 20% { transform: translateX(-6px) } 40% { transform: translateX(6px) } 60% { transform: translateX(-4px) } 80% { transform: translateX(4px) } }
 
+.streak-line { font-family: var(--font-display); font-weight: 600; color: #ff7a00; margin: 6px 0 16px; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
