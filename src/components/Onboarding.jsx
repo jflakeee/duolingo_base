@@ -1,16 +1,12 @@
 import { useState } from 'react'
 import Duck from './Duck.jsx'
+import { getLevels } from '../data/loadCurriculum.js'
 
 const GOALS = [
   { xp: 10, label: '가볍게' },
   { xp: 20, label: '보통' },
   { xp: 50, label: '진지하게' },
   { xp: 100, label: '최대로' },
-]
-const LEVELS = [
-  { id: 'kinder', label: '유치원', desc: '처음 시작해요' },
-  { id: 'grade1', label: '초등 1학년', desc: '기초는 알아요' },
-  { id: 'grade2', label: '초등 2학년', desc: '문장도 만들 수 있어요' },
 ]
 
 export default function Onboarding({ onDone }) {
@@ -43,9 +39,9 @@ export default function Onboarding({ onDone }) {
         <div className="ob-step">
           <h1>어디서 시작할까요?</h1>
           <p className="lede">고른 단계 이전은 완료 처리되어 열려요.</p>
-          {LEVELS.map((l) => (
+          {getLevels().map((l) => (
             <button key={l.id} className="choice" onClick={() => onDone({ dailyGoal: goal, startLevel: l.id })}>
-              <strong>{l.label}</strong> — {l.desc}
+              <strong>{l.name}</strong>
             </button>
           ))}
         </div>
