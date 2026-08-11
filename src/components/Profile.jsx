@@ -1,4 +1,5 @@
 import Duck from './Duck.jsx'
+import InstallButton from './InstallButton.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 
 function Stat({ k, v }) {
@@ -61,6 +62,7 @@ export default function Profile({ progress, onSetTheme, onSetGoal, onReset }) {
         </div>
       </div>
 
+      <InstallButton />
       <button className="btn btn--ghost" style={{ marginTop: 18 }} onClick={onReset}>진도 초기화</button>
     </div>
   )
