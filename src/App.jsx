@@ -9,7 +9,8 @@ import Quests from './components/Quests.jsx'
 import Shop from './components/Shop.jsx'
 import Profile from './components/Profile.jsx'
 import Onboarding from './components/Onboarding.jsx'
-import { getLessonById, getLevels } from './data/loadCurriculum.js'
+import { getLessonById, getLevels, getLessonSequence } from './data/loadCurriculum.js'
+import { recordMistake, buildReviewSession, clearSolved } from './engine/review.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -32,6 +33,12 @@ export default function App() {
   const [screen, setScreen] = useState('path') // learn sub-screen: path|lesson|result|fail
   const [activeLessonId, setActiveLessonId] = useState(null)
   const [summary, setSummary] = useState(null)
+  const [reviewMode, setReviewMode] = useState(false)
+  const [reviewExercises, setReviewExercises] = useState([])
+  const reviewWrongIds = useState(() => new Set())[0]
+
+  const lessonsById = {}
+  for (const { lesson } of getLessonSequence()) lessonsById[lesson.id] = lesson
 
   // apply theme on mount + when the setting changes; follow OS when 'auto'
   useEffect(() => {
@@ -53,9 +60,15 @@ export default function App() {
     setActiveLessonId(id)
     setScreen('lesson')
   }
-  function handleWrong() {
+  function handleWrong(exId) {
+    if (reviewMode) return // 복습은 하트 차감·오답 기록 없음
     const wasFull = progress.hearts >= 5
-    const next = { ...progress, hearts: loseHeart(progress.hearts), heartsUpdatedAt: wasFull ? Date.now() : progress.heartsUpdatedAt }
+    const key = `${activeLessonId}#${exId}`
+    const ex = getLessonById(activeLessonId)?.exercises?.[exId]
+    const withMistake = ex
+      ? { ...progress, reviewQueue: recordMistake(progress.reviewQueue ?? [], { key, lessonId: activeLessonId, ex }) }
+      : progress
+    const next = { ...withMistake, hearts: loseHeart(progress.hearts), heartsUpdatedAt: wasFull ? Date.now() : progress.heartsUpdatedAt }
     persist(next)
     if (next.hearts <= 0) setScreen('fail')
   }
@@ -86,6 +99,40 @@ export default function App() {
     const next = { ...afterLesson, achievements }
     persist(next)
     setSummary({ ...s, gemsGained, newAchievements: newIds })
+    setScreen('result')
+  }
+
+  function startReview() {
+    if (progress.hearts <= 0) { setScreen('fail'); return }
+    const exercises = buildReviewSession(
+      { reviewQueue: progress.reviewQueue ?? [], completedLessons: progress.completedLessons },
+      lessonsById,
+    )
+    if (exercises.length === 0) return
+    reviewWrongIds.clear()
+    setReviewExercises(exercises)
+    setReviewMode(true)
+    setActiveLessonId(null)
+    setScreen('lesson')
+  }
+  function handleExerciseResult(exId, isCorrect) {
+    if (reviewMode && !isCorrect) reviewWrongIds.add(exId)
+  }
+  function handleReviewFinish(s) {
+    const solvedKeys = reviewExercises
+      .map((ex, i) => ({ ex, i }))
+      .filter(({ ex, i }) => ex._reviewKey && !reviewWrongIds.has(i))
+      .map(({ ex }) => ex._reviewKey)
+    const today = todayStr()
+    const next = {
+      ...progress,
+      xp: progress.xp + s.xpGained,
+      dailyXp: addDailyXp(progress.dailyXp, s.xpGained, today),
+      reviewQueue: clearSolved(progress.reviewQueue ?? [], solvedKeys),
+    }
+    persist(next)
+    setReviewMode(false)
+    setSummary({ ...s, gemsGained: 0, newAchievements: [] })
     setScreen('result')
   }
 
@@ -129,9 +176,17 @@ export default function App() {
 
       {tab === 'learn' && (
         <>
-          {screen === 'path' && <Path progress={progress} onStart={startLesson} />}
+          {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} />}
           {screen === 'lesson' && (
-            <Lesson lesson={getLessonById(activeLessonId)} onWrong={handleWrong} onFinish={handleFinish} onQuit={() => setScreen('path')} />
+            <Lesson
+              lesson={reviewMode
+                ? { id: 'review', title: '복습', exercises: reviewExercises }
+                : getLessonById(activeLessonId)}
+              onWrong={handleWrong}
+              onExerciseResult={handleExerciseResult}
+              onFinish={reviewMode ? handleReviewFinish : handleFinish}
+              onQuit={() => { setReviewMode(false); setScreen('path') }}
+            />
           )}
           {screen === 'result' && summary && (
             <Result summary={summary} streak={progress.streak.count} onContinue={goPath} />

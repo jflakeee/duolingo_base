@@ -48,4 +48,12 @@ describe('progress store', () => {
     expect(p.onboarded).toBe(false)
     expect(p.settings).toEqual({ theme: 'auto' })
   })
+  it('defaults include empty reviewQueue', () => {
+    expect(defaultProgress().reviewQueue).toEqual([])
+  })
+  it('migrates old save without reviewQueue', () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ xp: 40 }))
+    expect(loadProgress().reviewQueue).toEqual([])
+    expect(loadProgress().xp).toBe(40)
+  })
 })

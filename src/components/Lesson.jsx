@@ -8,10 +8,11 @@ import Mcq from './exercises/Mcq.jsx'
 import WordBank from './exercises/WordBank.jsx'
 import Listen from './exercises/Listen.jsx'
 import Match from './exercises/Match.jsx'
+import Picture from './exercises/Picture.jsx'
 
-const REGISTRY = { mcq: Mcq, wordbank: WordBank, listen: Listen, match: Match }
+const REGISTRY = { mcq: Mcq, wordbank: WordBank, listen: Listen, match: Match, picture: Picture }
 
-export default function Lesson({ lesson, onWrong, onFinish, onQuit }) {
+export default function Lesson({ lesson, onWrong, onExerciseResult, onFinish, onQuit }) {
   const [session, setSession] = useState(() => createSession(lesson.exercises))
   const [combo, setCombo] = useState(0)
   // sheet: null | { correct: boolean, answerText: string, combo: number }
@@ -21,8 +22,10 @@ export default function Lesson({ lesson, onWrong, onFinish, onQuit }) {
   const pct = Math.round((session.completed / session.total) * 100)
 
   function handleAnswer(isCorrect) {
+    const exId = session.queue[0].id
     const nextCombo = isCorrect ? combo + 1 : 0
-    if (isCorrect) { playCorrect(); buzzCorrect() } else { playWrong(); buzzWrong(); onWrong?.() }
+    if (isCorrect) { playCorrect(); buzzCorrect() } else { playWrong(); buzzWrong(); onWrong?.(exId) }
+    onExerciseResult?.(exId, isCorrect)
     setCombo(nextCombo)
     setSheet({ correct: isCorrect, answerText: correctAnswerText(ex), combo: nextCombo })
   }

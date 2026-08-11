@@ -1,6 +1,16 @@
 import { describe, it, expect } from 'vitest'
 import { checkAnswer, arraysEqual } from '../src/engine/scoring.js'
 
+describe('picture', () => {
+  const ex = { type: 'picture', word: 'apple', choices: ['🍎', '🐱', '🏠', '🔴'], answer: '🍎' }
+  it('correct when response equals answer emoji', () => {
+    expect(checkAnswer(ex, '🍎')).toBe(true)
+  })
+  it('wrong when response is a different emoji', () => {
+    expect(checkAnswer(ex, '🐱')).toBe(false)
+  })
+})
+
 describe('mcq', () => {
   const ex = { type: 'mcq', answer: 'Hello' }
   it('correct when choice equals answer', () => {

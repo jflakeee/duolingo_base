@@ -18,6 +18,7 @@ export function defaultProgress() {
     quests: { day: null, items: [] },
     achievements: {},
     perfectCount: 0,
+    reviewQueue: [],
   }
 }
 

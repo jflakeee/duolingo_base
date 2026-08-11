@@ -526,3 +526,26 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 [data-theme="dark"] .node--locked .node__disc { background: #2a2c2e; color: #6a6a6a; box-shadow: 0 6px 0 #202223; }
 [data-theme="dark"] .action-bar { background: linear-gradient(0deg, #131516 60%, rgba(19,21,22,0)); }
 [data-theme="dark"] .bottomnav { background: #16181a; border-top-color: #2a2c2e; }
+
+/* Picture exercise */
+.pic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.pic-card {
+  aspect-ratio: 1 / 1; border: 2px solid var(--line, #e5e5e5); border-radius: 16px;
+  background: var(--card, #fff); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform .08s, border-color .12s, background .12s;
+}
+.pic-card:active { transform: translateY(2px); }
+.pic-card.selected { border-color: #58cc02; background: rgba(88,204,2,.10); }
+.pic-emoji { font-size: 64px; line-height: 1; }
+
+/* Review button */
+.review-btn {
+  display: inline-flex; align-items: center; gap: 8px; margin: 4px 0 14px;
+  padding: 12px 18px; border-radius: 14px; border: 2px solid #1cb0f6;
+  color: #1cb0f6; background: var(--card, #fff); font-weight: 800; cursor: pointer;
+}
+.review-btn:disabled { opacity: .45; cursor: default; }
+.review-badge {
+  background: #ff4b4b; color: #fff; border-radius: 999px;
+  padding: 1px 8px; font-size: 13px; font-weight: 800;
+}

@@ -32,7 +32,7 @@ function donePath(lessons, done) {
   return d.trim()
 }
 
-export default function Path({ progress, onStart }) {
+export default function Path({ progress, onStart, onReview }) {
   const done = new Set(progress.completedLessons)
   const seq = []
   getLevels().forEach((lvl) => lvl.units.forEach((u) => u.lessons.forEach((l) => seq.push(l.id))))
@@ -53,6 +53,16 @@ export default function Path({ progress, onStart }) {
           </p>
         </div>
       </div>
+
+      {(() => {
+        const reviewCount = (progress.reviewQueue ?? []).length
+        const canReview = reviewCount > 0 || progress.completedLessons.length > 0
+        return (
+          <button className="review-btn" disabled={!canReview} onClick={onReview}>
+            🔄 복습하기{reviewCount > 0 && <span className="review-badge">{reviewCount}</span>}
+          </button>
+        )
+      })()}
 
       {getLevels().map((lvl, li) => {
         const lessonCount = lvl.units.reduce((n, u) => n + u.lessons.length, 0)

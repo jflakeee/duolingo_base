@@ -9,6 +9,8 @@ export function arraysEqual(a, b) {
 //   match   -> { [english]: koreanUserPicked }
 export function checkAnswer(exercise, response) {
   switch (exercise.type) {
+    case 'picture':
+      return response === exercise.answer
     case 'mcq':
       return response === exercise.answer
     case 'wordbank':

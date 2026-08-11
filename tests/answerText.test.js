@@ -5,6 +5,9 @@ describe('correctAnswerText', () => {
   it('mcq → the answer string', () => {
     expect(correctAnswerText({ type: 'mcq', answer: 'Hello' })).toBe('Hello')
   })
+  it('picture → emoji + word', () => {
+    expect(correctAnswerText({ type: 'picture', answer: '🍎', word: 'apple' })).toBe('🍎 apple')
+  })
   it('wordbank → answer joined by spaces', () => {
     expect(correctAnswerText({ type: 'wordbank', answer: ['I', 'like', 'blue'] })).toBe('I like blue')
   })
