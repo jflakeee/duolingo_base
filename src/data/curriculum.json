@@ -117,6 +117,32 @@
                   ]
                 },
                 {
+                  "type": "picture",
+                  "prompt": "노랑은 어느 것?",
+                  "word": "yellow",
+                  "choices": [
+                    "🟡",
+                    "🔴",
+                    "🔵",
+                    "🟢"
+                  ],
+                  "answer": "🟡",
+                  "audioText": "yellow"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "빨강은 어느 것?",
+                  "word": "red",
+                  "choices": [
+                    "🔴",
+                    "🔵",
+                    "🟢",
+                    "🟡"
+                  ],
+                  "answer": "🔴",
+                  "audioText": "red"
+                },
+                {
                   "type": "mcq",
                   "prompt": "‘노랑’은 영어로?",
                   "choices": [
@@ -189,6 +215,32 @@
                   ],
                   "answer": "Cat",
                   "audioText": "Cat"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "개는 어느 것?",
+                  "word": "dog",
+                  "choices": [
+                    "🐶",
+                    "🐱",
+                    "🐟",
+                    "🐤"
+                  ],
+                  "answer": "🐶",
+                  "audioText": "dog"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "고양이는 어느 것?",
+                  "word": "cat",
+                  "choices": [
+                    "🐱",
+                    "🐶",
+                    "🐟",
+                    "🐤"
+                  ],
+                  "answer": "🐱",
+                  "audioText": "cat"
                 },
                 {
                   "type": "match",
@@ -455,6 +507,32 @@
                   "audioText": "Apple"
                 },
                 {
+                  "type": "picture",
+                  "prompt": "빵은 어느 것?",
+                  "word": "bread",
+                  "choices": [
+                    "🍞",
+                    "🍎",
+                    "🥛",
+                    "🍚"
+                  ],
+                  "answer": "🍞",
+                  "audioText": "bread"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "사과는 어느 것?",
+                  "word": "apple",
+                  "choices": [
+                    "🍎",
+                    "🍞",
+                    "🥛",
+                    "🍚"
+                  ],
+                  "answer": "🍎",
+                  "audioText": "apple"
+                },
+                {
                   "type": "match",
                   "prompt": "짝을 맞추세요",
                   "pairs": [
@@ -719,6 +797,32 @@
                   ],
                   "answer": "Mom",
                   "audioText": "Mom"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "아빠는 어느 것?",
+                  "word": "father",
+                  "choices": [
+                    "👨",
+                    "👩",
+                    "👶",
+                    "👦"
+                  ],
+                  "answer": "👨",
+                  "audioText": "father"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "엄마는 어느 것?",
+                  "word": "mother",
+                  "choices": [
+                    "👩",
+                    "👨",
+                    "👶",
+                    "👦"
+                  ],
+                  "answer": "👩",
+                  "audioText": "mother"
                 },
                 {
                   "type": "match",
