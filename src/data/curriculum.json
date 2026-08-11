@@ -311,6 +311,11 @@
                   "prompt": "'고양이'를 영어로 쓰세요",
                   "answer": "cat",
                   "audioText": "cat"
+                },
+                {
+                  "type": "dictation",
+                  "answer": "I like cats",
+                  "audioText": "I like cats"
                 }
               ]
             }
@@ -645,6 +650,14 @@
                   "audioText": "apple",
                   "accept": [
                     "an apple"
+                  ]
+                },
+                {
+                  "type": "dictation",
+                  "answer": "I like apples",
+                  "audioText": "I like apples",
+                  "accept": [
+                    "I like apple"
                   ]
                 }
               ]
@@ -989,6 +1002,11 @@
                   "accept": [
                     "mom"
                   ]
+                },
+                {
+                  "type": "dictation",
+                  "answer": "This is my mother",
+                  "audioText": "This is my mother"
                 }
               ]
             }
@@ -1332,6 +1350,11 @@
                   ],
                   "answer": "Read",
                   "audioText": "Read"
+                },
+                {
+                  "type": "dictation",
+                  "answer": "I can run",
+                  "audioText": "I can run"
                 }
               ]
             },
@@ -1989,6 +2012,14 @@
                   "prompt": "'행복한'을 영어로 쓰세요",
                   "answer": "happy",
                   "audioText": "happy"
+                },
+                {
+                  "type": "dictation",
+                  "answer": "I am happy",
+                  "audioText": "I am happy",
+                  "accept": [
+                    "I'm happy"
+                  ]
                 }
               ]
             },

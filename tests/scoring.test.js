@@ -20,6 +20,16 @@ describe('typein', () => {
   })
 })
 
+describe('dictation', () => {
+  const ex = { type: 'dictation', answer: 'I like blue', audioText: 'I like blue' }
+  it('accepts the sentence with forgiving normalization', () => {
+    expect(checkAnswer(ex, 'i like blue.')).toBe(true)
+  })
+  it('rejects a wrong sentence', () => {
+    expect(checkAnswer(ex, 'I like red')).toBe(false)
+  })
+})
+
 describe('picture', () => {
   const ex = { type: 'picture', word: 'apple', choices: ['🍎', '🐱', '🏠', '🔴'], answer: '🍎' }
   it('correct when response equals answer emoji', () => {

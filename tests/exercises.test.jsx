@@ -5,6 +5,22 @@ import WordBank from '../src/components/exercises/WordBank.jsx'
 import Match from '../src/components/exercises/Match.jsx'
 import Picture from '../src/components/exercises/Picture.jsx'
 import TypeIn from '../src/components/exercises/TypeIn.jsx'
+import Dictation from '../src/components/exercises/Dictation.jsx'
+
+describe('Dictation', () => {
+  const ex = { type: 'dictation', answer: 'I am happy', audioText: 'I am happy' }
+  it('grades the typed sentence forgivingly', () => {
+    const onAnswer = vi.fn()
+    render(<Dictation exercise={ex} onAnswer={onAnswer} />)
+    fireEvent.change(screen.getByLabelText('받아쓰기 입력'), { target: { value: 'i am happy' } })
+    fireEvent.click(screen.getByRole('button', { name: '확인' }))
+    expect(onAnswer).toHaveBeenCalledWith(true)
+  })
+  it('does not reveal the answer text on screen', () => {
+    render(<Dictation exercise={ex} onAnswer={vi.fn()} />)
+    expect(screen.queryByText('I am happy')).toBeNull()
+  })
+})
 
 describe('TypeIn', () => {
   const ex = { type: 'typein', prompt: "'사과'를 영어로", answer: 'apple', audioText: 'apple' }

@@ -15,7 +15,7 @@ export function normalizeText(s) {
 
 // response shape by type:
 //   mcq/picture -> string
-//   typein  -> string (free text)
+//   typein/dictation -> string (free text)
 //   wordbank/listen -> string[] (ordered)
 //   match   -> { [english]: koreanUserPicked }
 export function checkAnswer(exercise, response) {
@@ -24,7 +24,8 @@ export function checkAnswer(exercise, response) {
       return response === exercise.answer
     case 'mcq':
       return response === exercise.answer
-    case 'typein': {
+    case 'typein':
+    case 'dictation': {
       const target = normalizeText(response)
       return [exercise.answer, ...(exercise.accept ?? [])].some((a) => normalizeText(a) === target)
     }

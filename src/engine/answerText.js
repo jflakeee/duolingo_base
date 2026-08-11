@@ -4,6 +4,7 @@ export function correctAnswerText(exercise) {
     case 'picture':
       return `${exercise.answer} ${exercise.word ?? ''}`.trim()
     case 'typein':
+    case 'dictation':
       return exercise.answer
     case 'mcq':
       return exercise.answer
