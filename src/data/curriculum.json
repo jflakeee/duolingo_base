@@ -325,6 +325,32 @@
                   "audioText": "Five"
                 },
                 {
+                  "type": "picture",
+                  "prompt": "숫자 1은 어느 것?",
+                  "word": "one",
+                  "choices": [
+                    "1️⃣",
+                    "2️⃣",
+                    "3️⃣",
+                    "4️⃣"
+                  ],
+                  "answer": "1️⃣",
+                  "audioText": "one"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "숫자 3은 어느 것?",
+                  "word": "three",
+                  "choices": [
+                    "3️⃣",
+                    "1️⃣",
+                    "2️⃣",
+                    "5️⃣"
+                  ],
+                  "answer": "3️⃣",
+                  "audioText": "three"
+                },
+                {
                   "type": "match",
                   "prompt": "짝을 맞추세요",
                   "pairs": [
@@ -625,6 +651,32 @@
                   ]
                 },
                 {
+                  "type": "picture",
+                  "prompt": "물은 어느 것?",
+                  "word": "water",
+                  "choices": [
+                    "💧",
+                    "🥛",
+                    "🍞",
+                    "🍎"
+                  ],
+                  "answer": "💧",
+                  "audioText": "water"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "우유는 어느 것?",
+                  "word": "milk",
+                  "choices": [
+                    "🥛",
+                    "💧",
+                    "🍞",
+                    "🍎"
+                  ],
+                  "answer": "🥛",
+                  "audioText": "milk"
+                },
+                {
                   "type": "mcq",
                   "prompt": "‘밥’은 영어로?",
                   "choices": [
@@ -715,6 +767,32 @@
                   ],
                   "answer": "Three",
                   "audioText": "Three"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "숫자 7은 어느 것?",
+                  "word": "seven",
+                  "choices": [
+                    "7️⃣",
+                    "6️⃣",
+                    "8️⃣",
+                    "9️⃣"
+                  ],
+                  "answer": "7️⃣",
+                  "audioText": "seven"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "숫자 10은 어느 것?",
+                  "word": "ten",
+                  "choices": [
+                    "🔟",
+                    "6️⃣",
+                    "7️⃣",
+                    "8️⃣"
+                  ],
+                  "answer": "🔟",
+                  "audioText": "ten"
                 },
                 {
                   "type": "match",
@@ -907,6 +985,32 @@
                   "audioText": "Book"
                 },
                 {
+                  "type": "picture",
+                  "prompt": "연필은 어느 것?",
+                  "word": "pencil",
+                  "choices": [
+                    "✏️",
+                    "📚",
+                    "🎒",
+                    "📏"
+                  ],
+                  "answer": "✏️",
+                  "audioText": "pencil"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "책은 어느 것?",
+                  "word": "book",
+                  "choices": [
+                    "📚",
+                    "✏️",
+                    "🎒",
+                    "📏"
+                  ],
+                  "answer": "📚",
+                  "audioText": "book"
+                },
+                {
                   "type": "match",
                   "prompt": "짝을 맞추세요",
                   "pairs": [
@@ -1091,6 +1195,32 @@
                   ],
                   "answer": "Run",
                   "audioText": "Run"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "수영하다는 어느 것?",
+                  "word": "swim",
+                  "choices": [
+                    "🏊",
+                    "🏃",
+                    "🍳",
+                    "📖"
+                  ],
+                  "answer": "🏊",
+                  "audioText": "swim"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "달리다는 어느 것?",
+                  "word": "run",
+                  "choices": [
+                    "🏃",
+                    "🏊",
+                    "🍳",
+                    "📖"
+                  ],
+                  "answer": "🏃",
+                  "audioText": "run"
                 },
                 {
                   "type": "match",
@@ -1285,6 +1415,32 @@
                   "audioText": "Sunny"
                 },
                 {
+                  "type": "picture",
+                  "prompt": "비는 어느 것?",
+                  "word": "rainy",
+                  "choices": [
+                    "🌧️",
+                    "☀️",
+                    "❄️",
+                    "⛅"
+                  ],
+                  "answer": "🌧️",
+                  "audioText": "rainy"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "맑음은 어느 것?",
+                  "word": "sunny",
+                  "choices": [
+                    "☀️",
+                    "🌧️",
+                    "❄️",
+                    "⛅"
+                  ],
+                  "answer": "☀️",
+                  "audioText": "sunny"
+                },
+                {
                   "type": "match",
                   "prompt": "짝을 맞추세요",
                   "pairs": [
@@ -1379,6 +1535,32 @@
                       "바람 부는"
                     ]
                   ]
+                },
+                {
+                  "type": "picture",
+                  "prompt": "무지개는 어느 것?",
+                  "word": "rainbow",
+                  "choices": [
+                    "🌈",
+                    "☀️",
+                    "🌧️",
+                    "❄️"
+                  ],
+                  "answer": "🌈",
+                  "audioText": "rainbow"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "눈은 어느 것?",
+                  "word": "snowy",
+                  "choices": [
+                    "❄️",
+                    "☀️",
+                    "🌧️",
+                    "🌈"
+                  ],
+                  "answer": "❄️",
+                  "audioText": "snowy"
                 },
                 {
                   "type": "mcq",
@@ -1655,6 +1837,32 @@
                   ],
                   "answer": "Happy",
                   "audioText": "Happy"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "슬퍼요는 어느 것?",
+                  "word": "sad",
+                  "choices": [
+                    "😢",
+                    "😀",
+                    "😠",
+                    "😨"
+                  ],
+                  "answer": "😢",
+                  "audioText": "sad"
+                },
+                {
+                  "type": "picture",
+                  "prompt": "행복해요는 어느 것?",
+                  "word": "happy",
+                  "choices": [
+                    "😀",
+                    "😢",
+                    "😠",
+                    "😨"
+                  ],
+                  "answer": "😀",
+                  "audioText": "happy"
                 },
                 {
                   "type": "match",
