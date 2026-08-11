@@ -1,4 +1,5 @@
 import { getLevels } from '../data/loadCurriculum.js'
+import { dueCount } from '../engine/review.js'
 import Duck from './Duck.jsx'
 
 // horizontal sway as a PERCENT of container width (aligns with the SVG viewBox x-units)
@@ -55,11 +56,12 @@ export default function Path({ progress, onStart, onReview }) {
       </div>
 
       {(() => {
-        const reviewCount = (progress.reviewQueue ?? []).length
-        const canReview = reviewCount > 0 || progress.completedLessons.length > 0
+        const queue = progress.reviewQueue ?? []
+        const due = dueCount(queue, Date.now())
+        const canReview = queue.length > 0 || progress.completedLessons.length > 0
         return (
           <button className="review-btn" disabled={!canReview} onClick={onReview}>
-            🔄 복습하기{reviewCount > 0 && <span className="review-badge">{reviewCount}</span>}
+            🔄 복습하기{due > 0 && <span className="review-badge">{due}</span>}
           </button>
         )
       })()}

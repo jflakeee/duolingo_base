@@ -10,7 +10,7 @@ import Shop from './components/Shop.jsx'
 import Profile from './components/Profile.jsx'
 import Onboarding from './components/Onboarding.jsx'
 import { getLessonById, getLevels, getLessonSequence } from './data/loadCurriculum.js'
-import { recordMistake, buildReviewSession, clearSolved } from './engine/review.js'
+import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -66,7 +66,7 @@ export default function App() {
     const key = `${activeLessonId}#${exId}`
     const ex = getLessonById(activeLessonId)?.exercises?.[exId]
     const withMistake = ex
-      ? { ...progress, reviewQueue: recordMistake(progress.reviewQueue ?? [], { key, lessonId: activeLessonId, ex }) }
+      ? { ...progress, reviewQueue: recordMistake(progress.reviewQueue ?? [], { key, lessonId: activeLessonId, ex }, Date.now()) }
       : progress
     const next = { ...withMistake, hearts: loseHeart(progress.hearts), heartsUpdatedAt: wasFull ? Date.now() : progress.heartsUpdatedAt }
     persist(next)
@@ -107,6 +107,7 @@ export default function App() {
     const exercises = buildReviewSession(
       { reviewQueue: progress.reviewQueue ?? [], completedLessons: progress.completedLessons },
       lessonsById,
+      { now: Date.now() },
     )
     if (exercises.length === 0) return
     reviewWrongIds.clear()
@@ -119,16 +120,15 @@ export default function App() {
     if (reviewMode && !isCorrect) reviewWrongIds.add(exId)
   }
   function handleReviewFinish(s) {
-    const solvedKeys = reviewExercises
-      .map((ex, i) => ({ ex, i }))
-      .filter(({ ex, i }) => ex._reviewKey && !reviewWrongIds.has(i))
-      .map(({ ex }) => ex._reviewKey)
+    const keyed = reviewExercises.map((ex, i) => ({ ex, i })).filter(({ ex }) => ex._reviewKey)
+    const solvedKeys = keyed.filter(({ i }) => !reviewWrongIds.has(i)).map(({ ex }) => ex._reviewKey)
+    const wrongKeys = keyed.filter(({ i }) => reviewWrongIds.has(i)).map(({ ex }) => ex._reviewKey)
     const today = todayStr()
     const next = {
       ...progress,
       xp: progress.xp + s.xpGained,
       dailyXp: addDailyXp(progress.dailyXp, s.xpGained, today),
-      reviewQueue: clearSolved(progress.reviewQueue ?? [], solvedKeys),
+      reviewQueue: applyReviewResult(progress.reviewQueue ?? [], solvedKeys, wrongKeys, Date.now()),
     }
     persist(next)
     setReviewMode(false)
