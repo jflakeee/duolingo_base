@@ -9,8 +9,9 @@ import WordBank from './exercises/WordBank.jsx'
 import Listen from './exercises/Listen.jsx'
 import Match from './exercises/Match.jsx'
 import Picture from './exercises/Picture.jsx'
+import TypeIn from './exercises/TypeIn.jsx'
 
-const REGISTRY = { mcq: Mcq, wordbank: WordBank, listen: Listen, match: Match, picture: Picture }
+const REGISTRY = { mcq: Mcq, wordbank: WordBank, listen: Listen, match: Match, picture: Picture, typein: TypeIn }
 
 export default function Lesson({ lesson, onWrong, onExerciseResult, onFinish, onQuit }) {
   const [session, setSession] = useState(() => createSession(lesson.exercises))

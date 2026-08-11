@@ -4,6 +4,25 @@ import Mcq from '../src/components/exercises/Mcq.jsx'
 import WordBank from '../src/components/exercises/WordBank.jsx'
 import Match from '../src/components/exercises/Match.jsx'
 import Picture from '../src/components/exercises/Picture.jsx'
+import TypeIn from '../src/components/exercises/TypeIn.jsx'
+
+describe('TypeIn', () => {
+  const ex = { type: 'typein', prompt: "'사과'를 영어로", answer: 'apple', audioText: 'apple' }
+  it('reports correct for a forgiving match', () => {
+    const onAnswer = vi.fn()
+    render(<TypeIn exercise={ex} onAnswer={onAnswer} />)
+    fireEvent.change(screen.getByLabelText('답 입력'), { target: { value: ' Apple ' } })
+    fireEvent.click(screen.getByRole('button', { name: '확인' }))
+    expect(onAnswer).toHaveBeenCalledWith(true)
+  })
+  it('reports wrong for a different word', () => {
+    const onAnswer = vi.fn()
+    render(<TypeIn exercise={ex} onAnswer={onAnswer} />)
+    fireEvent.change(screen.getByLabelText('답 입력'), { target: { value: 'banana' } })
+    fireEvent.click(screen.getByRole('button', { name: '확인' }))
+    expect(onAnswer).toHaveBeenCalledWith(false)
+  })
+})
 
 describe('Picture', () => {
   const ex = { type: 'picture', prompt: '사과는?', word: 'apple', choices: ['🍎', '🐱', '🏠', '🔴'], answer: '🍎', audioText: 'apple' }

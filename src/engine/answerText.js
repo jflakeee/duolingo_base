@@ -3,6 +3,8 @@ export function correctAnswerText(exercise) {
   switch (exercise.type) {
     case 'picture':
       return `${exercise.answer} ${exercise.word ?? ''}`.trim()
+    case 'typein':
+      return exercise.answer
     case 'mcq':
       return exercise.answer
     case 'wordbank':

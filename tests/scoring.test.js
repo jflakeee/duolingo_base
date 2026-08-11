@@ -1,5 +1,24 @@
 import { describe, it, expect } from 'vitest'
-import { checkAnswer, arraysEqual } from '../src/engine/scoring.js'
+import { checkAnswer, arraysEqual, normalizeText } from '../src/engine/scoring.js'
+
+describe('typein', () => {
+  const ex = { type: 'typein', prompt: 'p', answer: 'apple', accept: ['an apple'] }
+  it('accepts exact answer', () => {
+    expect(checkAnswer(ex, 'apple')).toBe(true)
+  })
+  it('is forgiving of case, whitespace, and trailing punctuation', () => {
+    expect(checkAnswer(ex, '  Apple. ')).toBe(true)
+  })
+  it('accepts an alternate from accept[]', () => {
+    expect(checkAnswer(ex, 'AN  apple')).toBe(true)
+  })
+  it('rejects a wrong word', () => {
+    expect(checkAnswer(ex, 'banana')).toBe(false)
+  })
+  it('normalizeText lowercases, trims, and collapses spaces', () => {
+    expect(normalizeText('  Hello   World! ')).toBe('hello world')
+  })
+})
 
 describe('picture', () => {
   const ex = { type: 'picture', word: 'apple', choices: ['🍎', '🐱', '🏠', '🔴'], answer: '🍎' }

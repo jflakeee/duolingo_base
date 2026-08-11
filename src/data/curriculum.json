@@ -191,6 +191,12 @@
                     "yellow"
                   ],
                   "audioText": "I see yellow"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'빨강'을 영어로 쓰세요",
+                  "answer": "red",
+                  "audioText": "red"
                 }
               ]
             }
@@ -299,6 +305,12 @@
                     "small"
                   ],
                   "audioText": "The cat is small"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'고양이'를 영어로 쓰세요",
+                  "answer": "cat",
+                  "audioText": "cat"
                 }
               ]
             }
@@ -625,6 +637,15 @@
                   ],
                   "answer": "Milk",
                   "audioText": "Milk"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'사과'를 영어로 쓰세요",
+                  "answer": "apple",
+                  "audioText": "apple",
+                  "accept": [
+                    "an apple"
+                  ]
                 }
               ]
             },
@@ -959,6 +980,15 @@
                     "tall"
                   ],
                   "audioText": "My dad is tall"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'엄마'를 영어로 쓰세요",
+                  "answer": "mother",
+                  "audioText": "mother",
+                  "accept": [
+                    "mom"
+                  ]
                 }
               ]
             }
@@ -1081,6 +1111,15 @@
                   ],
                   "answer": "Desk",
                   "audioText": "Desk"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'책'을 영어로 쓰세요",
+                  "answer": "book",
+                  "audioText": "book",
+                  "accept": [
+                    "a book"
+                  ]
                 }
               ]
             },
@@ -1511,6 +1550,15 @@
                   ],
                   "answer": "Rainy",
                   "audioText": "Rainy"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'맑은'을 영어로 쓰세요",
+                  "answer": "sunny",
+                  "audioText": "sunny",
+                  "accept": [
+                    "sun"
+                  ]
                 }
               ]
             },
@@ -1935,6 +1983,12 @@
                   ],
                   "answer": "Hungry",
                   "audioText": "Hungry"
+                },
+                {
+                  "type": "typein",
+                  "prompt": "'행복한'을 영어로 쓰세요",
+                  "answer": "happy",
+                  "audioText": "happy"
                 }
               ]
             },
