@@ -23,6 +23,7 @@ export function defaultProgress() {
     role: 'learner',
     google: null,
     children: [],
+    messages: [],
   }
 }
 

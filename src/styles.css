@@ -641,3 +641,13 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .student-row__bar { flex: 1; height: 10px; min-width: 40px; }
 .student-row__pct { font-weight: 800; font-size: 13px; color: var(--green-d); width: 38px; text-align: right; }
 .student-row__xp { font-weight: 700; font-size: 12px; color: var(--gold-d); }
+
+/* Encouragement: composer + inbox */
+.msg-compose { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-2); display: flex; flex-direction: column; gap: 8px; }
+.msg-compose__title { font-weight: 800; font-size: 14px; color: var(--ink-strong); }
+.msg-to { padding: 10px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: inherit; font: inherit; }
+.inbox { display: flex; flex-direction: column; gap: 8px; }
+.inbox-msg { background: var(--green-l); border: 2px solid #b6e88a; border-radius: 14px; padding: 12px 14px; }
+[data-theme="dark"] .inbox-msg { background: #16351c; border-color: #2c5a2c; }
+.inbox-msg__text { font-weight: 700; color: var(--ink-strong); }
+.inbox-msg__from { font-size: 12px; color: var(--muted); margin-top: 4px; text-align: right; }

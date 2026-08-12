@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import App from '../src/App.jsx'
 import { STORAGE_KEY } from '../src/store/progress.js'
 import { encodeProgress } from '../src/engine/transfer.js'
+import { encodeMessage } from '../src/engine/messages.js'
 import { getLessonSequence } from '../src/data/loadCurriculum.js'
 
 beforeEach(() => {
@@ -42,7 +43,19 @@ describe('App smoke', () => {
     fireEvent.click(screen.getByRole('button', { name: /프로필/ }))
     fireEvent.change(screen.getByLabelText('학생 코드'), { target: { value: code } })
     fireEvent.click(screen.getByRole('button', { name: '학생 추가' }))
-    expect(screen.getByText('LD-KID0-0001')).toBeInTheDocument()
-    expect(screen.getByText('⭐99')).toBeInTheDocument()
+    // memberId appears in both the roster row and the message-recipient <option>
+    expect(screen.getAllByText('LD-KID0-0001').length).toBeGreaterThan(0)
+    expect(screen.getByText('⭐99')).toBeInTheDocument() // roster row only
+  })
+
+  it('receives an encouragement message via code into the inbox', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /프로필/ }))
+    fireEvent.click(screen.getByRole('button', { name: '코드로 가져오기' }))
+    const code = encodeMessage({ from: 'LD-TEAC-1111', text: '오늘도 최고예요!' })
+    fireEvent.change(screen.getByLabelText('가져올 코드'), { target: { value: code } })
+    fireEvent.click(screen.getByRole('button', { name: '가져오기' }))
+    expect(screen.getByText('오늘도 최고예요!')).toBeInTheDocument()
+    expect(screen.getByText('— LD-TEAC-1111')).toBeInTheDocument()
   })
 })

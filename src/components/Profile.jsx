@@ -23,7 +23,9 @@ export default function Profile({
   progress, onSetTheme, onSetGoal, onReset, lessonIds, onImportCode,
   role, isOperator, onSetRole, onGrantGems, onUnlockAll,
   onGoogleLogin, onGoogleLogout, onAddChild, onRemoveChild,
+  memberId, messages,
 }) {
+  const inbox = messages || []
   return (
     <div className="tabscreen profile">
       <div className="profile__hero">
@@ -36,6 +38,20 @@ export default function Profile({
 
       <GoogleAuth google={progress.google} isOperator={isOperator}
         onLogin={onGoogleLogin} onLogout={onGoogleLogout} />
+
+      {inbox.length > 0 && (
+        <>
+          <h2 className="section-title">받은 응원 💌</h2>
+          <div className="inbox">
+            {inbox.map((m, i) => (
+              <div key={i} className="inbox-msg">
+                <div className="inbox-msg__text">{m.text}</div>
+                {m.from && <div className="inbox-msg__from">— {m.from}</div>}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       <div className="stat-grid">
         <Stat k="총 XP" v={progress.xp} />
@@ -92,7 +108,7 @@ export default function Profile({
           ) : (
             <>
               <h2 className="section-title">학생 진도 한눈에</h2>
-              <ClassOverview students={progress.children} onAddChild={onAddChild} onRemoveChild={onRemoveChild} />
+              <ClassOverview students={progress.children} onAddChild={onAddChild} onRemoveChild={onRemoveChild} myMemberId={memberId} />
             </>
           )}
 

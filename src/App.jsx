@@ -16,6 +16,7 @@ import { resolveRole, isDevHost } from './engine/roles.js'
 import { decodeProgress } from './engine/transfer.js'
 import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
 import { childSummary, addChild, removeChild } from './engine/children.js'
+import { decodeMessage, applyMessage } from './engine/messages.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -93,6 +94,11 @@ export default function App() {
     if (gift) {
       persist(applyGift(progress, gift))
       return { ok: true, message: `선물을 받았어요! (${giftLabel(gift)})` }
+    }
+    const msg = decodeMessage(code)
+    if (msg) {
+      persist(applyMessage(progress, msg, Date.now()))
+      return { ok: true, message: '응원 메시지를 받았어요! 💌' }
     }
     return { ok: false, message: '코드를 확인해 주세요.' }
   }
@@ -269,7 +275,8 @@ export default function App() {
           role={effectiveRole} isOperator={isOperator}
           onSetRole={setRole} onGrantGems={grantGems} onUnlockAll={unlockAllLessons}
           onGoogleLogin={googleLogin} onGoogleLogout={googleLogout}
-          onAddChild={addChildByCode} onRemoveChild={removeChildById} />
+          onAddChild={addChildByCode} onRemoveChild={removeChildById}
+          memberId={progress.memberId} messages={progress.messages} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}
