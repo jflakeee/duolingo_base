@@ -1,5 +1,6 @@
 import Duck from './Duck.jsx'
 import InstallButton from './InstallButton.jsx'
+import ShareCard from './ShareCard.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 import { BUILD_TIME, formatBuildTime } from '../buildInfo.js'
 
@@ -12,7 +13,7 @@ function Stat({ k, v }) {
   )
 }
 
-export default function Profile({ progress, onSetTheme, onSetGoal, onReset }) {
+export default function Profile({ progress, onSetTheme, onSetGoal, onReset, lessonIds, onImport }) {
   return (
     <div className="tabscreen profile">
       <div className="profile__hero">
@@ -62,6 +63,9 @@ export default function Profile({ progress, onSetTheme, onSetGoal, onReset }) {
           ))}
         </div>
       </div>
+
+      <h2 className="section-title">계정 공유</h2>
+      <ShareCard progress={progress} lessonIds={lessonIds} onImport={onImport} />
 
       <InstallButton />
       <button className="btn btn--ghost" style={{ marginTop: 18 }} onClick={onReset}>진도 초기화</button>

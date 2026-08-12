@@ -11,6 +11,7 @@ import Profile from './components/Profile.jsx'
 import Onboarding from './components/Onboarding.jsx'
 import { getLessonById, getLevels, getLessonSequence } from './data/loadCurriculum.js'
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
+import { ensureMemberId } from './engine/member.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -38,7 +39,26 @@ export default function App() {
   const reviewWrongIds = useState(() => new Set())[0]
 
   const lessonsById = {}
-  for (const { lesson } of getLessonSequence()) lessonsById[lesson.id] = lesson
+  const lessonIds = []
+  for (const { lesson } of getLessonSequence()) { lessonsById[lesson.id] = lesson; lessonIds.push(lesson.id) }
+
+  // ensure a stable local member number exists (persist once)
+  useEffect(() => {
+    if (!progress.memberId) persist(ensureMemberId(progress))
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function importProgress(patch) {
+    persist({
+      ...progress,
+      xp: patch.xp,
+      gems: patch.gems,
+      dailyGoal: patch.dailyGoal,
+      role: patch.role,
+      memberId: patch.memberId || progress.memberId,
+      completedLessons: patch.completedLessons,
+      streak: { ...progress.streak, count: patch.streakCount },
+    })
+  }
 
   // apply theme on mount + when the setting changes; follow OS when 'auto'
   useEffect(() => {
@@ -207,7 +227,8 @@ export default function App() {
       {tab === 'quests' && <Quests progress={progress} onClaim={claimQuest} />}
       {tab === 'shop' && <Shop progress={progress} onBuyHearts={buyHearts} onBuyFreeze={buyFreeze} />}
       {tab === 'profile' && (
-        <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetToOnboarding} />
+        <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetToOnboarding}
+          lessonIds={lessonIds} onImport={importProgress} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}

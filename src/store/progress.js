@@ -19,6 +19,9 @@ export function defaultProgress() {
     achievements: {},
     perfectCount: 0,
     reviewQueue: [],
+    memberId: '',
+    role: 'learner',
+    google: null,
   }
 }
 
