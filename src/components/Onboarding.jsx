@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Duck from './Duck.jsx'
 import { getLevels } from '../data/loadCurriculum.js'
+import { BUILD_TIME, formatBuildTime } from '../buildInfo.js'
 
 const GOALS = [
   { xp: 10, label: '가볍게' },
@@ -46,6 +47,7 @@ export default function Onboarding({ onDone }) {
           ))}
         </div>
       )}
+      {BUILD_TIME && <p className="landing-foot">최근 업데이트: {formatBuildTime()}</p>}
     </div>
   )
 }

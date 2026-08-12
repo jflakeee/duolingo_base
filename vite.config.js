@@ -6,6 +6,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 // but at '/' during local `npm run dev`.
 export default defineConfig(({ command }) => ({
   base: command === 'build' ? '/duolingo_base/' : '/',
+  // Injected at build/dev-start; surfaced as the "최근 업데이트" time on the landing page.
+  define: { __BUILD_TIME__: JSON.stringify(new Date().toISOString()) },
   plugins: [
     react(),
     VitePWA({

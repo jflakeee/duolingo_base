@@ -557,3 +557,10 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
   background: var(--card, #fff); color: inherit; box-sizing: border-box;
 }
 .typein:focus { outline: none; border-color: #1cb0f6; }
+
+/* Landing "최근 업데이트" footer — pinned to the bottom without disturbing centering */
+.onboarding { position: relative; }
+.landing-foot {
+  position: absolute; left: 0; right: 0; bottom: 10px;
+  text-align: center; font-size: 12px; color: var(--muted, #999);
+}
