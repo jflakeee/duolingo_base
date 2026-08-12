@@ -4,6 +4,7 @@ import ShareCard from './ShareCard.jsx'
 import RolePanel from './RolePanel.jsx'
 import GiftPanel from './GiftPanel.jsx'
 import ChildrenPanel from './ChildrenPanel.jsx'
+import ClassOverview from './ClassOverview.jsx'
 import GoogleAuth from './GoogleAuth.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 import { ROLE_LABELS, canGift } from '../engine/roles.js'
@@ -83,8 +84,17 @@ export default function Profile({
 
       {canGift(role) && (
         <>
-          <h2 className="section-title">자녀 진도</h2>
-          <ChildrenPanel children={progress.children} onAddChild={onAddChild} onRemoveChild={onRemoveChild} />
+          {role === 'parent' ? (
+            <>
+              <h2 className="section-title">자녀 진도</h2>
+              <ChildrenPanel children={progress.children} onAddChild={onAddChild} onRemoveChild={onRemoveChild} />
+            </>
+          ) : (
+            <>
+              <h2 className="section-title">학생 진도 한눈에</h2>
+              <ClassOverview students={progress.children} onAddChild={onAddChild} onRemoveChild={onRemoveChild} />
+            </>
+          )}
 
           <h2 className="section-title">구매 · 선물</h2>
           <GiftPanel gems={progress.gems} onSpendGems={onGrantGems} />

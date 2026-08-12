@@ -57,11 +57,11 @@ export default function App() {
 
   function addChildByCode(code) {
     const patch = decodeProgress(code, lessonIds)
-    if (!patch) return { ok: false, message: '자녀 코드를 확인해 주세요.' }
-    if (patch.memberId && patch.memberId === progress.memberId) return { ok: false, message: '내 회원번호는 자녀로 추가할 수 없어요.' }
+    if (!patch) return { ok: false, message: '코드를 확인해 주세요.' }
+    if (patch.memberId && patch.memberId === progress.memberId) return { ok: false, message: '내 회원번호는 추가할 수 없어요.' }
     const summary = childSummary(patch, lessonIds.length, Date.now())
     persist({ ...progress, children: addChild(progress.children || [], summary) })
-    return { ok: true, message: '자녀 진도를 불러왔어요.' }
+    return { ok: true, message: '진도를 불러왔어요.' }
   }
   function removeChildById(memberId) {
     persist({ ...progress, children: removeChild(progress.children || [], memberId) })

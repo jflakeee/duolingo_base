@@ -31,18 +31,18 @@ describe('App smoke', () => {
     expect(screen.getByRole('button', { name: '시작하기' })).toBeInTheDocument()
   })
 
-  it('parent view: adds a child by their share code and shows their progress', () => {
-    // jsdom host is localhost → operator, so the 자녀 진도 panel is visible.
+  it('roster view (teacher/operator): adds a student by code and shows their progress', () => {
+    // jsdom host is localhost → operator, so the 학생 진도 한눈에 roster is visible.
     const ids = getLessonSequence().map((x) => x.lesson.id)
-    const childCode = encodeProgress(
+    const code = encodeProgress(
       { memberId: 'LD-KID0-0001', xp: 99, gems: 0, dailyGoal: 50, role: 'learner', streak: { count: 3 }, completedLessons: [ids[0], ids[1]] },
       ids,
     )
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: /프로필/ }))
-    fireEvent.change(screen.getByLabelText('자녀 코드'), { target: { value: childCode } })
-    fireEvent.click(screen.getByRole('button', { name: '자녀 추가' }))
+    fireEvent.change(screen.getByLabelText('학생 코드'), { target: { value: code } })
+    fireEvent.click(screen.getByRole('button', { name: '학생 추가' }))
     expect(screen.getByText('LD-KID0-0001')).toBeInTheDocument()
-    expect(screen.getByText(/99 XP/)).toBeInTheDocument()
+    expect(screen.getByText('⭐99')).toBeInTheDocument()
   })
 })
