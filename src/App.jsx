@@ -54,6 +54,8 @@ export default function App() {
   const effectiveRole = resolveRole(progress, hostname)
   const isOperator = isDevHost(hostname)
 
+  function googleLogin(profile) { persist({ ...progress, google: profile }) }
+  function googleLogout() { persist({ ...progress, google: null }) }
   function setRole(role) { persist({ ...progress, role }) }
   function grantGems(n) { persist({ ...progress, gems: progress.gems + n }) }
   function unlockAllLessons() { persist({ ...progress, completedLessons: [...lessonIds] }) }
@@ -252,7 +254,8 @@ export default function App() {
         <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetToOnboarding}
           lessonIds={lessonIds} onImportCode={importCode}
           role={effectiveRole} isOperator={isOperator}
-          onSetRole={setRole} onGrantGems={grantGems} onUnlockAll={unlockAllLessons} />
+          onSetRole={setRole} onGrantGems={grantGems} onUnlockAll={unlockAllLessons}
+          onGoogleLogin={googleLogin} onGoogleLogout={googleLogout} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}

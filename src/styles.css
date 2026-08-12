@@ -607,3 +607,14 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .gift-item__ico { font-size: 22px; }
 .gift-item__cost { margin-left: auto; color: var(--blue-d); font-weight: 800; font-size: 14px; }
 .gift-made { margin-top: 14px; text-align: center; }
+
+/* Google auth */
+.gauth { margin: 4px 0 14px; display: flex; justify-content: center; }
+.gauth--in { align-items: center; gap: 10px; background: var(--card); border: 2px solid var(--line-2); border-radius: 14px; padding: 10px 12px; box-shadow: 0 3px 0 var(--line); }
+.gauth__pic { border-radius: 50%; }
+.gauth__who { flex: 1; text-align: left; min-width: 0; }
+.gauth__name { font-weight: 800; font-size: 15px; color: var(--ink-strong); }
+.gauth__email { font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gauth--in .btn { width: auto; }
+.gauth__hint { font-size: 12px; color: var(--muted); text-align: center; margin: 6px 0 14px; }
+.gauth__hint code { background: var(--card-2); padding: 1px 5px; border-radius: 5px; }

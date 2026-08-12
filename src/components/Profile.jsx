@@ -3,6 +3,7 @@ import InstallButton from './InstallButton.jsx'
 import ShareCard from './ShareCard.jsx'
 import RolePanel from './RolePanel.jsx'
 import GiftPanel from './GiftPanel.jsx'
+import GoogleAuth from './GoogleAuth.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 import { ROLE_LABELS, canGift } from '../engine/roles.js'
 import { BUILD_TIME, formatBuildTime } from '../buildInfo.js'
@@ -19,6 +20,7 @@ function Stat({ k, v }) {
 export default function Profile({
   progress, onSetTheme, onSetGoal, onReset, lessonIds, onImportCode,
   role, isOperator, onSetRole, onGrantGems, onUnlockAll,
+  onGoogleLogin, onGoogleLogout,
 }) {
   return (
     <div className="tabscreen profile">
@@ -29,6 +31,9 @@ export default function Profile({
           <p className="lede">꾸준히 나아가고 있어요!</p>
         </div>
       </div>
+
+      <GoogleAuth google={progress.google} isOperator={isOperator}
+        onLogin={onGoogleLogin} onLogout={onGoogleLogout} />
 
       <div className="stat-grid">
         <Stat k="총 XP" v={progress.xp} />
