@@ -40,6 +40,25 @@ describe('TypeIn', () => {
   })
 })
 
+describe('Match deselect', () => {
+  const ex = { type: 'match', prompt: 'p', pairs: [['red', '빨강'], ['blue', '파랑']] }
+  it('clears a matched pair when its left item is clicked again', () => {
+    render(<Match exercise={ex} onAnswer={vi.fn()} />)
+    fireEvent.click(screen.getByText('red'))
+    fireEvent.click(screen.getByText('빨강'))
+    expect(screen.getByText('red → 빨강')).toBeTruthy()
+    fireEvent.click(screen.getByText('red → 빨강')) // click again → 취소
+    expect(screen.queryByText('red → 빨강')).toBeNull()
+  })
+  it('deselects a left clicked twice, so a later right pick does nothing', () => {
+    render(<Match exercise={ex} onAnswer={vi.fn()} />)
+    fireEvent.click(screen.getByText('red')) // select
+    fireEvent.click(screen.getByText('red')) // deselect
+    fireEvent.click(screen.getByText('빨강')) // no active selection
+    expect(screen.queryByText('red → 빨강')).toBeNull()
+  })
+})
+
 describe('Picture', () => {
   const ex = { type: 'picture', prompt: '사과는?', word: 'apple', choices: ['🍎', '🐱', '🏠', '🔴'], answer: '🍎', audioText: 'apple' }
   it('reports correct when right emoji picked', () => {

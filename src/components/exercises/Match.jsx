@@ -11,6 +11,19 @@ export default function Match({ exercise, onAnswer }) {
   const [selEn, setSelEn] = useState(null)
   const [map, setMap] = useState({}) // { english: koreanChosen }
 
+  function pickEn(en) {
+    if (map[en] != null) {
+      // already matched → clicking again cancels the pairing
+      const next = { ...map }
+      delete next[en]
+      setMap(next)
+      setSelEn(null)
+      return
+    }
+    // toggle selection: clicking the selected item again deselects it
+    setSelEn(selEn === en ? null : en)
+  }
+
   function pickKo(ko) {
     if (!selEn) return
     setMap({ ...map, [selEn]: ko })
@@ -27,7 +40,7 @@ export default function Match({ exercise, onAnswer }) {
           {lefts.map((en) => (
             <button key={en}
               className={`choice ${selEn === en ? 'selected' : ''} ${map[en] ? 'correct' : ''}`}
-              onClick={() => setSelEn(en)}>
+              onClick={() => pickEn(en)}>
               {en}{map[en] ? ` → ${map[en]}` : ''}
             </button>
           ))}
