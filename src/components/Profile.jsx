@@ -3,6 +3,7 @@ import InstallButton from './InstallButton.jsx'
 import ShareCard from './ShareCard.jsx'
 import RolePanel from './RolePanel.jsx'
 import GiftPanel from './GiftPanel.jsx'
+import ChildrenPanel from './ChildrenPanel.jsx'
 import GoogleAuth from './GoogleAuth.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 import { ROLE_LABELS, canGift } from '../engine/roles.js'
@@ -20,7 +21,7 @@ function Stat({ k, v }) {
 export default function Profile({
   progress, onSetTheme, onSetGoal, onReset, lessonIds, onImportCode,
   role, isOperator, onSetRole, onGrantGems, onUnlockAll,
-  onGoogleLogin, onGoogleLogout,
+  onGoogleLogin, onGoogleLogout, onAddChild, onRemoveChild,
 }) {
   return (
     <div className="tabscreen profile">
@@ -82,6 +83,9 @@ export default function Profile({
 
       {canGift(role) && (
         <>
+          <h2 className="section-title">자녀 진도</h2>
+          <ChildrenPanel children={progress.children} onAddChild={onAddChild} onRemoveChild={onRemoveChild} />
+
           <h2 className="section-title">구매 · 선물</h2>
           <GiftPanel gems={progress.gems} onSpendGems={onGrantGems} />
         </>

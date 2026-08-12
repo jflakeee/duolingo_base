@@ -618,3 +618,12 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .gauth--in .btn { width: auto; }
 .gauth__hint { font-size: 12px; color: var(--muted); text-align: center; margin: 6px 0 14px; }
 .gauth__hint code { background: var(--card-2); padding: 1px 5px; border-radius: 5px; }
+
+/* Children (parent view) panel */
+.children-panel { background: var(--card); border: 2px solid var(--line-2); border-radius: 16px; padding: 14px; box-shadow: 0 3px 0 var(--line); }
+.child-card { border: 2px solid var(--line); border-radius: 14px; padding: 12px; margin-bottom: 10px; }
+.child-card__head { display: flex; align-items: center; margin-bottom: 8px; }
+.child-card__id { font-family: var(--font-display); font-weight: 700; letter-spacing: 1px; color: var(--ink-strong); }
+.child-card__x { margin-left: auto; border: none; background: transparent; color: var(--muted); font-size: 16px; }
+.child-card__stats { display: flex; gap: 12px; flex-wrap: wrap; font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 8px; }
+.child-card__bar { height: 12px; }

@@ -15,6 +15,7 @@ import { ensureMemberId } from './engine/member.js'
 import { resolveRole, isDevHost } from './engine/roles.js'
 import { decodeProgress } from './engine/transfer.js'
 import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
+import { childSummary, addChild, removeChild } from './engine/children.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -53,6 +54,18 @@ export default function App() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : ''
   const effectiveRole = resolveRole(progress, hostname)
   const isOperator = isDevHost(hostname)
+
+  function addChildByCode(code) {
+    const patch = decodeProgress(code, lessonIds)
+    if (!patch) return { ok: false, message: '자녀 코드를 확인해 주세요.' }
+    if (patch.memberId && patch.memberId === progress.memberId) return { ok: false, message: '내 회원번호는 자녀로 추가할 수 없어요.' }
+    const summary = childSummary(patch, lessonIds.length, Date.now())
+    persist({ ...progress, children: addChild(progress.children || [], summary) })
+    return { ok: true, message: '자녀 진도를 불러왔어요.' }
+  }
+  function removeChildById(memberId) {
+    persist({ ...progress, children: removeChild(progress.children || [], memberId) })
+  }
 
   function googleLogin(profile) { persist({ ...progress, google: profile }) }
   function googleLogout() { persist({ ...progress, google: null }) }
@@ -255,7 +268,8 @@ export default function App() {
           lessonIds={lessonIds} onImportCode={importCode}
           role={effectiveRole} isOperator={isOperator}
           onSetRole={setRole} onGrantGems={grantGems} onUnlockAll={unlockAllLessons}
-          onGoogleLogin={googleLogin} onGoogleLogout={googleLogout} />
+          onGoogleLogin={googleLogin} onGoogleLogout={googleLogout}
+          onAddChild={addChildByCode} onRemoveChild={removeChildById} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}

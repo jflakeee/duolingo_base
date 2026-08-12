@@ -22,6 +22,7 @@ export function defaultProgress() {
     memberId: '',
     role: 'learner',
     google: null,
+    children: [],
   }
 }
 
