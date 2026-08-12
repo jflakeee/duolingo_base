@@ -12,6 +12,9 @@ import Onboarding from './components/Onboarding.jsx'
 import { getLessonById, getLevels, getLessonSequence } from './data/loadCurriculum.js'
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
 import { ensureMemberId } from './engine/member.js'
+import { resolveRole, isDevHost } from './engine/roles.js'
+import { decodeProgress } from './engine/transfer.js'
+import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -47,17 +50,36 @@ export default function App() {
     if (!progress.memberId) persist(ensureMemberId(progress))
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  function importProgress(patch) {
-    persist({
-      ...progress,
-      xp: patch.xp,
-      gems: patch.gems,
-      dailyGoal: patch.dailyGoal,
-      role: patch.role,
-      memberId: patch.memberId || progress.memberId,
-      completedLessons: patch.completedLessons,
-      streak: { ...progress.streak, count: patch.streakCount },
-    })
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : ''
+  const effectiveRole = resolveRole(progress, hostname)
+  const isOperator = isDevHost(hostname)
+
+  function setRole(role) { persist({ ...progress, role }) }
+  function grantGems(n) { persist({ ...progress, gems: progress.gems + n }) }
+  function unlockAllLessons() { persist({ ...progress, completedLessons: [...lessonIds] }) }
+
+  // Unified importer: progress-transfer code (LDX1) or gift code (LDG1).
+  function importCode(code) {
+    const patch = decodeProgress(code, lessonIds)
+    if (patch) {
+      persist({
+        ...progress,
+        xp: patch.xp,
+        gems: patch.gems,
+        dailyGoal: patch.dailyGoal,
+        role: patch.role,
+        memberId: patch.memberId || progress.memberId,
+        completedLessons: patch.completedLessons,
+        streak: { ...progress.streak, count: patch.streakCount },
+      })
+      return { ok: true, message: '진도를 가져왔어요!' }
+    }
+    const gift = decodeGift(code)
+    if (gift) {
+      persist(applyGift(progress, gift))
+      return { ok: true, message: `선물을 받았어요! (${giftLabel(gift)})` }
+    }
+    return { ok: false, message: '코드를 확인해 주세요.' }
   }
 
   // apply theme on mount + when the setting changes; follow OS when 'auto'
@@ -228,7 +250,9 @@ export default function App() {
       {tab === 'shop' && <Shop progress={progress} onBuyHearts={buyHearts} onBuyFreeze={buyFreeze} />}
       {tab === 'profile' && (
         <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetToOnboarding}
-          lessonIds={lessonIds} onImport={importProgress} />
+          lessonIds={lessonIds} onImportCode={importCode}
+          role={effectiveRole} isOperator={isOperator}
+          onSetRole={setRole} onGrantGems={grantGems} onUnlockAll={unlockAllLessons} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}

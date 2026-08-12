@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import QRCode from 'qrcode'
-import { encodeProgress, decodeProgress } from '../engine/transfer.js'
+import { encodeProgress } from '../engine/transfer.js'
 
-// 회원번호 표시 + 진도 이관 QR/코드 + 코드로 가져오기.
-export default function ShareCard({ progress, lessonIds, onImport }) {
+// 회원번호 표시 + 진도 이관 QR/코드 + 코드로 가져오기(진도·선물 통합).
+export default function ShareCard({ progress, lessonIds, onImportCode }) {
   const code = encodeProgress(progress, lessonIds)
   const [qr, setQr] = useState('')
   const [copied, setCopied] = useState(false)
@@ -21,11 +21,9 @@ export default function ShareCard({ progress, lessonIds, onImport }) {
     navigator.clipboard?.writeText(code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500) }).catch(() => {})
   }
   function doImport() {
-    const patch = decodeProgress(importText, lessonIds)
-    if (!patch) { setMsg({ ok: false, text: '코드를 확인해 주세요.' }); return }
-    onImport(patch)
-    setMsg({ ok: true, text: '진도를 가져왔어요!' })
-    setShowImport(false); setImportText('')
+    const res = onImportCode(importText)
+    setMsg({ ok: res.ok, text: res.message })
+    if (res.ok) { setShowImport(false); setImportText('') }
   }
 
   return (

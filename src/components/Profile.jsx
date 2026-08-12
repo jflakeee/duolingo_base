@@ -1,7 +1,10 @@
 import Duck from './Duck.jsx'
 import InstallButton from './InstallButton.jsx'
 import ShareCard from './ShareCard.jsx'
+import RolePanel from './RolePanel.jsx'
+import GiftPanel from './GiftPanel.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
+import { ROLE_LABELS, canGift } from '../engine/roles.js'
 import { BUILD_TIME, formatBuildTime } from '../buildInfo.js'
 
 function Stat({ k, v }) {
@@ -13,7 +16,10 @@ function Stat({ k, v }) {
   )
 }
 
-export default function Profile({ progress, onSetTheme, onSetGoal, onReset, lessonIds, onImport }) {
+export default function Profile({
+  progress, onSetTheme, onSetGoal, onReset, lessonIds, onImportCode,
+  role, isOperator, onSetRole, onGrantGems, onUnlockAll,
+}) {
   return (
     <div className="tabscreen profile">
       <div className="profile__hero">
@@ -64,8 +70,20 @@ export default function Profile({ progress, onSetTheme, onSetGoal, onReset, less
         </div>
       </div>
 
+      <h2 className="section-title">역할 <span className="role-chip">{ROLE_LABELS[role]}</span></h2>
+      <RolePanel
+        role={role} storedRole={progress.role} isOperator={isOperator}
+        onSetRole={onSetRole} onGrantGems={onGrantGems} onUnlockAll={onUnlockAll} />
+
+      {canGift(role) && (
+        <>
+          <h2 className="section-title">구매 · 선물</h2>
+          <GiftPanel gems={progress.gems} onSpendGems={onGrantGems} />
+        </>
+      )}
+
       <h2 className="section-title">계정 공유</h2>
-      <ShareCard progress={progress} lessonIds={lessonIds} onImport={onImport} />
+      <ShareCard progress={progress} lessonIds={lessonIds} onImportCode={onImportCode} />
 
       <InstallButton />
       <button className="btn btn--ghost" style={{ marginTop: 18 }} onClick={onReset}>진도 초기화</button>
