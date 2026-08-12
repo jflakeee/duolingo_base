@@ -1,6 +1,7 @@
 import Duck from './Duck.jsx'
 import InstallButton from './InstallButton.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
+import { BUILD_TIME, formatBuildTime } from '../buildInfo.js'
 
 function Stat({ k, v }) {
   return (
@@ -64,6 +65,8 @@ export default function Profile({ progress, onSetTheme, onSetGoal, onReset }) {
 
       <InstallButton />
       <button className="btn btn--ghost" style={{ marginTop: 18 }} onClick={onReset}>진도 초기화</button>
+
+      {BUILD_TIME && <p className="app-updated">최근 업데이트: {formatBuildTime()}</p>}
     </div>
   )
 }

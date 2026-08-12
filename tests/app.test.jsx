@@ -20,4 +20,12 @@ describe('App smoke', () => {
     fireEvent.click(screen.getByRole('button', { name: /Hello/ }))
     expect(screen.getByRole('button', { name: '확인' })).toBeInTheDocument()
   })
+
+  it('진도 초기화 returns to the onboarding landing (start-level select)', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /프로필/ }))
+    fireEvent.click(screen.getByRole('button', { name: '진도 초기화' }))
+    // landing welcome is back
+    expect(screen.getByRole('button', { name: '시작하기' })).toBeInTheDocument()
+  })
 })

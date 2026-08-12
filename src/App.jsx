@@ -145,9 +145,10 @@ export default function App() {
   }
   function setTheme(theme) { persist({ ...progress, settings: { ...progress.settings, theme } }) }
   function setGoal(dailyGoal) { persist({ ...progress, dailyGoal }) }
-  function resetKeepOnboarding() {
-    const next = { ...defaultProgress(), onboarded: true, settings: progress.settings, dailyGoal: progress.dailyGoal }
-    resetProgress(); persist(next); goTab('learn')
+  function resetToOnboarding() {
+    // 진도 초기화 → 온보딩(랜딩·학습단계 선택)부터 다시. 테마 설정만 유지.
+    const next = { ...defaultProgress(), settings: progress.settings }
+    resetProgress(); persist(next); setReviewMode(false); goTab('learn')
   }
   function claimQuest(id) {
     const today = todayStr()
@@ -206,7 +207,7 @@ export default function App() {
       {tab === 'quests' && <Quests progress={progress} onClaim={claimQuest} />}
       {tab === 'shop' && <Shop progress={progress} onBuyHearts={buyHearts} onBuyFreeze={buyFreeze} />}
       {tab === 'profile' && (
-        <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetKeepOnboarding} />
+        <Profile progress={progress} onSetTheme={setTheme} onSetGoal={setGoal} onReset={resetToOnboarding} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}
