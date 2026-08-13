@@ -2,6 +2,8 @@
 // Pure + deterministic given an injected rng. Early levels only; higher levels fall back
 // to pool sampling (see practice.js). Every generated item satisfies the same invariants
 // as hand-authored content (mcq/picture: 4 distinct choices, answer ∈ choices).
+import { POOLS, ANTONYMS, VERBS, SYNONYMS, BUSINESS } from './practiceData.js'
+export { POOLS } // re-export for consumers/tests
 
 const ONES = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
   'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
@@ -55,46 +57,6 @@ export function genNumberMcq(rng, max = 10) {
   return { type: 'mcq', prompt: `숫자 ${n} → 영어로?`, choices: shuffle(rng, [correct, ...distractors]), answer: correct, audioText: correct, _generated: true }
 }
 
-// ---- vocab pools ({ word, ko, emoji }) ----
-export const POOLS = {
-  colors: [
-    { word: 'red', ko: '빨강', emoji: '🔴' }, { word: 'blue', ko: '파랑', emoji: '🔵' },
-    { word: 'green', ko: '초록', emoji: '🟢' }, { word: 'yellow', ko: '노랑', emoji: '🟡' },
-    { word: 'orange', ko: '주황', emoji: '🟠' }, { word: 'purple', ko: '보라', emoji: '🟣' },
-    { word: 'black', ko: '검정', emoji: '⚫' }, { word: 'white', ko: '흰색', emoji: '⚪' },
-  ],
-  animals: [
-    { word: 'cat', ko: '고양이', emoji: '🐱' }, { word: 'dog', ko: '개', emoji: '🐶' },
-    { word: 'fish', ko: '물고기', emoji: '🐟' }, { word: 'bird', ko: '새', emoji: '🐤' },
-    { word: 'rabbit', ko: '토끼', emoji: '🐰' }, { word: 'bear', ko: '곰', emoji: '🐻' },
-    { word: 'lion', ko: '사자', emoji: '🦁' }, { word: 'mouse', ko: '쥐', emoji: '🐭' },
-  ],
-  food: [
-    { word: 'apple', ko: '사과', emoji: '🍎' }, { word: 'bread', ko: '빵', emoji: '🍞' },
-    { word: 'milk', ko: '우유', emoji: '🥛' }, { word: 'rice', ko: '밥', emoji: '🍚' },
-    { word: 'egg', ko: '달걀', emoji: '🥚' }, { word: 'banana', ko: '바나나', emoji: '🍌' },
-    { word: 'grape', ko: '포도', emoji: '🍇' }, { word: 'cake', ko: '케이크', emoji: '🍰' },
-  ],
-  family: [
-    { word: 'mother', ko: '엄마', emoji: '👩' }, { word: 'father', ko: '아빠', emoji: '👨' },
-    { word: 'baby', ko: '아기', emoji: '👶' }, { word: 'sister', ko: '누나', emoji: '👧' },
-    { word: 'brother', ko: '형', emoji: '👦' }, { word: 'grandmother', ko: '할머니', emoji: '👵' },
-    { word: 'grandfather', ko: '할아버지', emoji: '👴' },
-  ],
-  weather: [
-    { word: 'sunny', ko: '맑음', emoji: '☀️' }, { word: 'rainy', ko: '비', emoji: '🌧️' },
-    { word: 'snowy', ko: '눈', emoji: '❄️' }, { word: 'cloudy', ko: '흐림', emoji: '⛅' },
-    { word: 'windy', ko: '바람', emoji: '🌬️' }, { word: 'rainbow', ko: '무지개', emoji: '🌈' },
-    { word: 'stormy', ko: '폭풍', emoji: '⛈️' }, { word: 'foggy', ko: '안개', emoji: '🌫️' },
-  ],
-  feelings: [
-    { word: 'happy', ko: '행복한', emoji: '😀' }, { word: 'sad', ko: '슬픈', emoji: '😢' },
-    { word: 'angry', ko: '화난', emoji: '😠' }, { word: 'scared', ko: '무서운', emoji: '😨' },
-    { word: 'tired', ko: '피곤한', emoji: '😫' }, { word: 'surprised', ko: '놀란', emoji: '😲' },
-    { word: 'sleepy', ko: '졸린', emoji: '😴' }, { word: 'excited', ko: '신나는', emoji: '🤩' },
-  ],
-}
-
 export function genVocabPicture(rng, pool) {
   const target = pick(rng, pool)
   const distractors = sampleDistinct(rng, pool.map((p) => p.emoji), 3, [target.emoji])
@@ -110,24 +72,63 @@ export function genVocabTypein(rng, pool) {
   return { type: 'typein', prompt: `'${target.ko}'${objP(target.ko)} 영어로 쓰세요`, word: target.word, answer: target.word, audioText: target.word, _generated: true }
 }
 
-// levelId → generator thunks (each takes rng → exercise)
+// ---- grammar / higher-difficulty generators ----
+export function genAntonymMcq(rng) {
+  const p = pick(rng, ANTONYMS)
+  const all = ANTONYMS.flatMap((a) => [a.word, a.opposite])
+  const distractors = sampleDistinct(rng, all, 3, [p.word, p.opposite])
+  return { type: 'mcq', prompt: `'${p.word}'(${p.ko})의 반대말은?`, choices: shuffle(rng, [p.opposite, ...distractors]), answer: p.opposite, audioText: p.opposite, _generated: true }
+}
+export function genVerbPastTypein(rng) {
+  const v = pick(rng, VERBS)
+  return { type: 'typein', prompt: `'${v.base}'(${v.ko})의 과거형을 쓰세요`, word: v.past, answer: v.past, audioText: v.past, _generated: true }
+}
+export function genVerbPastMcq(rng) {
+  const v = pick(rng, VERBS)
+  const distractors = sampleDistinct(rng, VERBS.map((x) => x.past), 3, [v.past])
+  return { type: 'mcq', prompt: `'${v.base}'(${v.ko})의 과거형은?`, choices: shuffle(rng, [v.past, ...distractors]), answer: v.past, audioText: v.past, _generated: true }
+}
+export function genSynonymMcq(rng) {
+  const s = pick(rng, SYNONYMS)
+  const all = SYNONYMS.flatMap((x) => [x.word, x.synonym])
+  const distractors = sampleDistinct(rng, all, 3, [s.word, s.synonym])
+  return { type: 'mcq', prompt: `'${s.word}'(${s.ko})와 비슷한 말은?`, choices: shuffle(rng, [s.synonym, ...distractors]), answer: s.synonym, audioText: s.synonym, _generated: true }
+}
+export function genBusinessMcq(rng) {
+  const b = pick(rng, BUSINESS)
+  const distractors = sampleDistinct(rng, BUSINESS.map((x) => x.word), 3, [b.word])
+  return { type: 'mcq', prompt: `'${b.ko}'${topicP(b.ko)} 영어로?`, choices: shuffle(rng, [b.word, ...distractors]), answer: b.word, audioText: b.word, _generated: true }
+}
+export function genBusinessTypein(rng) {
+  const b = pick(rng, BUSINESS)
+  return { type: 'typein', prompt: `'${b.ko}'${objP(b.ko)} 영어로 쓰세요`, word: b.word, answer: b.word, audioText: b.word, _generated: true }
+}
+
+// vocab-generator triples for a pool (picture + mcq + typein)
+const vg = (key) => [(r) => genVocabPicture(r, POOLS[key]), (r) => genVocabMcq(r, POOLS[key]), (r) => genVocabTypein(r, POOLS[key])]
+
+// levelId → generator thunks (each takes rng → exercise). Every level now generates.
 export const LEVEL_GENERATORS = {
-  kinder: [
-    (r) => genNumberTypein(r, 10), (r) => genNumberMcq(r, 10),
-    (r) => genVocabPicture(r, POOLS.colors), (r) => genVocabMcq(r, POOLS.colors),
-    (r) => genVocabPicture(r, POOLS.animals), (r) => genVocabMcq(r, POOLS.animals),
-    (r) => genVocabPicture(r, POOLS.food),
-  ],
-  grade1: [
-    (r) => genNumberTypein(r, 20), (r) => genNumberMcq(r, 20),
-    (r) => genVocabPicture(r, POOLS.family), (r) => genVocabMcq(r, POOLS.family), (r) => genVocabTypein(r, POOLS.family),
-    (r) => genVocabMcq(r, POOLS.animals),
-  ],
-  grade2: [
-    (r) => genVocabPicture(r, POOLS.weather), (r) => genVocabMcq(r, POOLS.weather),
-    (r) => genVocabPicture(r, POOLS.feelings), (r) => genVocabMcq(r, POOLS.feelings), (r) => genVocabTypein(r, POOLS.feelings),
-    (r) => genNumberMcq(r, 20),
-  ],
+  kinder: [(r) => genNumberTypein(r, 10), (r) => genNumberMcq(r, 10), ...vg('colors'), ...vg('animals'), (r) => genVocabPicture(r, POOLS.food)],
+  grade1: [(r) => genNumberTypein(r, 20), (r) => genNumberMcq(r, 20), ...vg('family'), (r) => genVocabMcq(r, POOLS.animals)],
+  grade2: [...vg('weather'), ...vg('feelings'), (r) => genNumberMcq(r, 20)],
+  grade3: [...vg('school'), ...vg('body'), (r) => genNumberMcq(r, 100), (r) => genAntonymMcq(r)],
+  grade4: [...vg('clothes'), ...vg('jobs'), (r) => genAntonymMcq(r), (r) => genVerbPastMcq(r)],
+  grade5: [...vg('sports'), ...vg('transport'), (r) => genVerbPastMcq(r), (r) => genAntonymMcq(r)],
+  grade6: [...vg('nature'), ...vg('house'), (r) => genSynonymMcq(r), (r) => genVerbPastTypein(r)],
+  middle1: [(r) => genAntonymMcq(r), (r) => genVerbPastMcq(r), (r) => genVerbPastTypein(r), (r) => genSynonymMcq(r)],
+  middle2: [(r) => genVerbPastMcq(r), (r) => genVerbPastTypein(r), (r) => genSynonymMcq(r), (r) => genAntonymMcq(r)],
+  middle3: [(r) => genSynonymMcq(r), (r) => genVerbPastMcq(r), (r) => genAntonymMcq(r), (r) => genVerbPastTypein(r)],
+  high1: [(r) => genSynonymMcq(r), (r) => genAntonymMcq(r), (r) => genVerbPastMcq(r)],
+  high2: [(r) => genSynonymMcq(r), (r) => genVerbPastMcq(r), (r) => genAntonymMcq(r)],
+  high3: [(r) => genSynonymMcq(r), (r) => genVerbPastTypein(r), (r) => genAntonymMcq(r)],
+  uni1: [(r) => genSynonymMcq(r), (r) => genBusinessMcq(r), (r) => genAntonymMcq(r)],
+  uni2: [(r) => genBusinessMcq(r), (r) => genSynonymMcq(r), (r) => genBusinessTypein(r)],
+  uni3: [(r) => genBusinessMcq(r), (r) => genSynonymMcq(r), (r) => genBusinessTypein(r)],
+  uni4: [(r) => genBusinessMcq(r), (r) => genBusinessTypein(r), (r) => genSynonymMcq(r)],
+  work1: [(r) => genBusinessMcq(r), (r) => genBusinessTypein(r), (r) => genSynonymMcq(r)],
+  work2: [(r) => genBusinessMcq(r), (r) => genBusinessTypein(r), (r) => genSynonymMcq(r)],
+  work3: [(r) => genBusinessMcq(r), (r) => genBusinessTypein(r), (r) => genSynonymMcq(r)],
 }
 
 export function hasGenerators(levelId) {

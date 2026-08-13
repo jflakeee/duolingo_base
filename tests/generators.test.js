@@ -2,10 +2,12 @@ import { describe, it, expect } from 'vitest'
 import {
   numberWord, genNumberTypein, genNumberMcq,
   genVocabPicture, genVocabMcq, genVocabTypein,
+  genAntonymMcq, genVerbPastTypein, genVerbPastMcq, genSynonymMcq, genBusinessMcq, genBusinessTypein,
   generateForLevel, hasGenerators, hasBatchim, POOLS,
 } from '../src/engine/generators.js'
 import { mulberry32 } from '../src/engine/practice.js'
 import { checkAnswer } from '../src/engine/scoring.js'
+import { getLevels } from '../src/data/loadCurriculum.js'
 
 describe('numberWord', () => {
   it('maps small numbers', () => {
@@ -67,25 +69,47 @@ describe('vocab generators', () => {
   })
 })
 
+describe('grammar / higher-difficulty generators', () => {
+  const gens = { genAntonymMcq, genVerbPastMcq, genSynonymMcq, genBusinessMcq }
+  for (const [name, fn] of Object.entries(gens)) {
+    it(`${name}: 4 distinct choices incl. the answer`, () => {
+      const ex = fn(mulberry32(11))
+      expect(ex.choices).toHaveLength(4)
+      expect(new Set(ex.choices).size).toBe(4)
+      expect(checkAnswer(ex, ex.answer)).toBe(true)
+    })
+  }
+  it('typein generators produce a non-empty answer', () => {
+    expect(genVerbPastTypein(mulberry32(1)).answer.trim().length).toBeGreaterThan(0)
+    expect(genBusinessTypein(mulberry32(1)).answer.trim().length).toBeGreaterThan(0)
+  })
+})
+
 describe('generateForLevel', () => {
-  it('has generators for early levels, not for grade3+', () => {
+  it('has generators for every curriculum level now', () => {
     expect(hasGenerators('kinder')).toBe(true)
-    expect(hasGenerators('grade3')).toBe(false)
+    expect(hasGenerators('grade3')).toBe(true)
+    expect(hasGenerators('work3')).toBe(true)
+    expect(hasGenerators('__nope__')).toBe(false)
   })
-  it('returns [] for a level without generators', () => {
-    expect(generateForLevel('grade3', mulberry32(1), 6)).toEqual([])
+  it('returns [] for an unknown level', () => {
+    expect(generateForLevel('__nope__', mulberry32(1), 6)).toEqual([])
   })
-  it('produces `count` valid exercises deterministically', () => {
-    const a = generateForLevel('kinder', mulberry32(9), 6)
-    const b = generateForLevel('kinder', mulberry32(9), 6)
-    expect(a).toHaveLength(6)
-    expect(a).toEqual(b)
-    for (const ex of a) {
-      if (ex.type === 'mcq' || ex.type === 'picture') {
-        expect(ex.choices).toContain(ex.answer)
-        expect(new Set(ex.choices).size).toBe(4)
+  it('produces `count` valid, deterministic exercises for every level', () => {
+    for (const lvl of getLevels()) {
+      const a = generateForLevel(lvl.id, mulberry32(9), 6)
+      const b = generateForLevel(lvl.id, mulberry32(9), 6)
+      expect(a.length, lvl.id).toBe(6)
+      expect(a).toEqual(b)
+      for (const ex of a) {
+        expect(ex._generated).toBe(true)
+        if (ex.type === 'mcq' || ex.type === 'picture') {
+          expect(ex.choices, `${lvl.id}/${ex.prompt}`).toContain(ex.answer)
+          expect(new Set(ex.choices).size, `${lvl.id}/${ex.prompt}`).toBe(4)
+        } else {
+          expect(String(ex.answer).trim().length).toBeGreaterThan(0)
+        }
       }
-      expect(ex._generated).toBe(true)
     }
   })
 })
