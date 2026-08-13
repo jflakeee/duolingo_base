@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import QRCode from 'qrcode'
 import { classroomSummary, sortStudents } from '../engine/classroom.js'
-import { encodeMessage, MAX_LEN } from '../engine/messages.js'
+import { encodeMessage, broadcastCodes, MAX_LEN } from '../engine/messages.js'
 
 // 선생님: 여러 학생 진도를 학급 요약 + 정렬 로스터로 한눈에 + 응원 메시지 코드 생성.
 export default function ClassOverview({ students, onAddChild, onRemoveChild, myMemberId }) {
@@ -18,6 +18,11 @@ export default function ClassOverview({ students, onAddChild, onRemoveChild, myM
   const [msgCode, setMsgCode] = useState('')
   const [msgQr, setMsgQr] = useState('')
   const [copied, setCopied] = useState(false)
+  // 전체 브로드캐스트
+  const [bCode, setBCode] = useState('')
+  const [bQr, setBQr] = useState('')
+  const [bList, setBList] = useState([])
+  const [copiedId, setCopiedId] = useState('')
 
   useEffect(() => {
     if (!msgCode) { setMsgQr(''); return }
@@ -25,6 +30,13 @@ export default function ClassOverview({ students, onAddChild, onRemoveChild, myM
     QRCode.toDataURL(msgCode, { margin: 1, width: 180 }).then((u) => { if (alive) setMsgQr(u) }).catch(() => {})
     return () => { alive = false }
   }, [msgCode])
+
+  useEffect(() => {
+    if (!bCode) { setBQr(''); return }
+    let alive = true
+    QRCode.toDataURL(bCode, { margin: 1, width: 180 }).then((u) => { if (alive) setBQr(u) }).catch(() => {})
+    return () => { alive = false }
+  }, [bCode])
 
   function add() {
     const res = onAddChild(code)
@@ -38,6 +50,15 @@ export default function ClassOverview({ students, onAddChild, onRemoveChild, myM
   }
   function copyMsg() {
     navigator.clipboard?.writeText(msgCode).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500) }).catch(() => {})
+  }
+  function broadcast() {
+    if (!text.trim() || list.length === 0) return
+    setBCode(encodeMessage({ from: myMemberId || '', to: '', text: text.trim() }))
+    setBList(broadcastCodes(list.map((s) => s.memberId), myMemberId || '', text.trim()))
+    setCopiedId('')
+  }
+  function copyOne(code, id) {
+    navigator.clipboard?.writeText(code).then(() => { setCopiedId(id); setTimeout(() => setCopiedId(''), 1500) }).catch(() => {})
   }
 
   return (
@@ -85,13 +106,33 @@ export default function ClassOverview({ students, onAddChild, onRemoveChild, myM
         )}
         <textarea className="typein" rows={2} maxLength={MAX_LEN} value={text} placeholder="응원 메시지를 입력하세요 (최대 120자)"
           onChange={(e) => setText(e.target.value)} aria-label="응원 메시지" />
-        <button className="btn btn--sm btn--gold" disabled={!text.trim()} onClick={makeMessage}>응원 코드 만들기</button>
+        <div className="msg-buttons">
+          <button className="btn btn--sm btn--gold" disabled={!text.trim()} onClick={makeMessage}>응원 코드 만들기</button>
+          <button className="btn btn--sm btn--blue" disabled={!text.trim() || list.length === 0} onClick={broadcast}>전체 학생에게 한번에</button>
+        </div>
         {msgCode && (
           <div className="gift-made">
             <p className="gift-hint">받는 학생이 "코드로 가져오기"에 붙여넣으면 응원이 도착해요.</p>
             {msgQr && <img className="share-qr" src={msgQr} alt="응원 QR" width={180} height={180} />}
             <div className="share-actions">
               <button className="btn btn--sm btn--ghost" onClick={copyMsg}>{copied ? '복사됨 ✓' : '응원 코드 복사'}</button>
+            </div>
+          </div>
+        )}
+        {bCode && (
+          <div className="broadcast-result">
+            <p className="gift-hint">📣 반 전체가 이 QR/코드로 한 번에 받아요. 또는 아래 개별 코드로 각자에게 보내요.</p>
+            {bQr && <img className="share-qr" src={bQr} alt="전체 응원 QR" width={180} height={180} />}
+            <div className="share-actions">
+              <button className="btn btn--sm btn--ghost" onClick={() => copyOne(bCode, '__all')}>{copiedId === '__all' ? '복사됨 ✓' : '전체 공유 코드 복사'}</button>
+            </div>
+            <div className="broadcast-list">
+              {bList.map((x) => (
+                <div key={x.memberId} className="broadcast-row">
+                  <span className="broadcast-row__id">{x.memberId}</span>
+                  <button className="btn btn--sm btn--ghost" onClick={() => copyOne(x.code, x.memberId)}>{copiedId === x.memberId ? '복사됨 ✓' : '개별 코드'}</button>
+                </div>
+              ))}
             </div>
           </div>
         )}

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { encodeMessage, decodeMessage, applyMessage, unreadCount, markRead, markAllRead, MAX_LEN } from '../src/engine/messages.js'
+import { encodeMessage, decodeMessage, applyMessage, unreadCount, markRead, markAllRead, broadcastCodes, MAX_LEN } from '../src/engine/messages.js'
 
 describe('message codec', () => {
   it('round-trips a Korean message with sender/recipient', () => {
@@ -52,5 +52,17 @@ describe('read tracking', () => {
   })
   it('markAllRead marks every message read', () => {
     expect(unreadCount(markAllRead(msgs))).toBe(0)
+  })
+})
+
+describe('broadcastCodes', () => {
+  it('makes one personalized code per student', () => {
+    const out = broadcastCodes(['LD-A', 'LD-B'], 'LD-TEAC', '모두 화이팅!')
+    expect(out.map((x) => x.memberId)).toEqual(['LD-A', 'LD-B'])
+    expect(decodeMessage(out[0].code)).toEqual({ from: 'LD-TEAC', to: 'LD-A', text: '모두 화이팅!' })
+    expect(decodeMessage(out[1].code)).toEqual({ from: 'LD-TEAC', to: 'LD-B', text: '모두 화이팅!' })
+  })
+  it('returns empty for no students', () => {
+    expect(broadcastCodes([], 'T', 'x')).toEqual([])
   })
 })

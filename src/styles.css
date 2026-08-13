@@ -663,3 +663,12 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .inbox-msg__actions { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .inbox-msg__actions .btn { width: auto; }
 .inbox-msg__read { font-size: 12px; font-weight: 700; color: #3a8500; }
+
+/* Broadcast to all students */
+.msg-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.msg-buttons .btn { width: auto; flex: 1; min-width: 130px; }
+.broadcast-result { margin-top: 12px; text-align: center; }
+.broadcast-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.broadcast-row { display: flex; align-items: center; gap: 8px; padding: 6px 4px; border-bottom: 1px solid var(--line-2); }
+.broadcast-row__id { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--ink-strong); }
+.broadcast-row .btn { width: auto; margin-left: auto; }

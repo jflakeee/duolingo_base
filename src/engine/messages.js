@@ -41,6 +41,11 @@ export function applyMessage(progress, msg, now = 0) {
   return { ...progress, messages: [entry, ...(progress.messages || [])].slice(0, INBOX_CAP) }
 }
 
+// One personalized code per student (same text). Broadcast QR uses to:'' separately.
+export function broadcastCodes(studentIds, from, text) {
+  return (studentIds || []).map((id) => ({ memberId: id, code: encodeMessage({ from, to: id, text }) }))
+}
+
 export function unreadCount(messages) {
   return (messages || []).filter((m) => !m.read).length
 }
