@@ -5,6 +5,7 @@ import RolePanel from './RolePanel.jsx'
 import GiftPanel from './GiftPanel.jsx'
 import ChildrenPanel from './ChildrenPanel.jsx'
 import ClassOverview from './ClassOverview.jsx'
+import MessageCard from './MessageCard.jsx'
 import GoogleAuth from './GoogleAuth.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 import { ROLE_LABELS, canGift } from '../engine/roles.js'
@@ -44,10 +45,7 @@ export default function Profile({
           <h2 className="section-title">받은 응원 💌</h2>
           <div className="inbox">
             {inbox.map((m, i) => (
-              <div key={i} className="inbox-msg">
-                <div className="inbox-msg__text">{m.text}</div>
-                {m.from && <div className="inbox-msg__from">— {m.from}</div>}
-              </div>
+              <MessageCard key={i} msg={m} myMemberId={memberId} />
             ))}
           </div>
         </>
