@@ -13,6 +13,7 @@ import { getLessonById, getLevels, getLessonSequence } from './data/loadCurricul
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
 import { ensureMemberId } from './engine/member.js'
 import { buildDailyPractice, dailySeed, mulberry32 } from './engine/practice.js'
+import { generateForLevel } from './engine/generators.js'
 import { resolveRole, isDevHost } from './engine/roles.js'
 import { decodeProgress } from './engine/transfer.js'
 import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
@@ -191,8 +192,10 @@ export default function App() {
     const level = getLevels().find((l) => l.id === levelId)
     if (!level) return
     const rng = mulberry32(dailySeed(todayStr(), levelId))
-    // Phase 2 generators plug in here; Phase 1 = pool sampling only.
-    const exercises = buildDailyPractice(level, todayStr(), { size: 10, rng, generated: [] })
+    // Phase 2: procedural generators for early levels (genuinely new problems);
+    // higher levels fall back to pool sampling (generateForLevel → []).
+    const generated = generateForLevel(levelId, rng, 6)
+    const exercises = buildDailyPractice(level, todayStr(), { size: 10, rng, generated })
     if (exercises.length === 0) return
     setPracticeExercises(exercises)
     setPracticeMode(true)

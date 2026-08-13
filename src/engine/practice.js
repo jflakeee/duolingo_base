@@ -50,11 +50,12 @@ export function varyChoices(ex, rng) {
   return ex
 }
 
-// Returns a session of `size` exercises tagged _practice, generated items first, then a
-// seed-shuffled, choice-varied sample of the level pool.
+// Returns a session of `size` exercises tagged _practice. Generated items are guaranteed
+// included (up to size); the remainder is a seed-shuffled, choice-varied sample of the pool.
 export function buildDailyPractice(level, dateStr, { size = 10, rng, generated = [] } = {}) {
   const r = rng || mulberry32(dailySeed(dateStr, level?.id || ''))
-  const pool = levelExercises(level).map((ex) => varyChoices(ex, r))
-  const combined = shuffleSeeded([...generated, ...pool], r).slice(0, size)
-  return combined.map((ex) => ({ ...ex, _practice: true }))
+  const genPart = generated.slice(0, size)
+  const need = size - genPart.length
+  const pool = shuffleSeeded(levelExercises(level).map((ex) => varyChoices(ex, r)), r).slice(0, need)
+  return shuffleSeeded([...genPart, ...pool], r).map((ex) => ({ ...ex, _practice: true }))
 }

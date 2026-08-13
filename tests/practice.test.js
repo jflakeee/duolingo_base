@@ -72,4 +72,10 @@ describe('buildDailyPractice', () => {
     const s = buildDailyPractice(level, '2026-08-13', { size: 10, generated: gen })
     expect(s.some((e) => e.prompt === 'gen')).toBe(true)
   })
+  it('guarantees all generated items (up to size) ahead of pool filler', () => {
+    const gen = Array.from({ length: 4 }, (_, i) => ({ type: 'typein', prompt: `g${i}`, answer: 'x', _generated: true }))
+    const s = buildDailyPractice(level, '2026-08-13', { size: 6, generated: gen })
+    expect(s).toHaveLength(6)
+    expect(s.filter((e) => e._generated).length).toBe(4)
+  })
 })
