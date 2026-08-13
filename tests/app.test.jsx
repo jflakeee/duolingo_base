@@ -14,13 +14,21 @@ beforeEach(() => {
 describe('App smoke', () => {
   it('renders the path with the first lesson unlocked', () => {
     render(<App />)
-    expect(screen.getByText('유치원')).toBeInTheDocument()
+    // '유치원' appears in the level header and the practice-level <option>
+    expect(screen.getAllByText('유치원').length).toBeGreaterThan(0)
     expect(screen.getByRole('button', { name: /Hello/ })).not.toBeDisabled()
   })
 
   it('opens a lesson when the first node is clicked', () => {
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: /Hello/ }))
+    expect(screen.getByRole('button', { name: '확인' })).toBeInTheDocument()
+  })
+
+  it('오늘의 연습 starts a practice session at the selected level', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: '연습 시작' }))
+    // a synthetic practice lesson is running (has a 확인 button)
     expect(screen.getByRole('button', { name: '확인' })).toBeInTheDocument()
   })
 

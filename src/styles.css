@@ -672,3 +672,9 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .broadcast-row { display: flex; align-items: center; gap: 8px; padding: 6px 4px; border-bottom: 1px solid var(--line-2); }
 .broadcast-row__id { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--ink-strong); }
 .broadcast-row .btn { width: auto; margin-left: auto; }
+
+/* Daily practice bar */
+.practice-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0 0 16px; padding: 12px 14px; border: 2px solid var(--line); border-radius: 14px; background: var(--card); }
+.practice-bar__label { font-weight: 800; font-size: 14px; color: var(--ink-strong); }
+.practice-bar__sel { flex: 1; min-width: 120px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: inherit; font: inherit; font-weight: 700; }
+.practice-bar .btn { width: auto; }

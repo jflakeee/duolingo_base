@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { getLevels } from '../data/loadCurriculum.js'
 import { dueCount } from '../engine/review.js'
 import Duck from './Duck.jsx'
@@ -33,7 +34,7 @@ function donePath(lessons, done) {
   return d.trim()
 }
 
-export default function Path({ progress, onStart, onReview }) {
+export default function Path({ progress, onStart, onReview, onPractice }) {
   const done = new Set(progress.completedLessons)
   const seq = []
   getLevels().forEach((lvl) => lvl.units.forEach((u) => u.lessons.forEach((l) => seq.push(l.id))))
@@ -42,6 +43,14 @@ export default function Path({ progress, onStart, onReview }) {
     return idx > 0 && !done.has(seq[idx - 1])
   }
   const totalDone = progress.completedLessons.length
+
+  // current level = first level with an incomplete lesson (else the last)
+  const levels = getLevels()
+  let currentLevelId = levels[levels.length - 1].id
+  for (const lvl of levels) {
+    if (lvl.units.some((u) => u.lessons.some((l) => !done.has(l.id)))) { currentLevelId = lvl.id; break }
+  }
+  const [pLevel, setPLevel] = useState(currentLevelId)
 
   return (
     <div>
@@ -65,6 +74,14 @@ export default function Path({ progress, onStart, onReview }) {
           </button>
         )
       })()}
+
+      <div className="practice-bar">
+        <span className="practice-bar__label">✨ 오늘의 연습</span>
+        <select className="practice-bar__sel" value={pLevel} onChange={(e) => setPLevel(e.target.value)} aria-label="연습 레벨">
+          {levels.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
+        </select>
+        <button className="btn btn--sm btn--blue" onClick={() => onPractice(pLevel)}>연습 시작</button>
+      </div>
 
       {getLevels().map((lvl, li) => {
         const lessonCount = lvl.units.reduce((n, u) => n + u.lessons.length, 0)

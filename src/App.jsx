@@ -12,6 +12,7 @@ import Onboarding from './components/Onboarding.jsx'
 import { getLessonById, getLevels, getLessonSequence } from './data/loadCurriculum.js'
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
 import { ensureMemberId } from './engine/member.js'
+import { buildDailyPractice, dailySeed, mulberry32 } from './engine/practice.js'
 import { resolveRole, isDevHost } from './engine/roles.js'
 import { decodeProgress } from './engine/transfer.js'
 import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
@@ -41,6 +42,8 @@ export default function App() {
   const [summary, setSummary] = useState(null)
   const [reviewMode, setReviewMode] = useState(false)
   const [reviewExercises, setReviewExercises] = useState([])
+  const [practiceMode, setPracticeMode] = useState(false)
+  const [practiceExercises, setPracticeExercises] = useState([])
   const reviewWrongIds = useState(() => new Set())[0]
 
   const lessonsById = {}
@@ -126,7 +129,7 @@ export default function App() {
     setScreen('lesson')
   }
   function handleWrong(exId) {
-    if (reviewMode) return // 복습은 하트 차감·오답 기록 없음
+    if (reviewMode || practiceMode) return // 복습·연습은 하트 차감·오답 기록 없음
     const wasFull = progress.hearts >= 5
     const key = `${activeLessonId}#${exId}`
     const ex = getLessonById(activeLessonId)?.exercises?.[exId]
@@ -184,6 +187,25 @@ export default function App() {
   function handleExerciseResult(exId, isCorrect) {
     if (reviewMode && !isCorrect) reviewWrongIds.add(exId)
   }
+  function startPractice(levelId) {
+    const level = getLevels().find((l) => l.id === levelId)
+    if (!level) return
+    const rng = mulberry32(dailySeed(todayStr(), levelId))
+    // Phase 2 generators plug in here; Phase 1 = pool sampling only.
+    const exercises = buildDailyPractice(level, todayStr(), { size: 10, rng, generated: [] })
+    if (exercises.length === 0) return
+    setPracticeExercises(exercises)
+    setPracticeMode(true)
+    setActiveLessonId(null)
+    setScreen('lesson')
+  }
+  function handlePracticeFinish(s) {
+    const today = todayStr()
+    persist({ ...progress, xp: progress.xp + s.xpGained, dailyXp: addDailyXp(progress.dailyXp, s.xpGained, today) })
+    setPracticeMode(false)
+    setSummary({ ...s, gemsGained: 0, newAchievements: [] })
+    setScreen('result')
+  }
   function handleReviewFinish(s) {
     const keyed = reviewExercises.map((ex, i) => ({ ex, i })).filter(({ ex }) => ex._reviewKey)
     const solvedKeys = keyed.filter(({ i }) => !reviewWrongIds.has(i)).map(({ ex }) => ex._reviewKey)
@@ -213,7 +235,7 @@ export default function App() {
   function resetToOnboarding() {
     // 진도 초기화 → 온보딩(랜딩·학습단계 선택)부터 다시. 테마 설정만 유지.
     const next = { ...defaultProgress(), settings: progress.settings }
-    resetProgress(); persist(next); setReviewMode(false); goTab('learn')
+    resetProgress(); persist(next); setReviewMode(false); setPracticeMode(false); goTab('learn')
   }
   function claimQuest(id) {
     const today = todayStr()
@@ -242,16 +264,18 @@ export default function App() {
 
       {tab === 'learn' && (
         <>
-          {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} />}
+          {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} onPractice={startPractice} />}
           {screen === 'lesson' && (
             <Lesson
-              lesson={reviewMode
-                ? { id: 'review', title: '복습', exercises: reviewExercises }
-                : getLessonById(activeLessonId)}
+              lesson={practiceMode
+                ? { id: 'practice', title: '오늘의 연습', exercises: practiceExercises }
+                : reviewMode
+                  ? { id: 'review', title: '복습', exercises: reviewExercises }
+                  : getLessonById(activeLessonId)}
               onWrong={handleWrong}
               onExerciseResult={handleExerciseResult}
-              onFinish={reviewMode ? handleReviewFinish : handleFinish}
-              onQuit={() => { setReviewMode(false); setScreen('path') }}
+              onFinish={practiceMode ? handlePracticeFinish : reviewMode ? handleReviewFinish : handleFinish}
+              onQuit={() => { setReviewMode(false); setPracticeMode(false); setScreen('path') }}
             />
           )}
           {screen === 'result' && summary && (
