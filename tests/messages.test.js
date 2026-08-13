@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { encodeMessage, decodeMessage, applyMessage, MAX_LEN } from '../src/engine/messages.js'
+import { encodeMessage, decodeMessage, applyMessage, unreadCount, markRead, markAllRead, MAX_LEN } from '../src/engine/messages.js'
 
 describe('message codec', () => {
   it('round-trips a Korean message with sender/recipient', () => {
@@ -31,5 +31,26 @@ describe('applyMessage', () => {
     for (let i = 0; i < 25; i++) p = applyMessage(p, { text: `m${i}` }, i)
     expect(p.messages).toHaveLength(20)
     expect(p.messages[0].text).toBe('m24')
+  })
+  it('new messages start unread', () => {
+    const p = applyMessage({ messages: [] }, { text: 'hi' }, 1)
+    expect(p.messages[0].read).toBe(false)
+  })
+})
+
+describe('read tracking', () => {
+  const msgs = [{ text: 'a', read: false }, { text: 'b', read: true }, { text: 'c', read: false }]
+  it('unreadCount counts unread messages', () => {
+    expect(unreadCount(msgs)).toBe(2)
+    expect(unreadCount([])).toBe(0)
+  })
+  it('markRead marks one by index without touching others', () => {
+    const out = markRead(msgs, 0)
+    expect(out[0].read).toBe(true)
+    expect(out[2].read).toBe(false)
+    expect(msgs[0].read).toBe(false) // immutable
+  })
+  it('markAllRead marks every message read', () => {
+    expect(unreadCount(markAllRead(msgs))).toBe(0)
   })
 })

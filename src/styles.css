@@ -655,3 +655,11 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 /* Reply to an encouragement */
 .inbox-msg__reply { margin-top: 8px; }
 .reply-box { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+
+/* Inbox read/unread + reply confirm */
+.inbox-msg { position: relative; }
+.inbox-msg--unread { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(255,200,0,.25); }
+.inbox-msg__new { position: absolute; top: -8px; right: 10px; background: var(--red); color: #fff; font-size: 10px; font-weight: 800; border-radius: 999px; padding: 1px 7px; }
+.inbox-msg__actions { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.inbox-msg__actions .btn { width: auto; }
+.inbox-msg__read { font-size: 12px; font-weight: 700; color: #3a8500; }

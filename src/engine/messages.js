@@ -35,8 +35,20 @@ export function decodeMessage(code) {
   }
 }
 
-// Prepend to the inbox, newest first, capped.
+// Prepend to the inbox, newest first, capped. New messages start unread.
 export function applyMessage(progress, msg, now = 0) {
-  const entry = { from: msg.from || '', to: msg.to || '', text: msg.text, at: now }
+  const entry = { from: msg.from || '', to: msg.to || '', text: msg.text, at: now, read: false }
   return { ...progress, messages: [entry, ...(progress.messages || [])].slice(0, INBOX_CAP) }
+}
+
+export function unreadCount(messages) {
+  return (messages || []).filter((m) => !m.read).length
+}
+
+export function markRead(messages, index) {
+  return (messages || []).map((m, i) => (i === index ? { ...m, read: true } : m))
+}
+
+export function markAllRead(messages) {
+  return (messages || []).map((m) => (m.read ? m : { ...m, read: true }))
 }

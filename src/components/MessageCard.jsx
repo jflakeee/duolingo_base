@@ -3,7 +3,7 @@ import QRCode from 'qrcode'
 import { encodeMessage, MAX_LEN } from '../engine/messages.js'
 
 // 받은 응원 1건 + 답장 작성기(원 발신자를 수신자로). 답장도 LDM1 메시지 코드로 핸드오프.
-export default function MessageCard({ msg, myMemberId }) {
+export default function MessageCard({ msg, myMemberId, onMarkRead }) {
   const [open, setOpen] = useState(false)
   const [text, setText] = useState('')
   const [code, setCode] = useState('')
@@ -26,15 +26,23 @@ export default function MessageCard({ msg, myMemberId }) {
     navigator.clipboard?.writeText(code).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500) }).catch(() => {})
   }
 
+  const unread = !msg.read
   return (
-    <div className="inbox-msg">
+    <div className={`inbox-msg ${unread ? 'inbox-msg--unread' : ''}`}>
+      {unread && <span className="inbox-msg__new">NEW</span>}
       <div className="inbox-msg__text">{msg.text}</div>
       {msg.from && <div className="inbox-msg__from">— {msg.from}</div>}
-      {msg.from && (
-        <button className="btn btn--sm btn--ghost inbox-msg__reply" onClick={() => setOpen((v) => !v)}>
-          {open ? '닫기' : '답장'}
-        </button>
-      )}
+      <div className="inbox-msg__actions">
+        {unread && onMarkRead && (
+          <button className="btn btn--sm btn--ghost" onClick={onMarkRead}>읽음 확인</button>
+        )}
+        {!unread && <span className="inbox-msg__read">확인됨 ✓</span>}
+        {msg.from && (
+          <button className="btn btn--sm btn--ghost" onClick={() => setOpen((v) => !v)}>
+            {open ? '닫기' : '답장'}
+          </button>
+        )}
+      </div>
       {open && (
         <div className="reply-box">
           <textarea className="typein" rows={2} maxLength={MAX_LEN} value={text}

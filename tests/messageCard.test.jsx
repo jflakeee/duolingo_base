@@ -22,4 +22,17 @@ describe('MessageCard reply', () => {
     render(<MessageCard msg={{ from: '', text: '익명 응원' }} myMemberId="LD-STU1-2222" />)
     expect(screen.queryByRole('button', { name: '답장' })).toBeNull()
   })
+
+  it('shows 읽음 확인 for an unread message and calls onMarkRead', () => {
+    const onMarkRead = vi.fn()
+    render(<MessageCard msg={{ from: 'LD-STU1-2222', text: '감사합니다!', read: false }} myMemberId="LD-TEAC-1111" onMarkRead={onMarkRead} />)
+    fireEvent.click(screen.getByRole('button', { name: '읽음 확인' }))
+    expect(onMarkRead).toHaveBeenCalled()
+  })
+
+  it('shows 확인됨 for a read message and no 읽음 확인 button', () => {
+    render(<MessageCard msg={{ from: 'LD-STU1-2222', text: '감사합니다!', read: true }} myMemberId="LD-TEAC-1111" onMarkRead={vi.fn()} />)
+    expect(screen.getByText('확인됨 ✓')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: '읽음 확인' })).toBeNull()
+  })
 })

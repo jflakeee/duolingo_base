@@ -9,6 +9,7 @@ import MessageCard from './MessageCard.jsx'
 import GoogleAuth from './GoogleAuth.jsx'
 import { ACHIEVEMENTS } from '../engine/achievements.js'
 import { ROLE_LABELS, canGift } from '../engine/roles.js'
+import { unreadCount } from '../engine/messages.js'
 import { BUILD_TIME, formatBuildTime } from '../buildInfo.js'
 
 function Stat({ k, v }) {
@@ -24,9 +25,10 @@ export default function Profile({
   progress, onSetTheme, onSetGoal, onReset, lessonIds, onImportCode,
   role, isOperator, onSetRole, onGrantGems, onUnlockAll,
   onGoogleLogin, onGoogleLogout, onAddChild, onRemoveChild,
-  memberId, messages,
+  memberId, messages, onMarkRead,
 }) {
   const inbox = messages || []
+  const unread = unreadCount(inbox)
   return (
     <div className="tabscreen profile">
       <div className="profile__hero">
@@ -42,10 +44,10 @@ export default function Profile({
 
       {inbox.length > 0 && (
         <>
-          <h2 className="section-title">받은 응원 💌</h2>
+          <h2 className="section-title">받은 응원 💌{unread > 0 && <span className="review-badge">{unread}</span>}</h2>
           <div className="inbox">
             {inbox.map((m, i) => (
-              <MessageCard key={i} msg={m} myMemberId={memberId} />
+              <MessageCard key={i} msg={m} myMemberId={memberId} onMarkRead={() => onMarkRead(i)} />
             ))}
           </div>
         </>

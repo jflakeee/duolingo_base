@@ -16,7 +16,7 @@ import { resolveRole, isDevHost } from './engine/roles.js'
 import { decodeProgress } from './engine/transfer.js'
 import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
 import { childSummary, addChild, removeChild } from './engine/children.js'
-import { decodeMessage, applyMessage } from './engine/messages.js'
+import { decodeMessage, applyMessage, markRead } from './engine/messages.js'
 import { loadProgress, saveProgress, resetProgress, defaultProgress } from './store/progress.js'
 import { loseHeart, updateStreak, addDailyXp, regenHearts, msUntilNextHeart } from './engine/gamification.js'
 import { resolveTheme, applyTheme, prefersDark } from './engine/theme.js'
@@ -67,6 +67,8 @@ export default function App() {
   function removeChildById(memberId) {
     persist({ ...progress, children: removeChild(progress.children || [], memberId) })
   }
+
+  function markMessageRead(index) { persist({ ...progress, messages: markRead(progress.messages || [], index) }) }
 
   function googleLogin(profile) { persist({ ...progress, google: profile }) }
   function googleLogout() { persist({ ...progress, google: null }) }
@@ -276,7 +278,7 @@ export default function App() {
           onSetRole={setRole} onGrantGems={grantGems} onUnlockAll={unlockAllLessons}
           onGoogleLogin={googleLogin} onGoogleLogout={googleLogout}
           onAddChild={addChildByCode} onRemoveChild={removeChildById}
-          memberId={progress.memberId} messages={progress.messages} />
+          memberId={progress.memberId} messages={progress.messages} onMarkRead={markMessageRead} />
       )}
 
       {showNav && <BottomNav tab={tab} onTab={goTab} />}
