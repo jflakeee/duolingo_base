@@ -1,13 +1,17 @@
-import curriculum from './curriculum.json'
+import { SUBJECTS, DEFAULT_SUBJECT } from './subjects.js'
 
-export function getLevels() {
-  return curriculum.levels
+function curriculumOf(subject) {
+  return (SUBJECTS[subject] || SUBJECTS[DEFAULT_SUBJECT]).curriculum
 }
 
-// Flat, ordered list of every lesson with its level/unit context.
-export function getLessonSequence() {
+export function getLevels(subject = DEFAULT_SUBJECT) {
+  return curriculumOf(subject).levels
+}
+
+// Flat, ordered list of every lesson with its level/unit context (per subject).
+export function getLessonSequence(subject = DEFAULT_SUBJECT) {
   const seq = []
-  for (const level of curriculum.levels) {
+  for (const level of curriculumOf(subject).levels) {
     for (const unit of level.units) {
       for (const lesson of unit.lessons) {
         seq.push({ levelId: level.id, unitId: unit.id, lesson })
@@ -17,6 +21,6 @@ export function getLessonSequence() {
   return seq
 }
 
-export function getLessonById(lessonId) {
-  return getLessonSequence().find((x) => x.lesson.id === lessonId)?.lesson ?? null
+export function getLessonById(lessonId, subject = DEFAULT_SUBJECT) {
+  return getLessonSequence(subject).find((x) => x.lesson.id === lessonId)?.lesson ?? null
 }

@@ -24,6 +24,9 @@ export function defaultProgress() {
     google: null,
     children: [],
     messages: [],
+    // v3: multi-subject. Top-level completedLessons/reviewQueue mirror the active subject.
+    activeSubject: 'english',
+    subjects: { english: { completedLessons: [], reviewQueue: [] } },
   }
 }
 
@@ -31,7 +34,19 @@ export function loadProgress() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return defaultProgress()
-    return { ...defaultProgress(), ...JSON.parse(raw) }
+    const parsed = JSON.parse(raw)
+    const p = { ...defaultProgress(), ...parsed }
+    // v2→v3 migration: seed the subject map from the old top-level progress.
+    if (!parsed.subjects) {
+      p.subjects = { english: { completedLessons: p.completedLessons || [], reviewQueue: p.reviewQueue || [] } }
+      p.activeSubject = 'english'
+    }
+    // Keep top-level completedLessons/reviewQueue synced to the active subject.
+    const active = p.activeSubject || 'english'
+    const sub = p.subjects[active] || { completedLessons: [], reviewQueue: [] }
+    p.completedLessons = sub.completedLessons || []
+    p.reviewQueue = sub.reviewQueue || []
+    return p
   } catch {
     return defaultProgress()
   }

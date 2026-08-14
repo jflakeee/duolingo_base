@@ -32,6 +32,15 @@ describe('App smoke', () => {
     expect(screen.getByRole('button', { name: '확인' })).toBeInTheDocument()
   })
 
+  it('switches to the 수학 subject and shows a math lesson', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /수학/ })) // subject tab
+    // math practice should generate arithmetic; open the first math lesson node
+    fireEvent.click(screen.getByRole('button', { name: '연습 시작' }))
+    // a math exercise prompt contains an operator (e.g. "3 + 5 = ?")
+    expect(document.body.textContent).toMatch(/[+−×÷]|= \?/)
+  })
+
   it('진도 초기화 returns to the onboarding landing (start-level select)', () => {
     render(<App />)
     fireEvent.click(screen.getByRole('button', { name: /프로필/ }))

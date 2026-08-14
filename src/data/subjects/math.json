@@ -1,0 +1,1784 @@
+{
+  "levels": [
+    {
+      "id": "kinder",
+      "name": "유치원",
+      "units": [
+        {
+          "id": "kinder-m-u1",
+          "title": "10까지 더하기·빼기",
+          "lessons": [
+            {
+              "id": "kinder-m-l1",
+              "title": "10까지 더하기·빼기 1",
+              "exercises": [
+                {
+                  "type": "mcq",
+                  "prompt": "6 + 10 = ?",
+                  "choices": [
+                    "23",
+                    "2",
+                    "32",
+                    "16"
+                  ],
+                  "answer": "16"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "9 − 1 = ?",
+                  "choices": [
+                    "4",
+                    "3",
+                    "8",
+                    "1"
+                  ],
+                  "answer": "8"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "4 + 3 = ?",
+                  "choices": [
+                    "8",
+                    "11",
+                    "7",
+                    "10"
+                  ],
+                  "answer": "7"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "10 − 8 = ?",
+                  "choices": [
+                    "4",
+                    "2",
+                    "1",
+                    "0"
+                  ],
+                  "answer": "2"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "2 + 6 = ?",
+                  "choices": [
+                    "0",
+                    "3",
+                    "1",
+                    "8"
+                  ],
+                  "answer": "8"
+                }
+              ]
+            },
+            {
+              "id": "kinder-m-l2",
+              "title": "10까지 더하기·빼기 2",
+              "exercises": [
+                {
+                  "type": "mcq",
+                  "prompt": "6 − 2 = ?",
+                  "choices": [
+                    "1",
+                    "4",
+                    "0",
+                    "5"
+                  ],
+                  "answer": "4"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "2 + 2 = ?",
+                  "choices": [
+                    "0",
+                    "4",
+                    "6",
+                    "7"
+                  ],
+                  "answer": "4"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "2 − 1 = ?",
+                  "choices": [
+                    "-1",
+                    "1",
+                    "0",
+                    "2"
+                  ],
+                  "answer": "1"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "10 + 6 = ?",
+                  "choices": [
+                    "28",
+                    "31",
+                    "16",
+                    "10"
+                  ],
+                  "answer": "16"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "4 − 2 = ?",
+                  "choices": [
+                    "2",
+                    "4",
+                    "1",
+                    "0"
+                  ],
+                  "answer": "2"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade1",
+      "name": "초등 1학년",
+      "units": [
+        {
+          "id": "grade1-m-u1",
+          "title": "20까지 더하기·빼기",
+          "lessons": [
+            {
+              "id": "grade1-m-l1",
+              "title": "20까지 더하기·빼기 1",
+              "exercises": [
+                {
+                  "type": "mcq",
+                  "prompt": "14 + 7 = ?",
+                  "choices": [
+                    "21",
+                    "38",
+                    "36",
+                    "37"
+                  ],
+                  "answer": "21"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "20 − 8 = ?",
+                  "choices": [
+                    "4",
+                    "0",
+                    "12",
+                    "20"
+                  ],
+                  "answer": "12"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "20 + 5 = ?",
+                  "choices": [
+                    "16",
+                    "6",
+                    "25",
+                    "1"
+                  ],
+                  "answer": "25"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "12 − 3 = ?",
+                  "choices": [
+                    "9",
+                    "3",
+                    "4",
+                    "1"
+                  ],
+                  "answer": "9"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "5 + 3 = ?",
+                  "choices": [
+                    "13",
+                    "4",
+                    "8",
+                    "3"
+                  ],
+                  "answer": "8"
+                }
+              ]
+            },
+            {
+              "id": "grade1-m-l2",
+              "title": "20까지 더하기·빼기 2",
+              "exercises": [
+                {
+                  "type": "mcq",
+                  "prompt": "11 − 10 = ?",
+                  "choices": [
+                    "3",
+                    "-1",
+                    "1",
+                    "0"
+                  ],
+                  "answer": "1"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "6 + 14 = ?",
+                  "choices": [
+                    "20",
+                    "15",
+                    "16",
+                    "34"
+                  ],
+                  "answer": "20"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "8 − 5 = ?",
+                  "choices": [
+                    "0",
+                    "4",
+                    "3",
+                    "1"
+                  ],
+                  "answer": "3"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "2 + 19 = ?",
+                  "choices": [
+                    "6",
+                    "39",
+                    "21",
+                    "36"
+                  ],
+                  "answer": "21"
+                },
+                {
+                  "type": "mcq",
+                  "prompt": "19 − 12 = ?",
+                  "choices": [
+                    "4",
+                    "7",
+                    "8",
+                    "10"
+                  ],
+                  "answer": "7"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade2",
+      "name": "초등 2학년",
+      "units": [
+        {
+          "id": "grade2-m-u1",
+          "title": "덧셈·뺄셈·곱셈",
+          "lessons": [
+            {
+              "id": "grade2-m-l1",
+              "title": "덧셈·뺄셈·곱셈 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "1 + 23 = ?",
+                  "answer": "24",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "80 − 20 = ?",
+                  "answer": "60",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3 × 5 = ?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "97 + 55 = ?",
+                  "answer": "152",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "76 − 66 = ?",
+                  "answer": "10",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "grade2-m-l2",
+              "title": "덧셈·뺄셈·곱셈 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "4 × 2 = ?",
+                  "answer": "8",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "40 + 10 = ?",
+                  "answer": "50",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "70 − 19 = ?",
+                  "answer": "51",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3 × 5 = ?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "68 + 45 = ?",
+                  "answer": "113",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade3",
+      "name": "초등 3학년",
+      "units": [
+        {
+          "id": "grade3-m-u1",
+          "title": "곱셈·나눗셈",
+          "lessons": [
+            {
+              "id": "grade3-m-l1",
+              "title": "곱셈·나눗셈 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "5 × 3 = ?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "18 ÷ 3 = ?",
+                  "answer": "6",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "91 + 87 = ?",
+                  "answer": "178",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "7 × 7 = ?",
+                  "answer": "49",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "21 ÷ 3 = ?",
+                  "answer": "7",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "grade3-m-l2",
+              "title": "곱셈·나눗셈 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "90 + 6 = ?",
+                  "answer": "96",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "9 × 3 = ?",
+                  "answer": "27",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "63 ÷ 9 = ?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "18 + 62 = ?",
+                  "answer": "80",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3 × 7 = ?",
+                  "answer": "21",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade4",
+      "name": "초등 4학년",
+      "units": [
+        {
+          "id": "grade4-m-u1",
+          "title": "곱셈·나눗셈·분수·넓이",
+          "lessons": [
+            {
+              "id": "grade4-m-l1",
+              "title": "곱셈·나눗셈·분수·넓이 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "11 × 9 = ?",
+                  "answer": "99",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "40 ÷ 10 = ?",
+                  "answer": "4",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "8의 1/4은?",
+                  "answer": "2",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 4, 세로 10인 직사각형의 넓이는?",
+                  "answer": "40",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "8 × 6 = ?",
+                  "answer": "48",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "grade4-m-l2",
+              "title": "곱셈·나눗셈·분수·넓이 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "48 ÷ 4 = ?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4의 1/4은?",
+                  "answer": "1",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 2, 세로 9인 직사각형의 넓이는?",
+                  "answer": "18",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2 × 4 = ?",
+                  "answer": "8",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "40 ÷ 4 = ?",
+                  "answer": "10",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade5",
+      "name": "초등 5학년",
+      "units": [
+        {
+          "id": "grade5-m-u1",
+          "title": "분수·백분율·도형",
+          "lessons": [
+            {
+              "id": "grade5-m-l1",
+              "title": "분수·백분율·도형 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "6의 1/3은?",
+                  "answer": "2",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "80의 10%는?",
+                  "answer": "8",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 4, 세로 5인 직사각형의 넓이는?",
+                  "answer": "20",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 3, 세로 9인 직사각형의 둘레는?",
+                  "answer": "24",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "20의 1/4은?",
+                  "answer": "5",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "grade5-m-l2",
+              "title": "분수·백분율·도형 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "180의 50%는?",
+                  "answer": "90",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 5, 세로 3인 직사각형의 넓이는?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 10, 세로 7인 직사각형의 둘레는?",
+                  "answer": "34",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "8의 1/4은?",
+                  "answer": "2",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "100의 20%는?",
+                  "answer": "20",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grade6",
+      "name": "초등 6학년",
+      "units": [
+        {
+          "id": "grade6-m-u1",
+          "title": "백분율·도형·나눗셈",
+          "lessons": [
+            {
+              "id": "grade6-m-l1",
+              "title": "백분율·도형·나눗셈 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "190의 50%는?",
+                  "answer": "95",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 9, 세로 8인 직사각형의 넓이는?",
+                  "answer": "72",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 6, 세로 2인 직사각형의 둘레는?",
+                  "answer": "16",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "132 ÷ 11 = ?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "170의 20%는?",
+                  "answer": "34",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "grade6-m-l2",
+              "title": "백분율·도형·나눗셈 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "가로 7, 세로 2인 직사각형의 넓이는?",
+                  "answer": "14",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 6, 세로 4인 직사각형의 둘레는?",
+                  "answer": "20",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "14 ÷ 7 = ?",
+                  "answer": "2",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "140의 10%는?",
+                  "answer": "14",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "가로 9, 세로 4인 직사각형의 넓이는?",
+                  "answer": "36",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "middle1",
+      "name": "중학교 1학년",
+      "units": [
+        {
+          "id": "middle1-m-u1",
+          "title": "일차방정식·음수",
+          "lessons": [
+            {
+              "id": "middle1-m-l1",
+              "title": "일차방정식·음수 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "5x = 30, x = ?",
+                  "answer": "6",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6 − 16 = ?",
+                  "answer": "-10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "10 × 2 = ?",
+                  "answer": "20",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 8 = 2, x = ?",
+                  "answer": "10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "1 − 11 = ?",
+                  "answer": "-10",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "middle1-m-l2",
+              "title": "일차방정식·음수 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "7 × 3 = ?",
+                  "answer": "21",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 3 = 3, x = ?",
+                  "answer": "6",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "1 − 8 = ?",
+                  "answer": "-7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "10 × 9 = ?",
+                  "answer": "90",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 4 = 6, x = ?",
+                  "answer": "10",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "middle2",
+      "name": "중학교 2학년",
+      "units": [
+        {
+          "id": "middle2-m-u1",
+          "title": "방정식·지수·음수",
+          "lessons": [
+            {
+              "id": "middle2-m-l1",
+              "title": "방정식·지수·음수 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "6x = 54, x = ?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4의 3제곱은?",
+                  "answer": "64",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3 − 9 = ?",
+                  "answer": "-6",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 3 = 6, x = ?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3의 3제곱은?",
+                  "answer": "27",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "middle2-m-l2",
+              "title": "방정식·지수·음수 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "9 − 14 = ?",
+                  "answer": "-5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 8 = 7, x = ?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "5의 2제곱은?",
+                  "answer": "25",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "7 − 16 = ?",
+                  "answer": "-9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 7 = 9, x = ?",
+                  "answer": "2",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "middle3",
+      "name": "중학교 3학년",
+      "units": [
+        {
+          "id": "middle3-m-u1",
+          "title": "방정식·제곱근·지수",
+          "lessons": [
+            {
+              "id": "middle3-m-l1",
+              "title": "방정식·제곱근·지수 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "x + 1 = 8, x = ?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√81 = ?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6의 2제곱은?",
+                  "answer": "36",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6x = 54, x = ?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√9 = ?",
+                  "answer": "3",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "middle3-m-l2",
+              "title": "방정식·제곱근·지수 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "5의 2제곱은?",
+                  "answer": "25",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4x = 20, x = ?",
+                  "answer": "5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√121 = ?",
+                  "answer": "11",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4의 3제곱은?",
+                  "answer": "64",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6x = 36, x = ?",
+                  "answer": "6",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "high1",
+      "name": "고등학교 1학년",
+      "units": [
+        {
+          "id": "high1-m-u1",
+          "title": "방정식·지수·수열",
+          "lessons": [
+            {
+              "id": "high1-m-l1",
+              "title": "방정식·지수·수열 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "6x = 42, x = ?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3의 3제곱은?",
+                  "answer": "27",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2, 4, 6, 8, 다음 수는?",
+                  "answer": "10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 6 = 9, x = ?",
+                  "answer": "3",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2의 3제곱은?",
+                  "answer": "8",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "high1-m-l2",
+              "title": "방정식·지수·수열 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "3, 8, 13, 18, 다음 수는?",
+                  "answer": "23",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 2 = 5, x = ?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6의 3제곱은?",
+                  "answer": "216",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "9, 11, 13, 15, 다음 수는?",
+                  "answer": "17",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 8 = 5, x = ?",
+                  "answer": "13",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "high2",
+      "name": "고등학교 2학년",
+      "units": [
+        {
+          "id": "high2-m-u1",
+          "title": "방정식·제곱근·수열",
+          "lessons": [
+            {
+              "id": "high2-m-l1",
+              "title": "방정식·제곱근·수열 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "x + 3 = 8, x = ?",
+                  "answer": "5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√64 = ?",
+                  "answer": "8",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2, 4, 6, 8, 다음 수는?",
+                  "answer": "10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 4 = 9, x = ?",
+                  "answer": "5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√144 = ?",
+                  "answer": "12",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "high2-m-l2",
+              "title": "방정식·제곱근·수열 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "1, 6, 11, 16, 다음 수는?",
+                  "answer": "21",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 2 = 3, x = ?",
+                  "answer": "1",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√81 = ?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "7, 10, 13, 16, 다음 수는?",
+                  "answer": "19",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 8 = 5, x = ?",
+                  "answer": "13",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "high3",
+      "name": "고등학교 3학년",
+      "units": [
+        {
+          "id": "high3-m-u1",
+          "title": "방정식·지수·수열",
+          "lessons": [
+            {
+              "id": "high3-m-l1",
+              "title": "방정식·지수·수열 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "x − 3 = 6, x = ?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6의 2제곱은?",
+                  "answer": "36",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6, 9, 12, 15, 다음 수는?",
+                  "answer": "18",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 5 = 12, x = ?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2의 3제곱은?",
+                  "answer": "8",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "high3-m-l2",
+              "title": "방정식·지수·수열 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "7, 9, 11, 13, 다음 수는?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 3 = 9, x = ?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "5의 3제곱은?",
+                  "answer": "125",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4, 6, 8, 10, 다음 수는?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 7 = 5, x = ?",
+                  "answer": "12",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uni1",
+      "name": "대학교 1학년",
+      "units": [
+        {
+          "id": "uni1-m-u1",
+          "title": "백분율·방정식·수열",
+          "lessons": [
+            {
+              "id": "uni1-m-l1",
+              "title": "백분율·방정식·수열 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "12의 25%는?",
+                  "answer": "3",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 4 = 9, x = ?",
+                  "answer": "5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4, 7, 10, 13, 다음 수는?",
+                  "answer": "16",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "180의 10%는?",
+                  "answer": "18",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 5 = 1, x = ?",
+                  "answer": "6",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "uni1-m-l2",
+              "title": "백분율·방정식·수열 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "8, 11, 14, 17, 다음 수는?",
+                  "answer": "20",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "170의 50%는?",
+                  "answer": "85",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2x = 2, x = ?",
+                  "answer": "1",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "3, 6, 9, 12, 다음 수는?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "120의 50%는?",
+                  "answer": "60",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uni2",
+      "name": "대학교 2학년",
+      "units": [
+        {
+          "id": "uni2-m-u1",
+          "title": "백분율·방정식·지수",
+          "lessons": [
+            {
+              "id": "uni2-m-l1",
+              "title": "백분율·방정식·지수 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "28의 25%는?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 4 = 5, x = ?",
+                  "answer": "1",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2의 3제곱은?",
+                  "answer": "8",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "180의 50%는?",
+                  "answer": "90",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6x = 48, x = ?",
+                  "answer": "8",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "uni2-m-l2",
+              "title": "백분율·방정식·지수 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "3의 3제곱은?",
+                  "answer": "27",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "64의 25%는?",
+                  "answer": "16",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 9 = 10, x = ?",
+                  "answer": "1",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2의 3제곱은?",
+                  "answer": "8",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "40의 50%는?",
+                  "answer": "20",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uni3",
+      "name": "대학교 3학년",
+      "units": [
+        {
+          "id": "uni3-m-u1",
+          "title": "백분율·방정식·수열",
+          "lessons": [
+            {
+              "id": "uni3-m-l1",
+              "title": "백분율·방정식·수열 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "60의 50%는?",
+                  "answer": "30",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "4x = 28, x = ?",
+                  "answer": "7",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "9, 14, 19, 24, 다음 수는?",
+                  "answer": "29",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "20의 20%는?",
+                  "answer": "4",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6x = 36, x = ?",
+                  "answer": "6",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "uni3-m-l2",
+              "title": "백분율·방정식·수열 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "3, 5, 7, 9, 다음 수는?",
+                  "answer": "11",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "60의 25%는?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 5 = 7, x = ?",
+                  "answer": "2",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2, 6, 10, 14, 다음 수는?",
+                  "answer": "18",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "190의 20%는?",
+                  "answer": "38",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uni4",
+      "name": "대학교 4학년",
+      "units": [
+        {
+          "id": "uni4-m-u1",
+          "title": "백분율·방정식·제곱근",
+          "lessons": [
+            {
+              "id": "uni4-m-l1",
+              "title": "백분율·방정식·제곱근 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "50의 50%는?",
+                  "answer": "25",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 3 = 8, x = ?",
+                  "answer": "5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√121 = ?",
+                  "answer": "11",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "60의 25%는?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 9 = 6, x = ?",
+                  "answer": "15",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "uni4-m-l2",
+              "title": "백분율·방정식·제곱근 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "√121 = ?",
+                  "answer": "11",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "120의 10%는?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2x = 10, x = ?",
+                  "answer": "5",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "√16 = ?",
+                  "answer": "4",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "40의 10%는?",
+                  "answer": "4",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work1",
+      "name": "직장인 1",
+      "units": [
+        {
+          "id": "work1-m-u1",
+          "title": "실용 계산(백분율·방정식)",
+          "lessons": [
+            {
+              "id": "work1-m-l1",
+              "title": "실용 계산(백분율·방정식) 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "200의 10%는?",
+                  "answer": "20",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 6 = 9, x = ?",
+                  "answer": "15",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6 × 2 = ?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "20의 50%는?",
+                  "answer": "10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6x = 48, x = ?",
+                  "answer": "8",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "work1-m-l2",
+              "title": "실용 계산(백분율·방정식) 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "8 × 8 = ?",
+                  "answer": "64",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "90의 10%는?",
+                  "answer": "9",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "5x = 10, x = ?",
+                  "answer": "2",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "6 × 2 = ?",
+                  "answer": "12",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "12의 25%는?",
+                  "answer": "3",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work2",
+      "name": "직장인 2",
+      "units": [
+        {
+          "id": "work2-m-u1",
+          "title": "실용 계산(백분율·나눗셈)",
+          "lessons": [
+            {
+              "id": "work2-m-l1",
+              "title": "실용 계산(백분율·나눗셈) 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "170의 20%는?",
+                  "answer": "34",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "44 ÷ 4 = ?",
+                  "answer": "11",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "2 × 9 = ?",
+                  "answer": "18",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "180의 50%는?",
+                  "answer": "90",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "44 ÷ 4 = ?",
+                  "answer": "11",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "work2-m-l2",
+              "title": "실용 계산(백분율·나눗셈) 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "11 × 3 = ?",
+                  "answer": "33",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "80의 25%는?",
+                  "answer": "20",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "70 ÷ 7 = ?",
+                  "answer": "10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "8 × 11 = ?",
+                  "answer": "88",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "10의 10%는?",
+                  "answer": "1",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work3",
+      "name": "직장인 3",
+      "units": [
+        {
+          "id": "work3-m-u1",
+          "title": "실용 계산(백분율·방정식·수열)",
+          "lessons": [
+            {
+              "id": "work3-m-l1",
+              "title": "실용 계산(백분율·방정식·수열) 1",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "160의 10%는?",
+                  "answer": "16",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x + 4 = 7, x = ?",
+                  "answer": "3",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "5, 10, 15, 20, 다음 수는?",
+                  "answer": "25",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "130의 20%는?",
+                  "answer": "26",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 2 = 9, x = ?",
+                  "answer": "11",
+                  "_static": true
+                }
+              ]
+            },
+            {
+              "id": "work3-m-l2",
+              "title": "실용 계산(백분율·방정식·수열) 2",
+              "exercises": [
+                {
+                  "type": "typein",
+                  "prompt": "7, 10, 13, 16, 다음 수는?",
+                  "answer": "19",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "72의 25%는?",
+                  "answer": "18",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "x − 3 = 7, x = ?",
+                  "answer": "10",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "7, 12, 17, 22, 다음 수는?",
+                  "answer": "27",
+                  "_static": true
+                },
+                {
+                  "type": "typein",
+                  "prompt": "56의 25%는?",
+                  "answer": "14",
+                  "_static": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

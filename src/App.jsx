@@ -13,7 +13,8 @@ import { getLessonById, getLevels, getLessonSequence } from './data/loadCurricul
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
 import { ensureMemberId } from './engine/member.js'
 import { buildDailyPractice, dailySeed, mulberry32 } from './engine/practice.js'
-import { generateForLevel } from './engine/generators.js'
+import { generatorsFor } from './engine/subjectGenerators.js'
+import { SUBJECT_LIST } from './data/subjects.js'
 import { resolveRole, isDevHost } from './engine/roles.js'
 import { decodeProgress } from './engine/transfer.js'
 import { decodeGift, applyGift, giftLabel } from './engine/gifting.js'
@@ -47,9 +48,10 @@ export default function App() {
   const [practiceExercises, setPracticeExercises] = useState([])
   const reviewWrongIds = useState(() => new Set())[0]
 
+  const activeSubject = progress.activeSubject || 'english'
   const lessonsById = {}
   const lessonIds = []
-  for (const { lesson } of getLessonSequence()) { lessonsById[lesson.id] = lesson; lessonIds.push(lesson.id) }
+  for (const { lesson } of getLessonSequence(activeSubject)) { lessonsById[lesson.id] = lesson; lessonIds.push(lesson.id) }
 
   // ensure a stable local member number exists (persist once)
   useEffect(() => {
@@ -120,7 +122,21 @@ export default function App() {
     return () => mq.removeEventListener?.('change', onChange)
   }, [progress.settings.theme])
 
-  function persist(next) { setProgress(next); saveProgress(next) }
+  function persist(next) {
+    // keep the active subject's snapshot mirrored to the top-level working copy
+    const act = next.activeSubject || 'english'
+    const synced = { ...next, subjects: { ...next.subjects, [act]: { completedLessons: next.completedLessons, reviewQueue: next.reviewQueue } } }
+    setProgress(synced); saveProgress(synced)
+  }
+
+  function switchSubject(id) {
+    if (id === activeSubject) { setScreen('path'); return }
+    const subjects = { ...progress.subjects, [activeSubject]: { completedLessons: progress.completedLessons, reviewQueue: progress.reviewQueue } }
+    const target = subjects[id] || { completedLessons: [], reviewQueue: [] }
+    setReviewMode(false); setPracticeMode(false)
+    persist({ ...progress, subjects, activeSubject: id, completedLessons: target.completedLessons || [], reviewQueue: target.reviewQueue || [] })
+    setScreen('path')
+  }
 
   function goTab(id) { setTab(id); if (id === 'learn') setScreen('path') }
 
@@ -133,7 +149,7 @@ export default function App() {
     if (reviewMode || practiceMode) return // 복습·연습은 하트 차감·오답 기록 없음
     const wasFull = progress.hearts >= 5
     const key = `${activeLessonId}#${exId}`
-    const ex = getLessonById(activeLessonId)?.exercises?.[exId]
+    const ex = getLessonById(activeLessonId, activeSubject)?.exercises?.[exId]
     const withMistake = ex
       ? { ...progress, reviewQueue: recordMistake(progress.reviewQueue ?? [], { key, lessonId: activeLessonId, ex }, Date.now()) }
       : progress
@@ -189,12 +205,11 @@ export default function App() {
     if (reviewMode && !isCorrect) reviewWrongIds.add(exId)
   }
   function startPractice(levelId) {
-    const level = getLevels().find((l) => l.id === levelId)
+    const level = getLevels(activeSubject).find((l) => l.id === levelId)
     if (!level) return
-    const rng = mulberry32(dailySeed(todayStr(), levelId))
-    // Phase 2: procedural generators for early levels (genuinely new problems);
-    // higher levels fall back to pool sampling (generateForLevel → []).
-    const generated = generateForLevel(levelId, rng, 6)
+    const rng = mulberry32(dailySeed(todayStr(), `${activeSubject}#${levelId}`))
+    // subject-specific generators (english/math/…); levels without → pool sampling.
+    const generated = generatorsFor(activeSubject, levelId, rng, 6)
     const exercises = buildDailyPractice(level, todayStr(), { size: 10, rng, generated })
     if (exercises.length === 0) return
     setPracticeExercises(exercises)
@@ -227,7 +242,7 @@ export default function App() {
   }
 
   function handleOnboarded({ dailyGoal, startLevel }) {
-    const levels = getLevels()
+    const levels = getLevels(activeSubject)
     const idx = levels.findIndex((l) => l.id === startLevel)
     const pre = []
     for (let i = 0; i < idx; i++) for (const u of levels[i].units) for (const l of u.lessons) pre.push(l.id)
@@ -267,14 +282,15 @@ export default function App() {
 
       {tab === 'learn' && (
         <>
-          {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} onPractice={startPractice} />}
+          {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} onPractice={startPractice}
+            subject={activeSubject} subjects={SUBJECT_LIST} onSwitchSubject={switchSubject} />}
           {screen === 'lesson' && (
             <Lesson
               lesson={practiceMode
                 ? { id: 'practice', title: '오늘의 연습', exercises: practiceExercises }
                 : reviewMode
                   ? { id: 'review', title: '복습', exercises: reviewExercises }
-                  : getLessonById(activeLessonId)}
+                  : getLessonById(activeLessonId, activeSubject)}
               onWrong={handleWrong}
               onExerciseResult={handleExerciseResult}
               onFinish={practiceMode ? handlePracticeFinish : reviewMode ? handleReviewFinish : handleFinish}

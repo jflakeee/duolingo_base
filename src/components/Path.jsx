@@ -34,10 +34,10 @@ function donePath(lessons, done) {
   return d.trim()
 }
 
-export default function Path({ progress, onStart, onReview, onPractice }) {
+export default function Path({ progress, onStart, onReview, onPractice, subject = 'english', subjects = [], onSwitchSubject }) {
   const done = new Set(progress.completedLessons)
   const seq = []
-  getLevels().forEach((lvl) => lvl.units.forEach((u) => u.lessons.forEach((l) => seq.push(l.id))))
+  getLevels(subject).forEach((lvl) => lvl.units.forEach((u) => u.lessons.forEach((l) => seq.push(l.id))))
   const isLocked = (id) => {
     const idx = seq.indexOf(id)
     return idx > 0 && !done.has(seq[idx - 1])
@@ -45,7 +45,7 @@ export default function Path({ progress, onStart, onReview, onPractice }) {
   const totalDone = progress.completedLessons.length
 
   // current level = first level with an incomplete lesson (else the last)
-  const levels = getLevels()
+  const levels = getLevels(subject)
   let currentLevelId = levels[levels.length - 1].id
   for (const lvl of levels) {
     if (lvl.units.some((u) => u.lessons.some((l) => !done.has(l.id)))) { currentLevelId = lvl.id; break }
@@ -54,6 +54,17 @@ export default function Path({ progress, onStart, onReview, onPractice }) {
 
   return (
     <div>
+      {subjects.length > 1 && (
+        <div className="subject-tabs">
+          {subjects.map((s) => (
+            <button key={s.id} className={`subject-tab ${s.id === subject ? 'subject-tab--on' : ''}`}
+              onClick={() => onSwitchSubject(s.id)}>
+              <span className="subject-tab__ico">{s.icon}</span>{s.name}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="path-hero">
         <Duck mood="cheer" size={64} bob />
         <div>
@@ -83,7 +94,7 @@ export default function Path({ progress, onStart, onReview, onPractice }) {
         <button className="btn btn--sm btn--blue" onClick={() => onPractice(pLevel)}>연습 시작</button>
       </div>
 
-      {getLevels().map((lvl, li) => {
+      {getLevels(subject).map((lvl, li) => {
         const lessonCount = lvl.units.reduce((n, u) => n + u.lessons.length, 0)
         return (
           <section key={lvl.id} className={`level level--${li % 3}`}>

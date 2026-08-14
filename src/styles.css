@@ -678,3 +678,10 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .practice-bar__label { font-weight: 800; font-size: 14px; color: var(--ink-strong); }
 .practice-bar__sel { flex: 1; min-width: 120px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: inherit; font: inherit; font-weight: 700; }
 .practice-bar .btn { width: auto; }
+
+/* Subject tabs */
+.subject-tabs { display: flex; gap: 8px; margin: 4px 0 12px; overflow-x: auto; }
+.subject-tab { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 8px 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); color: var(--muted); font-weight: 800; font-size: 14px; }
+.subject-tab--on { border-color: var(--green); color: var(--green-d); background: var(--green-l); }
+[data-theme="dark"] .subject-tab--on { background: #16351c; }
+.subject-tab__ico { font-size: 16px; }

@@ -11,6 +11,7 @@ describe('progress store', () => {
     const p = defaultProgress()
     p.xp = 120
     p.completedLessons = ['kinder-u1-l1']
+    p.subjects = { english: { completedLessons: ['kinder-u1-l1'], reviewQueue: [] } } // mirror
     saveProgress(p)
     expect(loadProgress()).toEqual(p)
   })
@@ -55,5 +56,20 @@ describe('progress store', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ xp: 40 }))
     expect(loadProgress().reviewQueue).toEqual([])
     expect(loadProgress().xp).toBe(40)
+  })
+  it('v2→v3: seeds subjects.english from old top-level progress', () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 2, completedLessons: ['kinder-u1-l1', 'kinder-u1-l2'] }))
+    const p = loadProgress()
+    expect(p.activeSubject).toBe('english')
+    expect(p.subjects.english.completedLessons).toEqual(['kinder-u1-l1', 'kinder-u1-l2'])
+    expect(p.completedLessons).toEqual(['kinder-u1-l1', 'kinder-u1-l2']) // top-level mirror
+  })
+  it('v3: top-level mirrors the active subject on load', () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      version: 2, activeSubject: 'math', completedLessons: ['ignored'],
+      subjects: { english: { completedLessons: ['e1'], reviewQueue: [] }, math: { completedLessons: ['m1', 'm2'], reviewQueue: [] } },
+    }))
+    const p = loadProgress()
+    expect(p.completedLessons).toEqual(['m1', 'm2'])
   })
 })
