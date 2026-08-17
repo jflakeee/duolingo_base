@@ -14,12 +14,12 @@ export default function Listen({ exercise, onAnswer }) {
   const [chosen, setChosen] = useState([])
   const chosenIds = new Set(chosen.map((c) => c.i))
 
-  useEffect(() => { speak(exercise.audioText) }, [exercise])
+  useEffect(() => { speak(exercise.audioText, exercise.lang) }, [exercise])
 
   return (
     <div>
       <h2>{exercise.prompt}</h2>
-      <button className="audio-btn" onClick={() => speak(exercise.audioText)}>🔊 다시 듣기</button>
+      <button className="audio-btn" onClick={() => speak(exercise.audioText, exercise.lang)}>🔊 다시 듣기</button>
       {!canSpeak() && <p style={{ color: 'var(--muted)' }}>({exercise.audioText})</p>}
       <div className="tray">
         {chosen.map((c) => (

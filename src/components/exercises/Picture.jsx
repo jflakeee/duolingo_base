@@ -8,7 +8,7 @@ export default function Picture({ exercise, onAnswer }) {
     <div>
       <h2>{exercise.prompt}</h2>
       {exercise.word && (
-        <button className="audio-btn" onClick={() => speak(exercise.audioText ?? exercise.word)}>
+        <button className="audio-btn" onClick={() => speak(exercise.audioText ?? exercise.word, exercise.lang)}>
           🔊 {exercise.word}
         </button>
       )}
