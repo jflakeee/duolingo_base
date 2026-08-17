@@ -7,7 +7,10 @@ export function correctAnswerText(exercise) {
     case 'dictation':
       return exercise.answer
     case 'mcq':
+    case 'reading':
       return exercise.answer
+    case 'order':
+      return exercise.answer.join(' → ')
     case 'wordbank':
     case 'listen':
       return exercise.answer.join(' ')

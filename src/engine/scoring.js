@@ -18,12 +18,17 @@ export function normalizeText(s) {
 //   typein/dictation -> string (free text)
 //   wordbank/listen -> string[] (ordered)
 //   match   -> { [english]: koreanUserPicked }
+//   reading -> string (chosen option, graded like mcq)
+//   order   -> string[] (user-arranged sequence)
 export function checkAnswer(exercise, response) {
   switch (exercise.type) {
     case 'picture':
       return response === exercise.answer
     case 'mcq':
+    case 'reading':
       return response === exercise.answer
+    case 'order':
+      return arraysEqual(response, exercise.answer)
     case 'typein':
     case 'dictation': {
       const target = normalizeText(response)

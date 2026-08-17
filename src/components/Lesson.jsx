@@ -11,8 +11,10 @@ import Match from './exercises/Match.jsx'
 import Picture from './exercises/Picture.jsx'
 import TypeIn from './exercises/TypeIn.jsx'
 import Dictation from './exercises/Dictation.jsx'
+import Reading from './exercises/Reading.jsx'
+import Order from './exercises/Order.jsx'
 
-const REGISTRY = { mcq: Mcq, wordbank: WordBank, listen: Listen, match: Match, picture: Picture, typein: TypeIn, dictation: Dictation }
+const REGISTRY = { mcq: Mcq, wordbank: WordBank, listen: Listen, match: Match, picture: Picture, typein: TypeIn, dictation: Dictation, reading: Reading, order: Order }
 
 export default function Lesson({ lesson, onWrong, onExerciseResult, onFinish, onQuit }) {
   const [session, setSession] = useState(() => createSession(lesson.exercises))

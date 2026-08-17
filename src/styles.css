@@ -126,6 +126,52 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .token:active:not(:disabled) { transform: translateY(2px); }
 .token:disabled { opacity: .35; cursor: default; }
 
+/* ---------- reading passage ---------- */
+.passage {
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: var(--card-2);
+  padding: 14px 16px;
+  margin: 4px 0 14px;
+  line-height: 1.7;
+  color: var(--ink-strong);
+  white-space: pre-wrap;
+}
+
+/* ---------- order (arrange) ---------- */
+.order-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 8px;
+  margin-bottom: 12px;
+}
+.order-slot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 2px solid var(--blue);
+  border-bottom-width: 4px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  background: #ddf4ff;
+  color: var(--blue-d);
+  font-weight: 700;
+}
+.order-slot:active { transform: translateY(2px); }
+.order-num {
+  flex: 0 0 auto;
+  width: 24px; height: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+}
+.order-bank { display: flex; flex-direction: column; gap: 8px; }
+.order-bank .choice { text-align: left; }
+
 /* ---------- progress bars ---------- */
 .progress {
   height: 16px;
