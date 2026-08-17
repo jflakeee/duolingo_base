@@ -595,6 +595,42 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
   background: #ff4b4b; color: #fff; border-radius: 999px;
   padding: 1px 8px; font-size: 13px; font-weight: 800;
 }
+.review-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.review-btn--alt { border-color: #ce82ff; color: #ce82ff; }
+
+/* ---------- 오답노트 (mistakes view) ---------- */
+.mistakes { padding-bottom: 24px; }
+.mistakes__top { display: flex; align-items: center; gap: 10px; margin: 4px 0 10px; }
+.mistakes__top h1 { font-size: 22px; margin: 0; }
+.mistakes__summary { color: var(--ink); margin: 0 0 12px; }
+.mistakes__empty { text-align: center; padding: 48px 16px; color: var(--ink); }
+.mistakes__empty-emoji { font-size: 56px; }
+.mistakes__empty .sub { color: var(--ink-soft, #999); font-size: 14px; }
+.mistakes__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip {
+  border: 2px solid var(--line); border-radius: 999px; padding: 6px 12px;
+  background: var(--card, #fff); color: var(--ink-strong); font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.chip--on { border-color: #1cb0f6; background: #ddf4ff; color: var(--blue-d, #1899d6); }
+.mistakes__group { margin-bottom: 20px; }
+.mistakes__group-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.mistakes__group-head h2 { font-size: 17px; margin: 0; }
+.mistakes__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.mistake {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  border: 2px solid var(--line); border-radius: 14px; padding: 10px 14px; background: var(--card, #fff);
+}
+.mistake--due { border-color: #ffd0a1; background: #fff7ef; }
+:root[data-theme="dark"] .mistake--due { background: #3a2a1a; border-color: #7a5a30; }
+.mistake__body { min-width: 0; }
+.mistake__prompt { font-weight: 700; color: var(--ink-strong); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mistake__answer { font-size: 13px; color: var(--green, #58a700); margin-top: 2px; }
+.mistake__badge {
+  flex: 0 0 auto; font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 999px;
+  background: var(--card-2, #f0f0f0); color: var(--ink);
+}
+.mistake__badge.box-0 { background: #ffe0e0; color: #d33; }
+.mistake__badge.box-4 { background: #e3f7d3; color: #3a8500; }
 
 /* TypeIn exercise */
 .typein {

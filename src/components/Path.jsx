@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { getLevels } from '../data/loadCurriculum.js'
 import { dueCount } from '../engine/review.js'
+import { collectMistakes } from '../engine/mistakes.js'
 import Duck from './Duck.jsx'
 
 // horizontal sway as a PERCENT of container width (aligns with the SVG viewBox x-units)
@@ -34,7 +35,7 @@ function donePath(lessons, done) {
   return d.trim()
 }
 
-export default function Path({ progress, onStart, onReview, onPractice, subject = 'english', subjects = [], onSwitchSubject }) {
+export default function Path({ progress, onStart, onReview, onPractice, onMistakes, subject = 'english', subjects = [], onSwitchSubject }) {
   const done = new Set(progress.completedLessons)
   const seq = []
   getLevels(subject).forEach((lvl) => lvl.units.forEach((u) => u.lessons.forEach((l) => seq.push(l.id))))
@@ -79,10 +80,18 @@ export default function Path({ progress, onStart, onReview, onPractice, subject 
         const queue = progress.reviewQueue ?? []
         const due = dueCount(queue, Date.now())
         const canReview = queue.length > 0 || progress.completedLessons.length > 0
+        const mistakes = collectMistakes(progress, Date.now())
         return (
-          <button className="review-btn" disabled={!canReview} onClick={onReview}>
-            🔄 복습하기{due > 0 && <span className="review-badge">{due}</span>}
-          </button>
+          <div className="review-row">
+            <button className="review-btn" disabled={!canReview} onClick={onReview}>
+              🔄 복습하기{due > 0 && <span className="review-badge">{due}</span>}
+            </button>
+            {onMistakes && (
+              <button className="review-btn review-btn--alt" onClick={onMistakes}>
+                📒 오답노트{mistakes.total > 0 && <span className="review-badge">{mistakes.total}</span>}
+              </button>
+            )}
+          </div>
         )
       })()}
 

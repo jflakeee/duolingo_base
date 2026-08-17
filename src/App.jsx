@@ -11,6 +11,8 @@ import Profile from './components/Profile.jsx'
 import Onboarding from './components/Onboarding.jsx'
 import { getLessonById, getLevels, getLessonSequence } from './data/loadCurriculum.js'
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
+import { mistakeReviewExercises } from './engine/mistakes.js'
+import MistakesView from './components/MistakesView.jsx'
 import { ensureMemberId } from './engine/member.js'
 import { buildDailyPractice, dailySeed, mulberry32 } from './engine/practice.js'
 import { generatorsFor } from './engine/subjectGenerators.js'
@@ -204,6 +206,25 @@ export default function App() {
   function handleExerciseResult(exId, isCorrect) {
     if (reviewMode && !isCorrect) reviewWrongIds.add(exId)
   }
+  function openMistakes() { setReviewMode(false); setPracticeMode(false); setScreen('mistakes') }
+  // 오답노트 "다시 풀기": 해당 과목으로 전환(필요시) 후 그 과목 오답만 복습.
+  function reviewSubjectMistakes(subjectId) {
+    if (progress.hearts <= 0) { setScreen('fail'); return }
+    let p = progress
+    if (subjectId !== activeSubject) {
+      const subjects = { ...progress.subjects, [activeSubject]: { completedLessons: progress.completedLessons, reviewQueue: progress.reviewQueue } }
+      const target = subjects[subjectId] || { completedLessons: [], reviewQueue: [] }
+      p = { ...progress, subjects, activeSubject: subjectId, completedLessons: target.completedLessons || [], reviewQueue: target.reviewQueue || [] }
+      persist(p)
+    }
+    const exercises = mistakeReviewExercises(p.reviewQueue ?? [], { now: Date.now(), limit: 20 })
+    if (exercises.length === 0) return
+    reviewWrongIds.clear()
+    setReviewExercises(exercises)
+    setReviewMode(true)
+    setActiveLessonId(null)
+    setScreen('lesson')
+  }
   function startPractice(levelId) {
     const level = getLevels(activeSubject).find((l) => l.id === levelId)
     if (!level) return
@@ -283,7 +304,11 @@ export default function App() {
       {tab === 'learn' && (
         <>
           {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} onPractice={startPractice}
+            onMistakes={openMistakes}
             subject={activeSubject} subjects={SUBJECT_LIST} onSwitchSubject={switchSubject} />}
+          {screen === 'mistakes' && (
+            <MistakesView progress={progress} onBack={() => setScreen('path')} onReviewSubject={reviewSubjectMistakes} />
+          )}
           {screen === 'lesson' && (
             <Lesson
               lesson={practiceMode
