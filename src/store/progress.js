@@ -27,6 +27,8 @@ export function defaultProgress() {
     // v3: multi-subject. Top-level completedLessons/reviewQueue mirror the active subject.
     activeSubject: 'english',
     subjects: { english: { completedLessons: [], reviewQueue: [] } },
+    // custom '내 문제집' 덱(콘텐츠). subjects.custom가 진도.
+    decks: [],
   }
 }
 

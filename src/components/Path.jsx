@@ -35,7 +35,7 @@ function donePath(lessons, done) {
   return d.trim()
 }
 
-export default function Path({ progress, onStart, onReview, onPractice, onMistakes, subject = 'english', subjects = [], onSwitchSubject }) {
+export default function Path({ progress, onStart, onReview, onPractice, onMistakes, onManageDecks, subject = 'english', subjects = [], onSwitchSubject }) {
   const done = new Set(progress.completedLessons)
   const seq = []
   getLevels(subject).forEach((lvl) => lvl.units.forEach((u) => u.lessons.forEach((l) => seq.push(l.id))))
@@ -90,6 +90,9 @@ export default function Path({ progress, onStart, onReview, onPractice, onMistak
               <button className="review-btn review-btn--alt" onClick={onMistakes}>
                 📒 오답노트{mistakes.total > 0 && <span className="review-badge">{mistakes.total}</span>}
               </button>
+            )}
+            {subject === 'custom' && onManageDecks && (
+              <button className="review-btn review-btn--deck" onClick={onManageDecks}>📓 문제집 관리</button>
             )}
           </div>
         )

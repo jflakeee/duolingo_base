@@ -632,6 +632,27 @@ button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparen
 .mistake__badge.box-0 { background: #ffe0e0; color: #d33; }
 .mistake__badge.box-4 { background: #e3f7d3; color: #3a8500; }
 
+/* ---------- 내 문제집 (deck manager) ---------- */
+.review-btn--deck { border-color: #ffc800; color: #b58a00; }
+.deckmgr { padding-bottom: 32px; }
+.deckmgr section { margin-bottom: 22px; }
+.deckmgr h2 { font-size: 17px; margin: 0 0 10px; }
+.deckmgr__paste { font-family: inherit; line-height: 1.6; resize: vertical; }
+.deckmgr__hint { font-size: 13px; color: var(--ink-soft, #999); margin: 8px 0; }
+.deckmgr__hint code { background: var(--card-2, #f0f0f0); padding: 1px 6px; border-radius: 6px; font-size: 12px; }
+.deckmgr__preview { font-weight: 700; margin: 6px 0; }
+.deckmgr__errcount { color: #e6a100; }
+.deckmgr__errors { margin: 4px 0 10px; padding-left: 18px; color: #d33; font-size: 13px; }
+.deckmgr__empty { color: var(--ink-soft, #999); }
+.deckmgr__item { border: 2px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; background: var(--card, #fff); }
+.deckmgr__item-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.deckmgr__item-name { font-weight: 800; color: var(--ink-strong); }
+.deckmgr__item-sub { font-size: 13px; color: var(--ink-soft, #999); }
+.deckmgr__item-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.deckmgr__del { color: #e6533c; }
+.deckmgr__share { margin-top: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.deckmgr__warn { color: #e6a100; font-size: 13px; margin: 0; }
+
 /* TypeIn exercise */
 .typein {
   width: 100%; margin: 16px 0; padding: 14px 16px; font-size: 20px;

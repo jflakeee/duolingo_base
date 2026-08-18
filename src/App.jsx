@@ -13,6 +13,9 @@ import { getLessonById, getLevels, getLessonSequence } from './data/loadCurricul
 import { recordMistake, buildReviewSession, applyReviewResult } from './engine/review.js'
 import { mistakeReviewExercises } from './engine/mistakes.js'
 import MistakesView from './components/MistakesView.jsx'
+import DeckManager from './components/DeckManager.jsx'
+import { setCustomCurriculum } from './data/customSubject.js'
+import { decodeDeck } from './engine/deckShare.js'
 import { ensureMemberId } from './engine/member.js'
 import { buildDailyPractice, dailySeed, mulberry32 } from './engine/practice.js'
 import { generatorsFor } from './engine/subjectGenerators.js'
@@ -51,6 +54,8 @@ export default function App() {
   const reviewWrongIds = useState(() => new Set())[0]
 
   const activeSubject = progress.activeSubject || 'english'
+  // 커스텀 과목 커리큘럼을 덱에서 동기 파생(로더/Path/SRS가 최신값을 보도록 렌더 최상단에서).
+  setCustomCurriculum(progress.decks || [])
   const lessonsById = {}
   const lessonIds = []
   for (const { lesson } of getLessonSequence(activeSubject)) { lessonsById[lesson.id] = lesson; lessonIds.push(lesson.id) }
@@ -110,8 +115,27 @@ export default function App() {
       persist(applyMessage(progress, msg, Date.now()))
       return { ok: true, message: '응원 메시지를 받았어요! 💌' }
     }
+    const deck = decodeDeck(code)
+    if (deck) {
+      createDeck(deck.name, deck.exercises)
+      return { ok: true, message: `문제집을 받았어요! 📚 (${deck.name})` }
+    }
     return { ok: false, message: '코드를 확인해 주세요.' }
   }
+
+  // 커스텀 덱 콘텐츠 CRUD (progress.decks). 진도(subjects.custom)는 건드리지 않음.
+  function newDeckId() { return `deck-${Date.now()}-${Math.floor(Math.random() * 1000)}` }
+  function createDeck(name, exercises) {
+    const deck = { id: newDeckId(), name: name || '문제집', exercises: exercises || [], createdAt: Date.now() }
+    persist({ ...progress, decks: [...(progress.decks || []), deck] })
+  }
+  function renameDeck(id, name) {
+    persist({ ...progress, decks: (progress.decks || []).map((d) => (d.id === id ? { ...d, name } : d)) })
+  }
+  function deleteDeck(id) {
+    persist({ ...progress, decks: (progress.decks || []).filter((d) => d.id !== id) })
+  }
+  function openDecks() { setReviewMode(false); setPracticeMode(false); setScreen('decks') }
 
   // apply theme on mount + when the setting changes; follow OS when 'auto'
   useEffect(() => {
@@ -132,12 +156,14 @@ export default function App() {
   }
 
   function switchSubject(id) {
-    if (id === activeSubject) { setScreen('path'); return }
+    const emptyCustom = id === 'custom' && (progress.decks || []).length === 0
+    if (id === activeSubject) { setScreen(emptyCustom ? 'decks' : 'path'); return }
     const subjects = { ...progress.subjects, [activeSubject]: { completedLessons: progress.completedLessons, reviewQueue: progress.reviewQueue } }
     const target = subjects[id] || { completedLessons: [], reviewQueue: [] }
     setReviewMode(false); setPracticeMode(false)
     persist({ ...progress, subjects, activeSubject: id, completedLessons: target.completedLessons || [], reviewQueue: target.reviewQueue || [] })
-    setScreen('path')
+    // 덱이 없는 커스텀 과목은 바로 관리 화면으로 안내.
+    setScreen(emptyCustom ? 'decks' : 'path')
   }
 
   function goTab(id) { setTab(id); if (id === 'learn') setScreen('path') }
@@ -304,10 +330,14 @@ export default function App() {
       {tab === 'learn' && (
         <>
           {screen === 'path' && <Path progress={progress} onStart={startLesson} onReview={startReview} onPractice={startPractice}
-            onMistakes={openMistakes}
+            onMistakes={openMistakes} onManageDecks={openDecks}
             subject={activeSubject} subjects={SUBJECT_LIST} onSwitchSubject={switchSubject} />}
           {screen === 'mistakes' && (
             <MistakesView progress={progress} onBack={() => setScreen('path')} onReviewSubject={reviewSubjectMistakes} />
+          )}
+          {screen === 'decks' && (
+            <DeckManager decks={progress.decks || []} onCreateDeck={createDeck} onRenameDeck={renameDeck}
+              onDeleteDeck={deleteDeck} onImportCode={importCode} onBack={() => setScreen('path')} />
           )}
           {screen === 'lesson' && (
             <Lesson

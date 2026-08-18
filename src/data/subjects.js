@@ -3,6 +3,7 @@ import math from './subjects/math.json'
 import korean from './subjects/korean.json'
 import essay from './subjects/essay.json'
 import logic from './subjects/logic.json'
+import { customCurriculum } from './customSubject.js'
 
 // Subject registry. ttsLang: locale for audio (null = no audio, e.g. math).
 export const SUBJECTS = {
@@ -11,6 +12,8 @@ export const SUBJECTS = {
   korean: { id: 'korean', name: '국어', icon: '📖', ttsLang: 'ko-KR', curriculum: korean },
   essay: { id: 'essay', name: '논술', icon: '✍️', ttsLang: null, curriculum: essay },
   logic: { id: 'logic', name: '논리', icon: '🧩', ttsLang: null, curriculum: logic },
+  // 사용자 작성 덱 — curriculum은 progress.decks에서 런타임 파생(가변 홀더).
+  custom: { id: 'custom', name: '내 문제집', icon: '📓', ttsLang: null, get curriculum() { return customCurriculum() } },
 }
 
 export const SUBJECT_LIST = Object.values(SUBJECTS)
